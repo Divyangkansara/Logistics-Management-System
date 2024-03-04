@@ -1,0 +1,123 @@
+#Scope_of_work{
+    background-color:lightsteelblue;
+    font-weight:bolder;
+    color: #000;
+    margin-left: 4%;
+    width: 840px;
+
+}
+
+
+.freight_type{
+    background-color:lightsteelblue;
+    width:150px;
+}
+
+.type{
+    background-color:lightsteelblue;
+    width:150px;
+}
+
+.enquiry_date{
+    background-color:lightsteelblue;
+    font-weight:bold;
+    color: #000;
+    margin-left: 12%;
+}
+
+
+.job_category{
+    background-color:lightsteelblue;
+    width:150px;
+}
+
+.enquiry_details{
+    background-color: lightsteelblue;
+    font-weight: bold;
+    width: 840px;
+    margin-left: 4%;
+}
+
+.status{
+    width: 190px;
+    font-weight: bold;
+    border: none;
+}
+
+.customer{
+    font-weight: bold;
+    margin-left: 12%;
+}
+
+.contact_person{
+    width: 315px;
+    font-weight: bold;
+}
+
+.email{
+    font-weight: bold;
+    margin-left: 12%;
+}
+
+.sales_person{
+    width: 315px;
+    font-weight: bold;    
+}
+
+.phone{
+    font-weight: bold;
+    margin-left: 12%;
+}
+
+.sales_team{
+    width: 315px;
+    font-weight: bold;    
+}
+
+.btn{
+    background-color:cornflowerblue;
+    color: ghostwhite;
+    font-size: 12px;
+}
+
+.btn:hover {
+    color:ghostwhite;
+}
+
+
+#enquiry_form{
+    background-color:white;
+    box-shadow: 2px 6px 10px #000;
+}
+
+.navbar-custom{
+    background-color:white;
+    
+}
+
+
+.star-label {
+    margin-left: 25px;
+
+}
+
+/* Style the radio buttons as stars */
+input[type="radio"] {
+    display: none; 
+}
+
+input[type="radio"] + label {
+    cursor: pointer;
+    font-size: 30px; 
+    display: inline-block;
+}
+
+input[type="radio"] + label::before {
+    content: '\2605'; 
+    margin-right: 5px;
+    color: #ccc; 
+}
+
+input[type="radio"]:checked + label::before {
+    color:lightslategray; 
+}
