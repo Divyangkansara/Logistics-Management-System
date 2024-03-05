@@ -3,179 +3,189 @@
 
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'logistics/css/style.css' %}" >
-
-
-<div class="container">
-   <h1>Hello</h1>
-</div>
-
-<div class="container-fluid" style="padding: 0%;">
-    <nav class="navbar navbar-custom navbar-expand-lg">
-        <div class="justify-content-start">
-            <button class="btn" type="button"><b>New Freight Quotation</b></button>
-            <button class="btn" type="button"><b>Mark Won</b></button>
-            <button class="btn" type="button"><b>Mark Lost</b></button>
-        </div>
-    </nav>
-</div>
+<link rel="stylesheet" href="{% static 'logistics/css/style.css' %}">
 
 
 
-<div class="container">
-    <section class="formsection mt-4">
-       <div class="row">
-         <div class="col-sm-10 offset-1">
-             <form id="enquiry_form" method="POST" action="">
-                 {% csrf_token %}
-                 <div class="row">
-                     <div class="container">
-                         <label for="Scope_of_work" class="mt-4" style="margin-left: 4%;"><b>Scope of Work</b></label>
-                         <input type="text" class="form-control form-control-lg" id="Scope_of_work" name="Scope_of_work" required>
-                     </div>
-                 </div>
-         
-                 <div class="row mt-4">
-                     <div class="col-sm-4">
-                         <label for="enquiry_date" style="margin-left: 12%;"><b>Enquiry Date</b></label>
-                         <input type="date" class="enquiry_date form-control form-control-sm " name="enquiry_date" id="enquiry_date" required>
-                     </div>
-                     <div class="col-sm-4 offset-2">
-                        <div class="row">
-                             <div class="col-sm-5">
-                                 <label for="freight_type"><b>Freight Type</b></label>
-                             </div>
-                             <div class="com-sm-5 offset-1">
-                                 <select class="freight_type form-select" aria-label=".form-select-sm example">
-                                     <option selected></option>
-                                     <option value="1">Air Freight </option>
-                                     <option value="2">Sea Freight </option>
-                                 </select> <br>
-                             </div>
-                        </div> 
-                        <div class="row">
-                         <div class="col-sm-5">
-                             <label for="type"><b>Type</b></label>
-                         </div>
-                         <div class="com-sm-5 offset-1">
-                             <select class="type form-select" aria-label=".form-select-sm example">
-                                 <option selected></option>
-                                 <option value="1">Import </option>
-                                 <option value="2">Export </option>
-                             </select> <br>
-                         </div>
-                        </div> 
-                     </div>      
-                 </div>    
-         
-                 <div class="row mt-4">
-                     <div class="col-sm-4">
-                         <div class="row">
-                             <div class="col-sm-3">
-                                 <label for="status" style="margin-left: 70%;"><b>Status</b></label>
-                             </div>
-                             <div class="col-sm-4 offset-2">
-                                 <input type="text" class="status form-control-sm" name="status" id="status" value="Enquiry" disabled>
-                             </div>
-                         </div>
-                     </div>
-                     <div class="col-sm-4 offset-2">
-                         <div class="row">
-                             <div class="col-sm-4">
-                                 <label for="job_category"><b>Job Category</b></label>
-                             </div>
-                             <div class="com-sm-6 offset-2">
-                                 <select class="job_category form-select form-select-sm" aria-label=".form-select-sm example">
-                                     <option selected></option>
-                                     <option value="1">Buy </option>
-                                     <option value="2">Sales </option>
-                                 </select> <br>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-         
-                 <div class="row mt-3">
-                     <div class="col-sm-4">
-                         <label for="customer" style="margin-left: 12%;"><b>Customer</b></label>
-                         <input type="text" class="customer form-control form-control-sm" id="customer" name="customer" required>
-                     </div>
-                     <div class="col-sm-4 offset-2">
-                         <label for="contact_person"><b>Contact Person</b></label>
-                         <input type="text" class="contact_person form-control form-control-sm" id="contact_person" name="contact_person" required>
-                     </div>
-                 </div>
-         
-                 <div class="row mt-3">
-                     <div class="col-sm-4">
-                         <label for="email" style="margin-left: 12%;"><b>Email</b></label>
-                         <input type="email" class="email form-control form-control-sm" id="email" name="email" required>
-                     </div>
-                     <div class="col-sm-4 offset-2">
-                         <label for="sales_person"><b>Sales Person</b></label>
-                         <input type="text" class="sales_person form-control form-control-sm" id="sales_person" name="sales_person" required>
-                     </div>
-                 </div>
-         
-                 <div class="row mt-3">
-                     <div class="col-sm-4">
-                         <label for="phone" style="margin-left: 12%;"><b>Phone</b></label>
-                         <input type="text" class="phone form-control form-control-sm" id="phone" name="phone" required>
-                     </div>
-                     <div class="col-sm-4 offset-2">
-                         <label for="sales_team"><b>Sales Team</b></label>
-                         <input type="text" class="sales_team form-control form-control-sm" id="sales_team" name="sales_team" required>
-                     </div>
-                 </div>
-         
-                 <div class="row mt-4">
-                     <div class="col-sm-4">
-                        
-                         <div class="row">
-                             <div class="col-sm-2">
-                               <label for="priority" style="margin-left: 160%;"><b>Priority Tags</b></label>
-                             </div>
-                             <div class="col-sm-8 offset-2">
-                               <input type="radio" name="star1" id="star1" required>
-                               <label class="star-label" for="star1" onclick="checkAndSelectStar(1)"></label>
-                         
-                               <input type="radio" name="star2" id="star2" required>
-                               <label class="star-label" for="star2" onclick="checkAndSelectStar(2)"></label>
-                         
-                               <input type="radio" name="star3" id="star3" required>
-                               <label class="star-label" for="star3" onclick="checkAndSelectStar(3)"></label>
-                             </div>
-                         </div>
-                         
-                         
-                     </div>
-                 </div>
-         
-                 <div class="row mt-5">
-                     <div class="container">
-                         <label for="enquiry_details" style="margin-left: 4%;"><b>Enquiry Details</b></label>
-                         <textarea class="enquiry_details form-control" id="enquiry_details" name="enquiry_details" rows="2" required></textarea>
-                         <small id="emailHelp" class="form-text text-muted" style="margin-left: 4%;">Please provide brief information about enquiry.</small>
-                     </div>
-                 </div>
-             </form>
+<nav aria-label="breadcrumb" style="margin-top: 50px;">
+    <ol class="breadcrumb" style="font-size: x-large; margin-bottom: auto;">
+      <li class="breadcrumb-item"><a href="#">Opportunities</a></li>
+      <li class="breadcrumb-item active" aria-current="page">New</li>
+    </ol>
+    <!-- <button type="button" class="btn btn-sm btn-primary">Save</button>
+    <button type="button" class="btn btn-sm btn-outline-dark">Discard</button> -->
+</nav>
+
+
+
+<nav class="navbar navbar-custom navbar-expand-lg" style="margin-top:auto;">
+    <div class="justify-content-start">
+        <button class="btn btn-sm btn-primary" type="button">New Freight Quotation</button>
+        <button class="btn btn-sm btn-primary" type="button">Mark Won</button>
+        <button class="btn btn-sm btn-primary" type="button">Mark Lost</button>
+    </div>
+</nav>
+
+
+<div class="">
+    <section class="formsection mt-4 mb-4">
+         <div class="col-sm-12 col-md-8 col-lg-10 m-auto">
+            <form id="enquiry_form" method="post" action="{% url 'enquiry' %}">
+                {% csrf_token %}
+                <div class="row ml-2">
+                   <div class="col-sm-11">
+                        <div class="form-group">
+                            <label for="Scope_of_work" class="mt-4"><b>Scope of Work</b></label>
+                            <input type="text" class="form-control form-control-lg" id="scope_of_work" name="scope_of_work" required>
+                        </div>
+                   </div>
+                </div>
+
+                <div class="row ml-2">
+                    <div class="col-sm-6 col-md-6 col-lg-5">
+                        <div class="form-group">
+                            <label for="enquiry_date"><b>Enquiry Date</b></label>
+                            <input type="date" class="form-control form-control-sm" id="enquiry_date" name="enquiry_date">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
+                        <div class="form-group">
+                            <label for="freight_type"><b>Freight Type</b></label>
+                            <select class="form-control form-control-sm" id="freight_type" name="freight_type">
+                                <option selected></option>
+                                <option value="1">Air Freight</option>
+                                <option value="2">Sea Freight</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row ml-2">
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label for="job_category"><b>Job Category</b></label>
+                            <select class="form-control form-control-sm" id="job_category" name="job_category">
+                                <option selected></option>
+                                <option value="1">Buy </option>
+                                <option value="2">Sales </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-5 offset-1">
+                        <div class="form-group">
+                            <label for="type"><b>Type</b></label>
+                            <select class="form-control form-control-sm" id="type" name="type">
+                                <option selected></option>
+                                <option value="1">Import </option>
+                                <option value="2">Export </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row ml-2">
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label for="status"><b>Status</b></label>
+                            <input type="text" class="form-control form-control-sm" name="status" id="status" value="Enquiry" disabled>
+                        </div>
+                    </div>
+                    <div class="col-sm-5 offset-1">
+                        <label for="priority"><b>Priority Tags</b></label>
+                        <input type="radio" name="star1" id="star1" required>
+                        <label class="star-label" for="star1" onclick="checkAndSelectStar(1)"></label>
+
+                        <input type="radio" name="star2" id="star2" required>
+                        <label class="star-label" for="star2" onclick="checkAndSelectStar(2)"></label>
+
+                        <input type="radio" name="star3" id="star3" required>
+                        <label class="star-label" for="star3" onclick="checkAndSelectStar(3)"></label>
+                    </div>
+                </div>
+
+                <div class="row mt-5"></div>
+
+                <div class="row ml-2">
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label for="customer"><b>Customer</b></label>
+                            <input type="text" class="form-control form-control-sm" id="customer_name" name="customer_name" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-5 offset-1">
+                        <div class="form-group">
+                            <label for="contact_person"><b>Contact Person</b></label>
+                            <input type="text" class="form-control form-control-sm" id="contact_person" name="contact_person" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row ml-2">
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label for="email"><b>Email</b></label>
+                            <input type="email" class="form-control form-control-sm" id="email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-5 offset-1">
+                        <div class="form-group">
+                            <label for="sales_person"><b>Sales Person</b></label>
+                            <input type="text" class="form-control form-control-sm" id="sales_person" name="sales_person" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row ml-2">
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label for="phone"><b>Phone</b></label>
+                            <input type="text" class="form-control form-control-sm" id="phone" name="phone" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-5 offset-1">
+                        <div class="form-group">
+                            <label for="sales_team"><b>Sales Team</b></label>
+                            <input type="text" class="form-control form-control-sm" id="sales_team" name="sales_team" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3 ml-2">
+                   <div class="col-sm-11">
+                        <div class="form-group">
+                            <label for="enquiry_details"><b>Enquiry Details</b></label>
+                            <textarea class="form-control" id="enquiry_details" name="enquiry_details"
+                                rows="2" required></textarea>
+                            <small id="emailHelp" class="form-text text-muted">Please provide brief information about enquiry.</small>
+                        </div>
+                   </div>
+                </div>
+
+                <div class="row mt-3 ml-2">
+                    <div class="col-sm-12">
+                        <div class="button">
+                            <button type="submit" class="btn btn-sm btn-primary" style="font-size: 16px;">Save</button>
+                            <button type="button" class="btn btn-sm btn-outline-dark" style="font-size: 16px;">Discard</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3"></div>
+
+
+            </form>  
          </div>
-       </div>
-     </section>
-     
+    </section>
 </div>
 
 
 <script>
     function checkAndSelectStar(starNumber) {
-      for (let i = 1; i <= starNumber; i++) {
-        // console.log(i);
-        document.getElementById(`star${i}`).checked = true;
-      }
+        for (let i = 1; i <= starNumber; i++) {
+            document.getElementById(`star${i}`).checked = true;
+        }
     }
 </script>
 
 {% endblock content %}
-
-
 
