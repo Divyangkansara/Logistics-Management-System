@@ -1,0 +1,61 @@
+{% extends 'logistics/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'logistics/css/style.css' %}">
+
+
+<nav aria-label="breadcrumb" style="margin-top: 50px;">
+    <ol class="breadcrumb" style="font-size:xx-large; margin-bottom: auto;">
+        <li class="breadcrumb-item active" aria-current="page">Opportunities</li>
+    </ol>
+    <a href="{% url 'enquiryform' %}" class="btn btn-info ml-3">Create</a>
+    <button type="button" class="btn btn-outline-dark">Import</button>
+</nav>
+
+<div class="table-responsive mt-3">
+    {% if data %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Customer ID</th>
+                    <th scope="col">Enquiry Date</th>
+                    <th scope="col">Lead</th>
+                    <th scope="col">Enquiry Status</th>
+                    <th scope="col">Client Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Freight Type</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Sales Team</th>
+                    <!-- <th></th> -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in data %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ data.enquiry_date }}</td>
+                    <td>{{ data.scope_of_work }}</td>
+                    <td>{{ data.status }}</td>
+                    <td>{{ data.customer_name }}</td>
+                    <td>{{ data.email }}</td>
+                    <td>{{ data.phone }}</td>
+                    <td>{{ data.freight_type }}</td>
+                    <td>{{ data.type }}</td>
+                    <td>{{ data.sales_team }}</td>
+                    <!-- <td><a href="" class="btn btn-sm btn-primary">New Quotation</a></td> -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+        <h4 class="text-center alert alert-warning">No Data</h4>
+
+    {% endif %}
+</div>
+
+
+{% endblock content %} 

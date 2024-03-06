@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home),
-    path('enquiry/', views.submit_enquiry, name='enquiry'),
-    path('thankyou/', views.thankyou, name='thankyou')
+    path('enquiries/', views.enquiries, name='enquiries'),
+    path('enquiryform/', views.submit_enquiry, name='enquiryform'),
+    path('editenquiry/', views.edit_enquiry, name='editenquiry'),
 ]

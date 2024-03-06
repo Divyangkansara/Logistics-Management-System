@@ -37,22 +37,22 @@ class Shipping_Agents(models.Model):
 
 #  create enquiries
 class Enquiries(models.Model):
-    scope_of_work = models.TextField()
-    enquiry_date = models.DateField()
-    status = models.CharField(max_length=20, default='enquiry')
-    job_category = models.CharField(max_length=20, default='sales')
-    customer_name = models.CharField(max_length=50)
-    email = models.EmailField(max_length=50, unique=True)
-    phone = models.CharField(max_length=15, unique=True, null=True)
-    contact_person = models.CharField(max_length=50, unique=True, null=True)
-    sales_person = models.CharField(max_length=50, unique=True, null=True)
-    sales_team = models.CharField(max_length=20)
-    freight_type = models.CharField(max_length=20, choices=[('air freight',
-                        'air freight'),('sea freight', 'sea freight')])
-    type = models.CharField(max_length=20, default='export')
-    enquiry_details = models.TextField()
-    priority_tags = models.CharField(max_length=20, default='normal', choices=
-                      [('low', 'low'),('normal', 'normal'), ('high', 'high')])
+        scope_of_work = models.TextField()
+        enquiry_date = models.DateField()
+        status = models.CharField(max_length=20, default='Enquiry')
+        job_category = models.CharField(max_length=20, default='sales')
+        customer_name = models.CharField(max_length=50)
+        email = models.EmailField(max_length=50)
+        phone = models.CharField(max_length=15, default='1212121212')
+        contact_person = models.CharField(max_length=50)
+        sales_person = models.CharField(max_length=50)
+        sales_team = models.CharField(max_length=20)
+        freight_type = models.CharField(max_length=20, choices=[('air freight',
+                            'air freight'),('sea freight', 'sea freight')])
+        type = models.CharField(max_length=20, default='export')
+        enquiry_details = models.TextField()
+        priority_tags = models.CharField(max_length=20, default="normal", choices=
+                        [('low', 'low'),('normal', 'normal'), ('high', 'high')])
     
 
 #  quotation management
