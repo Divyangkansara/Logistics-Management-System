@@ -5,20 +5,21 @@
 
 <link rel="stylesheet" href="{% static 'logistics/css/style.css' %}">
 
+
 <nav aria-label="breadcrumb" style="margin-top: 50px; margin-bottom: 10px;">
     <ol class="breadcrumb" style="font-size: xx-large; margin-bottom: auto;">
-      <li class="breadcrumb-item"><a href="{% url 'enquiries' %}">Opportunities</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
       <li class="breadcrumb-item active" aria-current="page">{{order.scope_of_work}}</li>
     </ol>
-    <a href="" class="btn btn-info ml-3">Edit</a>
+    <a href="{% url 'edit' order.id %}" class="btn btn-primary ml-3">Edit</a>
     <a href="" class="btn btn-outline-dark" >Create</a>
 </nav>
 
 <nav class="navbar navbar-custom navbar-expand-lg" style="margin-top:auto;">
     <div class="justify-content-start">
-        <button class="btn btn-sm btn-info" type="button">New Freight Quotation</button>
-        <button class="btn btn-sm btn-info" type="button">Mark Won</button>
-        <button class="btn btn-sm btn-info" type="button">Mark Lost</button>
+        <a href="{% url 'quotation' order.id %}" class="btn btn-sm btn-primary">New Freight Quotation</a>
+        <button class="btn btn-sm btn-primary" type="button">Mark Won</button>
+        <button class="btn btn-sm btn-primary" type="button">Mark Lost</button>
     </div>
 </nav>
 
@@ -32,7 +33,9 @@
                         <h2 class="mt-4 ml-2">{{order.scope_of_work}}</h2>
                     </div>
                 </div>
+
                 <div class="row mt-5"></div>
+              
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="row">
@@ -43,7 +46,7 @@
                                 <p><b>Status</b></p>
                             </div>
                             <div class="col-xs-4 ml-5">
-                                <p>{{order.enquiry_date}}</p>
+                                <p>code</p>
                                 <p>{{order.enquiry_date}}</p>
                                 <p>{{order.job_category}}</p>
                                 <p>{{order.status}}</p>
@@ -98,12 +101,16 @@
                 </div>
 
                 <div class="row mt-5"></div>
-                <hr>
+                
 
                 <div class="row ml-2">
-                    <p><b>Enquiry Detail</b></p>
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                          <a class="nav-link active" href="#"><b>Enquiry Details</b></a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="row ml-2">
+                <div class="row ml-4 mt-4">
                     <p>{{order.enquiry_details}}</p>
                 </div>
                 <div class="row mt-3"></div>
@@ -113,6 +120,6 @@
                 <div class="row mt-2"></div> -->
 
             </div> 
-    </section>
+    </section>  
 </div>
 {% endblock content %}

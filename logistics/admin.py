@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Customers, Update_Currency, Flights, Shipping_Agents, Enquiries, Quotations, Approved_Quotations, Tracking_Data, Orders, Invoices
+from .models import Customers, Update_Currency, Flights, Shipping_Agents, Enquiries, Quotations, Approved_Quotations, Tracking_Data, Orders, Invoices, FreightType, JobCategory, Type
 
 @admin.register(Customers)
 class CustomersAdmin(admin.ModelAdmin):
@@ -31,8 +31,8 @@ class EnquiriesAdmin(admin.ModelAdmin):
 class QuotationsAdmin(admin.ModelAdmin):
     list_display = ('customer_name','job_category','payment_type','sales_person',
                     'origin','destination','final_destination','freight_type',
-                    'type','enquiry_date','client_currency','rate','product',
-                    'description','units','quantity','weight','dimensions','price')
+                    'type','quotation_date','client_currency','rate','product',
+                    'description','unit','quantity','weight','dimension')
 
 @admin.register(Approved_Quotations)
 class Approved_QuotationsAdmin(admin.ModelAdmin):
@@ -67,3 +67,8 @@ class InvoicesAdmin(admin.ModelAdmin):
                      'recepient_contact','recepient_address','product_weight',
                      'product_quantity','date','time','total_amount','sub_total')
 
+admin.site.register(FreightType)
+
+admin.site.register(JobCategory)
+
+admin.site.register(Type)

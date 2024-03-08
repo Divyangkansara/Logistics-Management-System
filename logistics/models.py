@@ -43,7 +43,7 @@ class Enquiries(models.Model):
         job_category = models.CharField(max_length=20, default='sales')
         customer_name = models.CharField(max_length=50)
         email = models.EmailField(max_length=50)
-        phone = models.CharField(max_length=15, default='1212121212')
+        phone = models.CharField(max_length=20, default='1212121212')
         contact_person = models.CharField(max_length=50)
         sales_person = models.CharField(max_length=50)
         sales_team = models.CharField(max_length=20)
@@ -57,28 +57,30 @@ class Enquiries(models.Model):
 
 #  quotation management
 class Quotations(models.Model):
-    customer_name = models.ForeignKey(Customers, on_delete=models.CASCADE)
+    # customer_name = models.ForeignKey(Customers, on_delete=models.CASCADE)
+    customer_name = models.CharField(max_length=50)
     job_category = models.CharField(max_length=20, default='sales')
     payment_type = models.CharField(max_length=20, choices=[('pending','pending'),
                                                      ('collect','collect')])
-    sales_person = models.CharField(max_length=50, unique=True, null=True)
+    sales_person = models.CharField(max_length=50, default='')
     origin = models.CharField(max_length=255)
     destination = models.CharField(max_length=255)
     final_destination = models.CharField(max_length=255, null=True, blank=True)
     freight_type = models.CharField(max_length=20, choices=[('air freight',
                         'air freight'),('sea freight', 'sea freight')])
     type = models.CharField(max_length=20, default='export')
-    enquiry_date = models.DateField()
+    quotation_date = models.DateField()
     client_currency = models.CharField(max_length=20, choices=[('USD','USD'),
                                             ('AED','AED'),('INR','INR')])
     rate = models.DecimalField(max_digits=10, decimal_places=2)
     product = models.CharField(max_length=50)
     description = models.TextField()
-    units = models.CharField(max_length=10)
+    unit = models.CharField(max_length=10)
     quantity = models.IntegerField()
     weight = models.DecimalField(max_digits=10, decimal_places=2)
-    dimensions = models.CharField(max_length=20)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    dimension = models.CharField(max_length=20)
+    # price = models.DecimalField(max_digits=10, decimal_places=2)
+    terms = models.CharField(max_length=100, null=True)
 
 #  quotation approval
 class Approved_Quotations(models.Model):
@@ -86,7 +88,7 @@ class Approved_Quotations(models.Model):
     job_category = models.CharField(max_length=20, default='sales')
     payment_type = models.CharField(max_length=20, choices=[('pending','pending'),
                                                      ('collect','collect')])
-    sales_person = models.CharField(max_length=50, unique=True, null=True)
+    sales_person = models.CharField(max_length=50, default='')
     origin = models.CharField(max_length=255)
     destination = models.CharField(max_length=255)
     final_destination = models.CharField(max_length=255, null=True, blank=True)
@@ -162,5 +164,27 @@ class Invoices(models.Model):
     sub_total  = models.DecimalField(max_digits=10, decimal_places=2)
     
 
+#  Freight Type
+class FreightType(models.Model):
+    freight_type = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.freight_type
 
 
+
+#  Job Category
+class JobCategory(models.Model):
+    job_category = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.job_category
+
+
+
+#  Type  import / export
+class Type(models.Model):
+    type = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.type

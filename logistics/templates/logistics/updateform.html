@@ -10,11 +10,8 @@
 <nav aria-label="breadcrumb" style="margin-top: 50px; margin-bottom: 10px;">
     <ol class="breadcrumb" style="font-size: xx-large; margin-bottom: auto;">
       <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
-      <li class="breadcrumb-item active" aria-current="page">New</li>
+      <li class="breadcrumb-item active" aria-current="page">{{instance.scope_of_work}}</li>
     </ol>
-    <!-- <button type="submit" class="btn btn-info ml-3">Save</button>
-    <button type="button" class="btn btn-outline-dark">Discard</button> -->
-    
 </nav>
 
 
@@ -31,13 +28,13 @@
 <div class="">
     <section class="formsection mt-4 mb-4">
          <div class="col-sm-12 col-md-8 col-lg-10 m-auto">
-            <form id="enquiry_form" method="post" action="{% url 'enquiryform' %}">
+            <form id="enquiry_form" method="post" action="{% url 'edit'  instance.id %}">
                 {% csrf_token %}
                 <div class="row ml-2">
                    <div class="col-sm-11">
                         <div class="form-group">
                             <label for="Scope_of_work" class="mt-4"><b>Scope of Work</b></label>
-                            <input type="text" class="form-control form-control-lg" id="scope_of_work" name="scope_of_work" required>
+                            <input type="text" value="{{instance.scope_of_work}}" class="form-control form-control-lg" id="scope_of_work" name="scope_of_work" required>
                         </div>
                    </div>
                 </div>
@@ -46,7 +43,7 @@
                     <div class="col-sm-6 col-md-6 col-lg-5">
                         <div class="form-group">
                             <label for="enquiry_date"><b>Enquiry Date</b></label>
-                            <input type="date" class="form-control form-control-sm" id="enquiry_date" name="enquiry_date">
+                            <input type="date" value="{{ instance.enquiry_date|date:'Y-m-d' }}" class="form-control form-control-sm" id="enquiry_date" name="enquiry_date">
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
@@ -54,8 +51,9 @@
                             <label for="freight_type"><b>Freight Type</b></label>
                             <select class="form-control form-control-sm" id="freight_type" name="freight_type">
                                 <option selected>Select</option>
-                                <option value="Air Freight">Air Freight</option>
-                                <option value="Sea Freight">Sea Freight</option>
+                                {% for ft in freight_types %}
+                                     <option value="{{ ft.freight_type }}" {% if ft.freight_type == instance.freight_type %}selected{% endif %}>{{ ft.freight_type }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                     </div>
@@ -67,8 +65,9 @@
                             <label for="job_category"><b>Job Category</b></label>
                             <select class="form-control form-control-sm" id="job_category" name="job_category">
                                 <option selected>Select</option>
-                                <option value="Constuction">Constuction </option>
-                                <option value="Sales">Sales </option>
+                                {% for jc in jobs %}
+                                    <option value="{{ jc.job_category }}" {% if jc.job_category == instance.job_category %}selected{% endif %}>{{ jc.job_category }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                     </div>
@@ -77,8 +76,9 @@
                             <label for="type"><b>Type</b></label>
                             <select class="form-control form-control-sm" id="type" name="type">
                                 <option selected>Select</option>
-                                <option value="Import">Import </option>
-                                <option value="Export">Export </option>
+                                {% for type in types %}
+                                    <option value="{{ type.type }}" {% if type.type == instance.type %}selected{% endif %}>{{ type.type }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                     </div>
@@ -93,13 +93,13 @@
                     </div>
                     <div class="col-sm-5 offset-1">
                         <label for="priority"><b>Priority Tags</b></label>
-                        <input type="radio" name="star1" id="star1" value="low">
+                        <input type="radio" name="star1" id="star1" value="low" {% if instance.priority == "low" %}checked{% endif %}>
                         <label class="star-label" for="star1" onclick="checkAndSelectStar(1)"></label>
 
-                        <input type="radio" name="star2" id="star2" value="normal">
+                        <input type="radio" name="star2" id="star2" value="normal" {% if instance.priority == "normal" %}checked{% endif %}>
                         <label class="star-label" for="star2" onclick="checkAndSelectStar(2)"></label>
 
-                        <input type="radio" name="star3" id="star3" value="high">
+                        <input type="radio" name="star3" id="star3" value="high" {% if instance.priority == "high" %}checked{% endif %}>
                         <label class="star-label" for="star3" onclick="checkAndSelectStar(3)"></label>
                     </div>
                 </div>
@@ -110,13 +110,13 @@
                     <div class="col-sm-5">
                         <div class="form-group">
                             <label for="customer"><b>Customer</b></label>
-                            <input type="text" class="form-control form-control-sm" id="customer_name" name="customer_name" required>
+                            <input type="text" value="{{instance.customer_name}}" class="form-control form-control-sm" id="customer_name" name="customer_name" required>
                         </div>
                     </div>
                     <div class="col-sm-5 offset-1">
                         <div class="form-group">
                             <label for="contact_person"><b>Contact Person</b></label>
-                            <input type="text" class="form-control form-control-sm" id="contact_person" name="contact_person" required>
+                            <input type="text" value="{{instance.contact_person}}" class="form-control form-control-sm" id="contact_person" name="contact_person" required>
                         </div>
                     </div>
                 </div>
@@ -125,13 +125,13 @@
                     <div class="col-sm-5">
                         <div class="form-group">
                             <label for="email"><b>Email</b></label>
-                            <input type="email" class="form-control form-control-sm" id="email" name="email" required>
+                            <input type="email" value="{{instance.email}}" class="form-control form-control-sm" id="email" name="email" required>
                         </div>
                     </div>
                     <div class="col-sm-5 offset-1">
                         <div class="form-group">
                             <label for="sales_person"><b>Sales Person</b></label>
-                            <input type="text" class="form-control form-control-sm" id="sales_person" name="sales_person" required>
+                            <input type="text"  value="{{instance.sales_person}}" class="form-control form-control-sm" id="sales_person" name="sales_person" required>
                         </div>
                     </div>
                 </div>
@@ -140,13 +140,13 @@
                     <div class="col-sm-5">
                         <div class="form-group">
                             <label for="phone"><b>Phone</b></label>
-                            <input type="text" class="form-control form-control-sm" id="phone" name="phone" required>
+                            <input type="text" value="{{instance.phone}}" class="form-control form-control-sm" id="phone" name="phone" required>
                         </div>
                     </div>
                     <div class="col-sm-5 offset-1">
                         <div class="form-group">
                             <label for="sales_team"><b>Sales Team</b></label>
-                            <input type="text" class="form-control form-control-sm" id="sales_team" name="sales_team" required>
+                            <input type="text" value="{{instance.sales_team}}" class="form-control form-control-sm" id="sales_team" name="sales_team" required>
                         </div>
                     </div>
                 </div>
@@ -156,8 +156,8 @@
                         <div class="form-group">
                             <label for="enquiry_details"><b>Enquiry Details</b></label>
                             <textarea class="form-control" id="enquiry_details" name="enquiry_details"
-                                rows="2" required></textarea>
-                            <small id="emailHelp" class="form-text text-muted">Please provide brief information about enquiry.</small>
+                                rows="2" required>{{instance.enquiry_details}}</textarea>
+                            <small id="emailHelp"  class="form-text text-muted">Please provide brief information about enquiry.</small>
                         </div>
                    </div>
                 </div>
@@ -165,8 +165,7 @@
                 <div class="row mt-3 ml-2">
                     <div class="col-sm-12">
                         <div class="button">
-                            <button type="submit" class="btn btn-sm btn-primary" style="font-size: 17px;">Save</button>
-                            <!-- <button type="button" class="btn btn-sm btn-outline-dark" style="font-size: 16px;">Discard</button> -->
+                            <button type="submit" class="btn btn-sm btn-primary" style="font-size: 17px;">Update</button>
                         </div>
                     </div>
                 </div>

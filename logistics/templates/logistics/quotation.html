@@ -1,0 +1,272 @@
+{% extends 'logistics/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'logistics/css/style.css' %}">
+
+
+<nav aria-label="breadcrumb" style="margin-top: 50px; margin-bottom: 10px;">
+    <ol class="breadcrumb" style="font-size: xx-large; margin-bottom: auto;">
+      <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'edit_enquiry' instance.id %}">{{instance.scope_of_work}}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">New</li>
+    </ol>
+</nav>
+
+<nav class="navbar navbar-custom navbar-expand-lg" style="margin-top:auto;">
+    <div class="justify-content-start">
+        <a href="" class="btn btn-sm btn-primary">Approve Quotation</a>
+        <a href="" class="btn btn-sm btn-primary">Send Quotation Email</a>
+        <a href="" class="btn btn-sm btn-outline-dark">Cancel</a>
+    </div>
+</nav>
+
+<div class="">
+    <section class="formsection mt-4 mb-4">
+         <div class="col-sm-12 col-md-8 col-lg-10 m-auto">
+            <form id="enquiry_form" method="POST" action="{% url 'save_quotation' instance.id %}">
+                {% csrf_token %}
+                <div class="row ml-2">
+                    <div class="col-sm-5 mt-2">
+                        <div class="form-group">
+                            <label for="customer" class="mt-5"><b>Customer</b></label>
+                            <input type="text"  value="{{instance.customer_name}}" class=
+                            "form-control form-control-sm" style="background-color:lightsteelblue; color: #000;" id="customer_name" name="customer_name" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4"></div>
+
+                <div class="row ml-2">
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label for="job_category"><b>Job Category</b></label>
+                            <select class="form-control form-control-sm" id="job_category" name="job_category" style="color: #000;">
+                                <option selected>Select</option>
+                                {% for jc in jobs %}
+                                    <option value="{{ jc.job_category }}" {% if jc.job_category == instance.job_category %}selected{% endif %}>{{ jc.job_category }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
+                        <div class="form-group">
+                            <label for="freight_type"><b>Freight Type</b></label>
+                            <select class="form-control form-control-sm" id="freight_type" name="freight_type">
+                                <option selected>Select</option>
+                                {% for ft in freight_types %}
+                                     <option value="{{ ft.freight_type }}" {% if ft.freight_type == instance.freight_type %}selected{% endif %}>{{ ft.freight_type }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>  
+
+                <div class="row ml-2">
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label for="payment_type"><b>Payment Type</b></label>
+                            <select class="form-control form-control-sm" id="payment_type" name="payment_type" style="color: #000;">
+                                <option selected>Select</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Collect">Collect</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-4"></div>
+
+                <div class="row ml-2">
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label for="sales_person"><b>Sales Person</b></label>
+                            <input type="text" value="{{instance.sales_person}}" style="color: #000;" class="form-control form-control-sm" id="sales_person" name="sales_person" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-5 offset-1">
+                        <div class="form-group">
+                            <label for="type"><b>Type</b></label>
+                            <select class="form-control form-control-sm" id="type" name="type">
+                                <option selected>Select</option>
+                                {% for type in types %}
+                                    <option value="{{ type.type }}" {% if type.type == instance.type %}selected{% endif %}>{{ type.type }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row ml-2">
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label for="origin"><b>Origin</b></label>
+                            <input type="text" class="form-control form-control-sm" style="color: #000;" id="origin" name="origin">
+                        </div>
+                    </div>
+                    <div class=" col-sm-5 offset-1">
+                        <div class="form-group">
+                            <label for="quotation_date"><b>Quotation Date</b></label>
+                            <input type="date" class="form-control form-control-sm" style="color: #000;" id="quotation_date" name="quotation_date">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row ml-2">
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label for="destination"><b>Destination</b></label>
+                            <input type="text" class="form-control form-control-sm" style="color: #000;" id="destination" name="destination">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row ml-2">
+                    <div class=" col-sm-5">
+                        <div class="form-group">
+                            <label for="final_destination"><b>Final Destination</b></label>
+                            <input type="text" class="form-control form-control-sm" style="color: #000;" id="final_destination" name="final_destination">
+                        </div>
+                    </div>
+                    <div class=" col-sm-5 offset-1">
+                        <div class="form-group">
+                            <label for="terms"><b>Terms</b></label>
+                            <input type="text" class="form-control form-control-sm" style="color: #000;" id="terms" name="terms">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5"></div>
+                <div class="row mt-5"></div>
+
+                <div class="row ml-4">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                          <a class="nav-link active" href="#"><b>Packages</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="" data-toggle="modal" data-target=".bd-example-modal-lg"><b>Quantity & Dimensions</b></a>
+                            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg">
+                                  <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel"><b>Create Quantity & Dimension</b></h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <hr>
+                                        <div class="row ml-2 mt-2">
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <label for="quantity"><b>Quantity</b></label>
+                                                    <input type="number" class="form-control form-control-sm" style="color: #000;" id="quantity" name="quantity">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5 offset-1">
+                                                <div class="form-group">
+                                                    <label for="dimension"><b>Dimension ( L x W x H )</b></label>
+                                                    <input type="text" class="form-control form-control-sm" style="color: #000;" id="dimension" name="dimension">
+                                                </div>
+                                            </div>
+                                        </div> 
+                                        <div class="row mt-2"></div>
+                                        <hr>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><b>T&C</b></a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="row mt-5"></div>
+
+                <div class="row ml-2">
+                    <div class=" col-sm-5">
+                        <div class="form-group">
+                            <label for="product"><b>Product</b></label>
+                            <input type="text" class="form-control form-control-sm" style="color: #000;" id="product" name="product">
+                        </div>
+                    </div>
+                    <div class="col-sm-5 offset-1">
+                        <div class="form-group">
+                            <label for="client_currency"><b>Client Currency</b></label>
+                            <select class="form-control form-control-sm" style="background-color:lightsteelblue; color: #000;" id="client_currency" name="client_currency">
+                                <option selected>Select</option>
+                                <option value="Import">INR </option>
+                                <option value="Export">USD </option>
+                                <option value="Export">AED </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row ml-2">
+                    <div class=" col-sm-5">
+                        <div class="form-group">
+                            <label for="description"><b>Description</b></label>
+                            <textarea class="form-control form-control-sm" style="color: #000;" id="description" name="description"
+                                rows="1" required></textarea>
+                        </div>
+                    </div>
+                    <div class=" col-sm-5 offset-1">
+                        <div class="form-group">
+                            <label for="rate"><b>Rate</b></label>
+                            <input type="text" class="form-control form-control-sm" style="background-color:lightsteelblue; color: #000;" id="rate" name="rate">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row ml-2">
+                    <div class=" col-sm-5">
+                        <div class="form-group">
+                            <label for="unit"><b>Unit</b></label>
+                            <input type="number" class="form-control form-control-sm" style="color: #000;" id="unit " name="unit">
+                        </div>
+                    </div>
+                    <div class="col-sm-5 offset-1">
+                        <div class="form-group">
+                            <label for="quantity"><b>Quantity</b></label>
+                            <input type="number" class="form-control form-control-sm" style="color: #000;" id="quantity" name="quantity">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row ml-2">
+                    <div class=" col-sm-5">
+                        <div class="form-group">
+                            <label for="weight"><b>Weight</b></label>
+                            <input type="number" class="form-control form-control-sm" style="color: #000;" id="weight" name="weight">
+                        </div>
+                    </div>
+                    <div class="col-sm-5 offset-1">
+                        <div class="form-group">
+                            <label for="dimension"><b>Dimension ( L x W x H )</b></label>
+                            <input type="text" class="form-control form-control-sm" style="color: #000;" id="dimension" name="dimension">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5"></div>
+                <div class="row mt-3 ml-2">
+                    <div class="col-sm-12">
+                        <div class="button">
+                            <button type="submit" class="btn btn-sm btn-primary" style="font-size: 17px;">Save</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3"></div>
+
+            </form>  
+         </div>
+    </section>
+</div>
+{% endblock content %}
+

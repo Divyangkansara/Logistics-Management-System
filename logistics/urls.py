@@ -5,7 +5,10 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home),
-    path('enquiries/', views.enquiries, name='enquiries'),
-    path('enquiryform/', views.submit_enquiry, name='enquiryform'),
-    path('editenquiry/', views.edit_enquiry, name='editenquiry'),
+    path('enquiry_list/', views.enquiries, name='enquiry_list'),
+    path('enquiry/', views.submit_enquiry, name='enquiryform'),
+    path('edit_enquiry/<int:id>/', views.edit_enquiry, name='edit_enquiry'),
+    path('edit/<int:id>/', views.update_enquiry, name='edit'),
+    path('quotation/<int:id>', views.quotation_management, name='quotation'),
+    path('save_quotation/<int:id>/', views.save_quotation, name='save_quotation'),
 ]
