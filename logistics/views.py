@@ -1,5 +1,5 @@
 from django.shortcuts import render , redirect, get_object_or_404
-from .models import Enquiries , FreightType, JobCategory, Type, Quotations
+from .models import Enquiries , FreightType, JobCategory, Type, Quotations, PaymentType, ClientCurrency
 
 
 
@@ -21,7 +21,7 @@ def submit_enquiry(request):
     if request.method == 'POST':
         scope_of_work = request.POST.get('scope_of_work')
         enquiry_date = request.POST.get('enquiry_date')
-        status = request.POST.get('status')
+        # status = request.POST.get('status')
         job_category = request.POST.get('job_category')
         customer_name = request.POST.get('customer_name')
         email = request.POST.get('email')
@@ -101,9 +101,9 @@ def quotation_management(request, id):
 def save_quotation(request, id):
     if request.method == 'POST':
         customer_name = request.POST.get('customer_name')
-        job_category = request.POST.get('job_category')
-        freight_type = request.POST.get('freight_type')
-        type = request.POST.get('type')
+        job_category = request.POST.get('job_category_value')
+        freight_type = request.POST.get('freight_type_value')
+        type = request.POST.get('type_value')
         sales_person = request.POST.get('sales_person')
         payment_type = request.POST.get('payment_type')
         quotation_date = request.POST.get('quotation_date')
@@ -122,20 +122,54 @@ def save_quotation(request, id):
 
         quotation = Quotations(customer_name=customer_name, freight_type=freight_type, type=type, job_category=job_category, sales_person=sales_person, quantity=quantity, dimension=dimension, payment_type=payment_type, quotation_date=quotation_date, origin=origin, destination=destination, final_destination=final_destination, product=product, description=description, unit=unit, weight=weight, client_currency=client_currency, rate=rate, terms=terms)
         quotation.save()
-        print("1111111111", quotation.id)
-        # instance = get_object_or_404(Enquiries, pk=id)
-        # freight_types = FreightType.objects.all()
-        # jobs = JobCategory.objects.all()
-        # types = Type.objects.all()
-
-        # context = {'instance': instance, 'freight_types':freight_types, 'jobs':jobs,
-        #                 'types':types, 'quotation':quotation}
 
         return render(request, 'logistics/approvequotation.html', {'quotation':quotation})
     
     return render(request, 'logistics/quotation.html')
 
 
+#  update quotation
+def update_quotation(request, id):
+
+    instance = get_object_or_404(Quotations, pk=id)
+
+    if request.method == 'POST':
+        instance.customer_name = request.POST.get('customer_name')
+        instance.job_category = request.POST.get('job_category_value')
+        instance.freight_type = request.POST.get('freight_type_value')
+        instance.type = request.POST.get('type_value')
+        instance.sales_person = request.POST.get('sales_person')
+        instance.payment_type = request.POST.get('payment_type')
+        instance.quotation_date = request.POST.get('quotation_date')
+        instance.origin = request.POST.get('origin')
+        instance.destination = request.POST.get('destination')
+        instance.final_destination = request.POST.get('final_destination')
+        instance.product = request.POST.get('product')
+        instance.description = request.POST.get('description')
+        instance.unit = request.POST.get('unit')
+        instance.quantity = request.POST.get('quantity')
+        instance.weight = request.POST.get('weight')
+        instance.dimension = request.POST.get('dimension')
+        instance.client_currency = request.POST.get('client_currency')
+        instance.rate = request.POST.get('rate')
+        instance.terms = request.POST.get('terms')
+
+        instance.save()
+        return render(request, 'logistics/approvequotation.html', {'quotation':instance})
+
+
+
+
+    freight_types = FreightType.objects.all()
+    jobs = JobCategory.objects.all()
+    types = Type.objects.all()
+    payment_types = PaymentType.objects.all()
+    client_currency = ClientCurrency.objects.all()
+    context = {'instance': instance, 'freight_types':freight_types, 'jobs':jobs,
+                        'types':types, 'payment_types':payment_types,
+                         'client_currency':client_currency}
+
+    return render(request, 'logistics/updatequotation.html', context)
 
 
 

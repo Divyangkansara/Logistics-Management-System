@@ -1,14 +1,16 @@
 {% extends 'logistics/base.html' %}
 {% load static %}
 
+
 {% block content %}
 <link rel="stylesheet" href="{% static 'logistics/css/style.css' %}">
+
 
 
 <nav aria-label="breadcrumb" style="margin-top: 50px; margin-bottom: 10px;">
     <ol class="breadcrumb" style="font-size: xx-large; margin-bottom: auto;">
       <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
-      <li class="breadcrumb-item"><a href="{% url 'edit_enquiry' instance.id %}">{{instance.scope_of_work}}</a></li>
+      <li class="breadcrumb-item"><a href="">{{instance.scope_of_work}}</a></li>
       <li class="breadcrumb-item active" aria-current="page">New</li>
     </ol>
 </nav>
@@ -17,14 +19,14 @@
     <div class="justify-content-start">
         <a href="" class="btn btn-sm btn-primary">Approve Quotation</a>
         <a href="" class="btn btn-sm btn-primary">Send Quotation Email</a>
-        <a href="{% url 'edit_enquiry' instance.id %}" class="btn btn-sm btn-outline-dark">Cancel</a>
+        <a href="" class="btn btn-sm btn-outline-dark">Cancel</a>
     </div>
 </nav>
 
 <div class="">
     <section class="formsection mt-4 mb-4">
          <div class="col-sm-12 col-md-8 col-lg-10 m-auto">
-            <form id="enquiry_form" method="POST" action="{% url 'save_quotation' instance.id %}">
+            <form id="enquiry_form" method="POST" action="{% url 'update_quotation' instance.id %}">
                 {% csrf_token %}
                 <div class="row ml-2">
                     <div class="col-sm-5 mt-2">
@@ -71,8 +73,9 @@
                             <label for="payment_type"><b>Payment Type</b></label>
                             <select class="form-control form-control-sm" id="payment_type" name="payment_type" style="color: #000;">
                                 <option selected>Select</option>
-                                <option value="Pending">Pending</option>
-                                <option value="Collect">Collect</option>
+                                {% for pt in payment_types %}
+                                    <option value="{{ pt.payment_type }}" {% if pt.payment_type|lower == instance.payment_type|lower %}selected{% endif %}>{{ pt.payment_type }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                     </div>
@@ -105,13 +108,13 @@
                     <div class="col-sm-5">
                         <div class="form-group">
                             <label for="origin"><b>Origin</b></label>
-                            <input type="text" class="form-control form-control-sm" style="color: #000;" id="origin" name="origin">
+                            <input type="text" value="{{instance.origin}}" class="form-control form-control-sm" style="color: #000;" id="origin" name="origin">
                         </div>
                     </div>
                     <div class=" col-sm-5 offset-1">
                         <div class="form-group">
                             <label for="quotation_date"><b>Quotation Date</b></label>
-                            <input type="datetime-local" class="form-control form-control-sm" style="color: #000;" id="quotation_date" name="quotation_date">
+                            <input type="datetime-local" value="{{ instance.quotation_date|date:'Y-m-d\TH:i' }}" class="form-control form-control-sm" style="color: #000;" id="quotation_date" name="quotation_date">
                         </div>
                     </div>
                 </div>
@@ -120,7 +123,7 @@
                     <div class="col-sm-5">
                         <div class="form-group">
                             <label for="destination"><b>Destination</b></label>
-                            <input type="text" class="form-control form-control-sm" style="color: #000;" id="destination" name="destination">
+                            <input type="text" value="{{instance.destination}}" class="form-control form-control-sm" style="color: #000;" id="destination" name="destination">
                         </div>
                     </div>
                 </div>
@@ -129,13 +132,13 @@
                     <div class=" col-sm-5">
                         <div class="form-group">
                             <label for="final_destination"><b>Final Destination</b></label>
-                            <input type="text" class="form-control form-control-sm" style="color: #000;" id="final_destination" name="final_destination">
+                            <input type="text" value="{{instance.final_destination}}" class="form-control form-control-sm" style="color: #000;" id="final_destination" name="final_destination">
                         </div>
                     </div>
                     <div class=" col-sm-5 offset-1">
                         <div class="form-group">
                             <label for="terms"><b>Terms</b></label>
-                            <input type="text" class="form-control form-control-sm" style="color: #000;" id="terms" name="terms">
+                            <input type="text" value="{{instance.terms}}" class="form-control form-control-sm" style="color: #000;" id="terms" name="terms">
                         </div>
                     </div>
                 </div>
@@ -164,13 +167,13 @@
                                             <div class="col-sm-5">
                                                 <div class="form-group">
                                                     <label for="quantity"><b>Quantity</b></label>
-                                                    <input type="number" class="form-control form-control-sm" style="color: #000;" id="quantity" name="quantity" min="1">
+                                                    <input type="number" value="{{instance.quantity}}" class="form-control form-control-sm" style="color: #000;" id="quantity" name="quantity">
                                                 </div>
                                             </div>
                                             <div class="col-sm-5 offset-1">
                                                 <div class="form-group">
                                                     <label for="dimension"><b>Dimension ( L x W x H )</b></label>
-                                                    <input type="text" class="form-control form-control-sm" style="color: #000;" id="dimension" name="dimension">
+                                                    <input type="text" value="{{instance.dimension}}" class="form-control form-control-sm" style="color: #000;" id="dimension" name="dimension">
                                                 </div>
                                             </div>
                                         </div> 
@@ -196,7 +199,7 @@
                     <div class=" col-sm-5">
                         <div class="form-group">
                             <label for="product"><b>Product</b></label>
-                            <input type="text" class="form-control form-control-sm" style="color: #000;" id="product" name="product">
+                            <input type="text" value="{{instance.product}}" class="form-control form-control-sm" style="color: #000;" id="product" name="product">
                         </div>
                     </div>
                     <div class="col-sm-5 offset-1">
@@ -204,9 +207,9 @@
                             <label for="client_currency"><b>Client Currency</b></label>
                             <select class="form-control form-control-sm" style="background-color:lightsteelblue; color: #000;" id="client_currency" name="client_currency">
                                 <option selected>Select</option>
-                                <option value="INR">INR </option>
-                                <option value="USD">USD </option>
-                                <option value="AED">AED </option>
+                                {% for cc in client_currency %}
+                                    <option value="{{ cc.client_currency }}" {% if cc.client_currency == instance.client_currency %}selected{% endif %}>{{ cc.client_currency }}</option>
+                                {% endfor %}
                             </select>
                         </div>
                     </div>
@@ -217,13 +220,13 @@
                         <div class="form-group">
                             <label for="description"><b>Description</b></label>
                             <textarea class="form-control form-control-sm" style="color: #000;" id="description" name="description"
-                                rows="1" required></textarea>
+                                rows="1" required>{{instance.description}}</textarea>
                         </div>
                     </div>
                     <div class=" col-sm-5 offset-1">
                         <div class="form-group">
                             <label for="rate"><b>Rate</b></label>
-                            <input type="text" class="form-control form-control-sm" style="background-color:lightsteelblue; color: #000;" id="rate" name="rate">
+                            <input type="text" value="{{instance.rate}}" class="form-control form-control-sm" style="background-color:lightsteelblue; color: #000;" id="rate" name="rate">
                         </div>
                     </div>
                 </div>
@@ -232,7 +235,7 @@
                     <div class=" col-sm-5">
                         <div class="form-group">
                             <label for="unit"><b>Unit</b></label>
-                            <input type="number" class="form-control form-control-sm" style="color: #000;" id="unit " name="unit">
+                            <input type="number" value="{{instance.unit}}" class="form-control form-control-sm" style="color: #000;" id="unit " name="unit">
                         </div>
                     </div>
                 </div>
@@ -241,7 +244,7 @@
                     <div class=" col-sm-5">
                         <div class="form-group">
                             <label for="weight"><b>Weight</b></label>
-                            <input type="number" class="form-control form-control-sm" style="color: #000;" id="weight" name="weight">
+                            <input type="number" value="{{instance.weight}}" class="form-control form-control-sm" style="color: #000;" id="weight" name="weight">
                         </div>
                     </div>
                 </div>
@@ -249,7 +252,7 @@
                 <div class="row mt-3 ml-2">
                     <div class="col-sm-12">
                         <div class="button">
-                            <button type="submit" class="btn btn-sm btn-primary" style="font-size: 17px;">Save</button>
+                            <button type="submit" class="btn btn-sm btn-primary" style="font-size: 17px;">Update</button>
                         </div>
                     </div>
                 </div>
@@ -260,8 +263,7 @@
     </section>
 </div>
 
-
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     $(document).ready(function () {
         $('#quantity_dimension').click(function(){
@@ -280,9 +282,6 @@
         });
 
         $('#closeButton').on('click', function() {
-            $('#quantity').val('');
-            $('#dimension').val('');
-
             $('#quantity_dimension').removeClass('active');
             $('#packages').addClass('active');
 
@@ -290,6 +289,4 @@
         });
     });
 </script>
-
 {% endblock content %}
-

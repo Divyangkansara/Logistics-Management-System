@@ -69,14 +69,14 @@ class Quotations(models.Model):
     freight_type = models.CharField(max_length=20, choices=[('air freight',
                         'air freight'),('sea freight', 'sea freight')])
     type = models.CharField(max_length=20, default='export')
-    quotation_date = models.DateField()
+    quotation_date = models.DateTimeField()
     client_currency = models.CharField(max_length=20, choices=[('USD','USD'),
                                             ('AED','AED'),('INR','INR')])
     rate = models.DecimalField(max_digits=10, decimal_places=2)
     product = models.CharField(max_length=50)
     description = models.TextField()
     unit = models.CharField(max_length=10)
-    quantity = models.IntegerField()
+    quantity = models.PositiveIntegerField()
     weight = models.DecimalField(max_digits=10, decimal_places=2)
     dimension = models.CharField(max_length=20)
     # price = models.DecimalField(max_digits=10, decimal_places=2)
@@ -188,3 +188,20 @@ class Type(models.Model):
 
     def __str__(self):
         return self.type
+
+
+#  payment type
+class PaymentType(models.Model):
+    payment_type = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.payment_type
+    
+
+#  client currency
+class ClientCurrency(models.Model):
+    client_currency = models.CharField(max_length=50)
+    rate = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return self.client_currency

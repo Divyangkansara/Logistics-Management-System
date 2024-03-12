@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Customers, Update_Currency, Flights, Shipping_Agents, Enquiries, Quotations, Approved_Quotations, Tracking_Data, Orders, Invoices, FreightType, JobCategory, Type
+from .models import Customers, Update_Currency, Flights, Shipping_Agents, Enquiries, Quotations, Approved_Quotations, Tracking_Data, Orders, Invoices, FreightType, JobCategory, Type, PaymentType, ClientCurrency
 
 @admin.register(Customers)
 class CustomersAdmin(admin.ModelAdmin):
@@ -72,3 +72,7 @@ admin.site.register(FreightType)
 admin.site.register(JobCategory)
 
 admin.site.register(Type)
+
+admin.site.register(PaymentType)
+
+admin.site.register(ClientCurrency)
