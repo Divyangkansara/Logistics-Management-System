@@ -7,7 +7,7 @@
 
 
 <nav aria-label="breadcrumb" style="margin-top: 50px; margin-bottom: 10px;">
-    <ol class="breadcrumb" style="font-size: xx-large; margin-bottom: auto;">
+    <ol class="breadcrumb" style="font-size: x-large; margin-bottom: auto;">
       <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
       <li class="breadcrumb-item active" aria-current="page">{{order.scope_of_work}}</li>
     </ol>
@@ -28,7 +28,7 @@
     <section class="form-section mt-4 mb-4">
         <div class="col-sm-12 col-md-8 col-lg-10 m-auto">
             <div class="edit-enquiry">
-                <div class="row">
+                <div class="row ml-2">
                     <div class="col-sm-12">
                         <h2 class="mt-4 ml-2">{{order.scope_of_work}}</h2>
                     </div>
@@ -36,7 +36,7 @@
 
                 <div class="row mt-5"></div>
               
-                <div class="row">
+                <div class="row ml-2">
                     <div class="col-sm-6">
                         <div class="row">
                             <div class="col-xs-4 ml-4">
@@ -46,7 +46,7 @@
                                 <p><b>Status</b></p>
                             </div>
                             <div class="col-xs-4 ml-5">
-                                <p>code</p>
+                                <p>COMPANY01EQ20030{{order.id}}</p>
                                 <p>{{order.enquiry_date}}</p>
                                 <p>{{order.job_category}}</p>
                                 <p>{{order.status}}</p>
@@ -69,7 +69,7 @@
 
                 <div class="row mt-5"></div>
 
-                <div class="row">
+                <div class="row ml-2">
                     <div class="col-sm-6">
                         <div class="row">
                             <div class="col-xs-4 ml-4">
@@ -103,7 +103,7 @@
                 <div class="row mt-5"></div>
                 
 
-                <div class="row ml-2">
+                <div class="row ml-4">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
                           <a class="nav-link active" href="#"><b>Enquiry Details</b></a>
@@ -111,7 +111,7 @@
                     </ul>
                 </div>
                 <div class="row ml-4 mt-4">
-                    <p>{{order.enquiry_details}}</p>
+                    <p class="ml-1">{{order.enquiry_details}}</p>
                 </div>
                 <div class="row mt-3"></div>
             </div> 

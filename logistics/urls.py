@@ -13,4 +13,5 @@ urlpatterns = [
     path('save_quotation/<int:id>/', views.save_quotation, name='save_quotation'),
     path('update_quotation/<int:id>/', views.update_quotation, name='update_quotation'),
     path('send_email/<int:enquiry_id>/<int:quotation_id>/', views.sending_email, name='send_email'),
+    path('pending_order/<int:id>/', views.confirm_order, name='pending_order'),
 ]

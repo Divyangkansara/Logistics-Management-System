@@ -1,0 +1,132 @@
+{% extends 'logistics/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'logistics/css/style.css' %}">
+
+<nav aria-label="breadcrumb" style="margin-top: 50px; margin-bottom: 10px;">
+    <ol class="breadcrumb" style="font-size: x-large; margin-bottom: auto;">
+        <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
+        <li class="breadcrumb-item"><a href="">{{instance.scope_of_work}}</a></li>
+        <li class="breadcrumb-item"><a href="">...20030{{instance.id}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">...20030{{instance.id}}</li>
+    </ol>
+</nav>
+
+<nav class="navbar navbar-custom navbar-expand-lg" style="margin-top:auto;">
+    <div class="justify-content-start">
+        <a href="" class="btn btn-sm btn-primary">Confirm Order</a>
+        <button class="btn btn-sm btn-outline-dark" type="button">Cancel</button>
+    </div>
+</nav>
+
+<div>
+    <section class="form-section mt-4 mb-4">
+        <div class="col-sm-12 col-md-8 col-lg-10 m-auto">
+            <div class="quotation-details">
+                <div class="row ml-2">
+                    <div class="col-sm-12">
+                        <h4 class="mt-4 ml-2"><b>COMPANY01EQ20030{{instance.id}}</b></h4>
+                    </div>
+                </div>
+                <div class="row mt-4"></div>
+                <div class="row ml-2">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-xs-4 ml-4">
+                                <p class="mt-5"><b>Customer</b></p>
+                                <p class="mt-5"></p>
+                                <p><b>Freight Type</b></p>
+                                <p><b>Track Number</b></p>
+                            </div>
+                            <div class="col-xs-4 ml-5">
+                                <p class="mt-5">{{instance.customer_name}}</p>
+                                <p class="mt-5"></p>
+                                <p>{{instance.freight_type}}</p>
+                                <p>COMPANY01EQ20030{{instance.id}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <div class="col-xs-4 ml-4">
+                                <div class="row mt-5"></div>
+                                <div class="row mt-4"></div>
+                                <div class="row mt-5"></div>
+                                <p><b>Type</b></p>
+                                <p><b>Job Category</b></p>
+                            </div>
+                            <div class="col-xs-4 ml-5">
+                                <div class="row mt-5"></div>
+                                <div class="row mt-4"></div>
+                                <div class="row mt-5"></div>
+                                <p>{{instance.type}}</p>
+                                <p>{{instance.job_category}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5"></div>
+                <div class="row ml-3">
+                    <div class="col-sm-6 col-md-6 col-lg-5">
+                        <div class="form-group">
+                            <label for="shipping_agent"><b>Shipping Agent</b></label>
+                            <input type="text" style="background-color: lightsteelblue; color: black;" class="form-control form-control-sm" id="shipping_agent" name="shipping_agent">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
+                        <div class="form-group">
+                            <label for="acc_num"><b>Account Number</b></label>
+                            <input type="number" class="form-control form-control-sm" id="acc_num" name="acc_num">
+                        </div>
+                    </div>
+                </div>
+                <div class="row ml-3">
+                    <div class="col-sm-6 col-md-6 col-lg-5">
+                        <label for="order_date"><b>Order Date</b></label>
+                        <input type="date" class="form-control form-control-sm" id="order_date" name="order_date">
+                    </div>
+                </div>
+                <div class="row mt-5"></div>
+                <div class="row mt-5"></div>
+                <div class="row ml-3">
+                    <div class="col-sm-6 col-md-6 col-lg-5">
+                        <div class="form-group">
+                            <label for="airline"><b>Airline</b></label>
+                            <input type="text" style="background-color: lightsteelblue; color: black;" class="form-control form-control-sm" id="airline" name="airline">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
+                        <div class="form-group">
+                            <label for="flight_date"><b>Flight Date</b></label>
+                            <input type="date" class="form-control form-control-sm" id="flight_date" name="flight_date">
+                        </div>
+                    </div>
+                </div>
+                <div class="row ml-3">
+                    <div class="col-sm-6 col-md-6 col-lg-5">
+                        <div class="form-group">
+                            <label for="origin_airport"><b>Origin Airport</b></label>
+                            <input type="text" class="form-control form-control-sm" id="origin_airport" name="origin_airport">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
+                        <div class="form-group">
+                            <label for="flight_code"><b>Flight Code</b></label>
+                            <input type="text" class="form-control form-control-sm" id="flight_code" name="flight_code">
+                        </div>
+                    </div>
+                </div>
+                <div class="row ml-3">
+                    <div class="col-sm-6 col-md-6 col-lg-5">
+                        <div class="form-group">
+                            <label for="destination_airport"><b>Destination Airport</b></label>
+                            <input type="text" class="form-control form-control-sm" id="destination_airport" name="destination_airport">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock content %}

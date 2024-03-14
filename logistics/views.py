@@ -185,9 +185,8 @@ def update_quotation(request, id):
 
 #  send email
 def sending_email(request, enquiry_id, quotation_id):
-    print("sending email", id)
+    print("sending email", enquiry_id, quotation_id)
     enquiry = get_object_or_404(Enquiries, pk=enquiry_id)
-    print('➡ logistics/views.py:189 mail:', enquiry.__dict__)
 
     threading.Thread(target=lambda: send_mail(
         'Testing Mail',
@@ -205,31 +204,7 @@ def sending_email(request, enquiry_id, quotation_id):
 
 
 
-
-# def sending_email(request, id):
-#     print("sending email")
-#     try:
-#         mail = get_object_or_404(Enquiries, pk=id)
-#         print('➡ logistics/views.py:189 mail:', mail)
-
-#     except Enquiries.DoesNotExist:
-#         # Handle the case where the Enquiries object does not exist
-#         return render(request, 'logistics/error.html', {'error_message': 'Enquiries object does not exist'})
-
-#   
-#         threading.Thread(target=lambda: send_mail(
-#             'Testing Mail',
-#             'Here is the testing message. Just for confirmation. Logistics Management System project',
-#             'divyang.kansara@technostacks.com',
-#             [mail.email],
-#             fail_silently=False
-#         )).start()
-
-#         quotation = get_object_or_404(Quotations, pk=id)
-#         return render(request, 'logistics/sentemail.html', {'quotation': quotation})
-
-# 
-#         # Log the error or handle it appropriately
-#         print(f"An error occurred while sending email: {e}")
-#         # You can render an error page or redirect the user to a specific URL
-#         return render(request, 'logistics/error.html', {'error_message': str(e)})
+#  Order 
+def confirm_order(request, id):
+    enquiry = get_object_or_404(Enquiries, pk=id)
+    return render(request, 'logistics/orders.html', {'instance':enquiry})

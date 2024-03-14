@@ -9,10 +9,10 @@
 
 
 <nav aria-label="breadcrumb" style="margin-top: 50px; margin-bottom: 10px;">
-    <ol class="breadcrumb" style="font-size: xx-large; margin-bottom: auto;">
+    <ol class="breadcrumb" style="font-size: x-large; margin-bottom: auto;">
       <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
       <li class="breadcrumb-item"><a href="">{{instance.scope_of_work}}</a></li>
-      <li class="breadcrumb-item active" aria-current="page">New</li>
+      <li class="breadcrumb-item active" aria-current="page">...20030{{instance.id}}</li>
     </ol>
     <a href="{% url 'update_quotation' quotation.id %}" class="btn btn-primary ml-3">Edit</a>
     <a class="btn btn-outline-dark" >Create</a>
@@ -20,7 +20,7 @@
 
 <nav class="navbar navbar-custom navbar-expand-lg" style="margin-top:auto;">
     <div class="justify-content-start">
-        <a href="" class="btn btn-sm btn-primary">Approve Quotation</a>
+        <a href="{% url 'pending_order' instance.id %}" class="btn btn-sm btn-primary">Approve Quotation</a>
         
         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" data-backdrop="static" data-keyboard="false">Send Quotation Email</button>
         <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -52,7 +52,11 @@
                         </div>
                         <div class="row mt-4">
                             <div class="col-sm-12">
-                                <textarea class="form-control" id="message-text" name="message-text" rows="5"></textarea>
+                                <textarea class="form-control" id="message-text" name="message-text">Dear {{instance.customer_name}},<br>
+                                    Here is your <b>quotation</b> for your enquiry amounting in <b>1500 USD.</b><br><br><br><br>
+                                    You can reply to this email if you have any questions. <br>
+                                    Thank You.
+                                </textarea>
                             </div>
                         </div>
                     </div>
@@ -73,6 +77,12 @@
     <section class="form-section mt-4 mb-4">
         <div class="col-sm-12 col-md-8 col-lg-10 m-auto">
             <div class="quotation-details">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="mt-4 ml-2"><b>COMPANY01EQ20030{{instance.id}}</b></h4>
+                    </div>
+                </div>
+                <div class="row mt-4"></div>
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="row">
@@ -207,13 +217,11 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     ClassicEditor
-        .create(document.querySelector('#message-text'), {
-            config: {
-                height: '600px' // Set the height of the CKEditor textarea
-            }
-        })
+        .create(document.querySelector('#message-text'))
         .then(editor => {
             console.log(editor);
+            editor.ui.view.editable.element.style.height = '200px';
+
         })
         .catch(error => {
             console.error(error);
