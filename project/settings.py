@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
 EXTERNAL_APPS = [
     'logistics',
+    'ckeditor',
 ]
 
 INSTALLED_APPS += EXTERNAL_APPS
@@ -131,3 +132,26 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+EMAIL_BACKEND='django_smtp_ssl.SSLEmailBackend'
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT=465
+EMAIL_HOST_USER='divyang.kansara@technostacks.com'
+EMAIL_HOST_PASSWORD='#Kansara@4698$'
+EMAIL_USE_TLS=True
+
+
+CKEDITOR_UPLOAD_PATH = "uploads/"  # Define the path where uploaded files will be stored
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList'],
+            ['Link', 'Unlink'],
+            ['RemoveFormat']
+        ],
+        'height': 300,  # Set the height of the CKEditor field
+    },
+}

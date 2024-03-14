@@ -1,5 +1,8 @@
-from django.shortcuts import render , redirect, get_object_or_404
+import threading
+from django.shortcuts import render , redirect, get_object_or_404,HttpResponseRedirect
+from django.urls import reverse
 from .models import Enquiries , FreightType, JobCategory, Type, Quotations, PaymentType, ClientCurrency
+from django.core.mail import send_mail
 
 
 
@@ -99,6 +102,11 @@ def quotation_management(request, id):
 
 #  save quotation
 def save_quotation(request, id):
+
+    instance = get_object_or_404(Enquiries, pk=id)
+    print('➡ logistics/views.py:107 instance:', instance)
+    print('➡ logistics/views.py:106 instance:', instance.email)
+
     if request.method == 'POST':
         customer_name = request.POST.get('customer_name')
         job_category = request.POST.get('job_category_value')
@@ -122,8 +130,9 @@ def save_quotation(request, id):
 
         quotation = Quotations(customer_name=customer_name, freight_type=freight_type, type=type, job_category=job_category, sales_person=sales_person, quantity=quantity, dimension=dimension, payment_type=payment_type, quotation_date=quotation_date, origin=origin, destination=destination, final_destination=final_destination, product=product, description=description, unit=unit, weight=weight, client_currency=client_currency, rate=rate, terms=terms)
         quotation.save()
-
-        return render(request, 'logistics/approvequotation.html', {'quotation':quotation})
+        print("quoatiii", quotation)    
+        return render(request, 'logistics/approvequotation.html', {'quotation':quotation,
+                                                            'instance':instance})
     
     return render(request, 'logistics/quotation.html')
 
@@ -165,7 +174,7 @@ def update_quotation(request, id):
     types = Type.objects.all()
     payment_types = PaymentType.objects.all()
     client_currency = ClientCurrency.objects.all()
-    context = {'instance': instance, 'freight_types':freight_types, 'jobs':jobs,
+    context = {'inst': instance, 'freight_types':freight_types, 'jobs':jobs,
                         'types':types, 'payment_types':payment_types,
                          'client_currency':client_currency}
 
@@ -174,5 +183,53 @@ def update_quotation(request, id):
 
 
 
+#  send email
+def sending_email(request, enquiry_id, quotation_id):
+    print("sending email", id)
+    enquiry = get_object_or_404(Enquiries, pk=enquiry_id)
+    print('➡ logistics/views.py:189 mail:', enquiry.__dict__)
+
+    threading.Thread(target=lambda: send_mail(
+        'Testing Mail',
+        'Here is the testing message. Just for confirmation. Logistics Management System project',
+        'divyang.kansara@technostacks.com',
+        [enquiry.email],
+        fail_silently=False
+    )).start()
+
+    quotation = get_object_or_404(Quotations, pk=quotation_id)
+    return render(request, 'logistics/sentemail.html', {'quotation':quotation,
+                                                        'instance':enquiry})
 
 
+
+
+
+
+# def sending_email(request, id):
+#     print("sending email")
+#     try:
+#         mail = get_object_or_404(Enquiries, pk=id)
+#         print('➡ logistics/views.py:189 mail:', mail)
+
+#     except Enquiries.DoesNotExist:
+#         # Handle the case where the Enquiries object does not exist
+#         return render(request, 'logistics/error.html', {'error_message': 'Enquiries object does not exist'})
+
+#   
+#         threading.Thread(target=lambda: send_mail(
+#             'Testing Mail',
+#             'Here is the testing message. Just for confirmation. Logistics Management System project',
+#             'divyang.kansara@technostacks.com',
+#             [mail.email],
+#             fail_silently=False
+#         )).start()
+
+#         quotation = get_object_or_404(Quotations, pk=id)
+#         return render(request, 'logistics/sentemail.html', {'quotation': quotation})
+
+# 
+#         # Log the error or handle it appropriately
+#         print(f"An error occurred while sending email: {e}")
+#         # You can render an error page or redirect the user to a specific URL
+#         return render(request, 'logistics/error.html', {'error_message': str(e)})
