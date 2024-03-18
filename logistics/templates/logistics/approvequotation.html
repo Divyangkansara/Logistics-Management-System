@@ -11,10 +11,10 @@
 <nav aria-label="breadcrumb" style="margin-top: 50px; margin-bottom: 10px;">
     <ol class="breadcrumb" style="font-size: x-large; margin-bottom: auto;">
       <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
-      <li class="breadcrumb-item"><a href="">{{instance.scope_of_work}}</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'edit_enquiry' instance.id %}">{{instance.scope_of_work}}</a></li>
       <li class="breadcrumb-item active" aria-current="page">...20030{{instance.id}}</li>
     </ol>
-    <a href="{% url 'update_quotation' quotation.id %}" class="btn btn-primary ml-3">Edit</a>
+    <a href="{% url 'update_quotation' instance.id quotation.id %}" class="btn btn-primary ml-3">Edit</a>
     <a class="btn btn-outline-dark" >Create</a>
 </nav>
 
@@ -62,7 +62,7 @@
                     </div>
                     <div class="row mt-4"></div>
                     <div class="modal-footer justify-content-start">
-                        <a href="{% url 'send_email' quotation_id=quotation.id enquiry_id=instance.id %}" class="send_mail btn btn-primary">Send</a> 
+                        <a href="{% url 'send_email' instance.id quotation.id %}" class="send_mail btn btn-primary">Send</a> 
                         <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
@@ -216,18 +216,16 @@
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-    ClassicEditor
-        .create(document.querySelector('#message-text'))
-        .then(editor => {
-            console.log(editor);
-            editor.ui.view.editable.element.style.height = '200px';
-
-        })
-        .catch(error => {
-            console.error(error);
-        });
-
     $(document).ready(function () {
+        ClassicEditor
+            .create(document.querySelector('#message-text'))
+            .then(editor => {
+                console.log(editor);
+                $(editor.ui.view.editable.element).css('height', '200px');
+            })
+            .catch(error => {
+                console.error(error);
+            });
         $("#quantity_dimension").click(function(){
             $("#packagesContent").hide();
             $("#quantityDimensionContent").show();

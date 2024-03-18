@@ -51,12 +51,11 @@ class Tracking_DataAdmin(admin.ModelAdmin):
 
 @admin.register(Orders)
 class OrdersAdmin(admin.ModelAdmin):
-     list_display = ('customer_name','job_category','payment_type','freight_type',
-                     'type','airline','flight_number','origin','destination',
+     list_display = ('airline','flight_number','origin','destination',
                      'shipper_name','shipper_acc_num','shipper_address',
                      'consignee_name','consignee_acc_num','consignee_address',
-                     'shipping_agent','shipping_agent_acc_num','shipping_agent_code',
-                     'date')
+                     'shipping_agent','shipping_agent_acc_num',
+                     'order_date', 'flight_date', 'notify_name', 'notify_acc', 'notify_add')
      
 
 

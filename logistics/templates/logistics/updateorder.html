@@ -7,8 +7,8 @@
 <nav aria-label="breadcrumb" style="margin-top: 50px; margin-bottom: 10px;">
     <ol class="breadcrumb" style="font-size: x-large; margin-bottom: auto;">
         <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'edit_enquiry' instance.id %}">{{instance.scope_of_work}}</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'save_quotation' instance.id %}">...20030{{instance.id}}</a></li>
+        <li class="breadcrumb-item"><a href="">{{instance.scope_of_work}}</a></li>
+        <li class="breadcrumb-item"><a href="">...20030{{instance.id}}</a></li>
         <li class="breadcrumb-item active" aria-current="page">...20030{{instance.id}}</li>
     </ol>
 </nav>
@@ -67,26 +67,26 @@
                     </div>
                 </div>
                 <div class="row mt-5"></div>
-                <form action="{% url 'pending_order' instance.id quotation.id %}"  method="POST">
+                <form action="{% url 'update_order' order.id  instance.id quotation.id %}"  method="POST">
                     {% csrf_token %}
                     <div class="row ml-3">
                         <div class="col-sm-6 col-md-6 col-lg-5">
                             <div class="form-group">
                                 <label for="shipping_agent"><b>Shipping Agent</b></label>
-                                <input type="text" style="background-color: lightsteelblue; color: black;" class="form-control form-control-sm" id="shipping_agent" name="shipping_agent">
+                                <input type="text" value="{{order.shipping_agent}}" style="background-color: lightsteelblue; color: black;" class="form-control form-control-sm" id="shipping_agent" name="shipping_agent">
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
                             <div class="form-group">
                                 <label for="acc_num"><b>Account Number</b></label>
-                                <input type="number" class="form-control form-control-sm" id="acc_num" name="acc_num">
+                                <input type="number" value="{{order.shipping_agent_acc_num}}" class="form-control form-control-sm" id="acc_num" name="acc_num">
                             </div>
                         </div>
                     </div>
                     <div class="row ml-3">
                         <div class="col-sm-6 col-md-6 col-lg-5">
                             <label for="order_date"><b>Order Date</b></label>
-                            <input type="date" class="form-control form-control-sm" id="order_date" name="order_date">
+                            <input type="date" value="{{ order.order_date|date:'Y-m-d' }}" class="form-control form-control-sm" id="order_date" name="order_date">
                         </div>
                     </div>
                     <div class="row mt-5"></div>
@@ -95,13 +95,13 @@
                         <div class="col-sm-6 col-md-6 col-lg-5">
                             <div class="form-group">
                                 <label for="airline"><b>Airline</b></label>
-                                <input type="text" style="background-color: lightsteelblue; color: black;" class="form-control form-control-sm" id="airline" name="airline">
+                                <input type="text" value="{{order.airline}}" style="background-color: lightsteelblue; color: black;" class="form-control form-control-sm" id="airline" name="airline">
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
                             <div class="form-group">
                                 <label for="flight_date"><b>Flight Date</b></label>
-                                <input type="date" class="form-control form-control-sm" id="flight_date" name="flight_date">
+                                <input type="date" value="{{ order.flight_date|date:'Y-m-d' }}" class="form-control form-control-sm" id="flight_date" name="flight_date">
                             </div>
                         </div>
                     </div>
@@ -109,13 +109,13 @@
                         <div class="col-sm-6 col-md-6 col-lg-5">
                             <div class="form-group">
                                 <label for="origin_airport"><b>Origin Airport</b></label>
-                                <input type="text" class="form-control form-control-sm" id="origin_airport" name="origin_airport">
+                                <input type="text" value="{{order.origin}}" class="form-control form-control-sm" id="origin_airport" name="origin_airport">
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
                             <div class="form-group">
                                 <label for="flight_code"><b>Flight Code</b></label>
-                                <input type="text" class="form-control form-control-sm" id="flight_code" name="flight_code">
+                                <input type="text" value="{{order.flight_number}}" class="form-control form-control-sm" id="flight_code" name="flight_code">
                             </div>
                         </div>
                     </div>
@@ -123,7 +123,7 @@
                         <div class="col-sm-6 col-md-6 col-lg-5">
                             <div class="form-group">
                                 <label for="destination_airport"><b>Destination Airport</b></label>
-                                <input type="text" class="form-control form-control-sm" id="destination_airport" name="destination_airport">
+                                <input type="text" value="{{order.destination}}" class="form-control form-control-sm" id="destination_airport" name="destination_airport">
                             </div>
                         </div>
                     </div>
@@ -147,13 +147,13 @@
                             <div class="col-sm-6 col-md-6 col-lg-5">
                                 <div class="form-group">
                                     <label for="shipper_name"><b>Shipper Name</b></label>
-                                    <input type="text" class="form-control form-control-sm" id="shipper_name" name="shipper_name">
+                                    <input type="text" value="{{order.shipper_name}}" class="form-control form-control-sm" id="shipper_name" name="shipper_name">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
                                 <div class="form-group">
                                     <label for="shipper_acc"><b>Account No</b></label>
-                                    <input type="text" class="form-control form-control-sm" id="shipper_acc" name="shipper_acc">
+                                    <input type="text" value="{{order.shipper_acc_num}}" class="form-control form-control-sm" id="shipper_acc" name="shipper_acc">
                                 </div>
                             </div>
                         </div>
@@ -161,7 +161,7 @@
                             <div class="col-sm-6 col-md-6 col-lg-5">
                                 <div class="form-group">
                                     <label for="shipper_add"><b>Address</b></label>
-                                    <textarea class="form-control form-control-sm" id="shipper_add" name="shipper_add" rows="3"></textarea>
+                                    <textarea class="form-control form-control-sm" id="shipper_add" name="shipper_add" rows="3">{{order.shipper_address}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -173,13 +173,13 @@
                             <div class="col-sm-6 col-md-6 col-lg-5">
                                 <div class="form-group">
                                     <label for="consignee_name"><b>Consignee Name</b></label>
-                                    <input type="text" class="form-control form-control-sm" id="consignee_name" name="consignee_name">
+                                    <input type="text" value="{{order.consignee_name}}" class="form-control form-control-sm" id="consignee_name" name="consignee_name">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
                                 <div class="form-group">
                                     <label for="consignee_acc"><b>Account No</b></label>
-                                    <input type="text" class="form-control form-control-sm" id="consignee_acc" name="consignee_acc">
+                                    <input type="text" value="{{order.consignee_acc_num}}" class="form-control form-control-sm" id="consignee_acc" name="consignee_acc">
                                 </div>
                             </div>
                         </div>
@@ -192,13 +192,13 @@
                             <div class="col-sm-6 col-md-6 col-lg-5">
                                 <div class="form-group">
                                     <label for="notify_name"><b>Notify Name</b></label>
-                                    <input type="text" class="form-control form-control-sm" id="notify_name" name="notify_name">
+                                    <input type="text" value="{{order.notify_name}}" class="form-control form-control-sm" id="notify_name" name="notify_name">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
                                 <div class="form-group">
                                     <label for="notify_acc"><b>Account No</b></label>
-                                    <input type="text" class="form-control form-control-sm" id="notify_acc" name="notify_acc">
+                                    <input type="text" value="{{order.notify_acc}}" class="form-control form-control-sm" id="notify_acc" name="notify_acc">
                                 </div>
                             </div>
                         </div>
@@ -206,7 +206,7 @@
                             <div class="col-sm-6 col-md-6 col-lg-5">
                                 <div class="form-group">
                                     <label for="notify_add"><b>Address</b></label>
-                                    <textarea class="form-control form-control-sm" id="notify_add" name="notify_add" rows="3"></textarea>
+                                    <textarea class="form-control form-control-sm" id="notify_add" name="notify_add" rows="3">{{order.notify_add}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -253,7 +253,7 @@
                         <div class="row mt-5"></div>
                     </div>
                     <div class="row ml-4">
-                        <button type="submit" class="btn btn-sm btn-primary ml-2" style="font-size: 17px;">Save</button>
+                        <button type="submit" class="btn btn-sm btn-primary ml-2" style="font-size: 17px;">Update</button>
                     </div>
                     <div class="row mt-3"></div>
                 </form>

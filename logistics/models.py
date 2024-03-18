@@ -111,27 +111,23 @@ class Approved_Quotations(models.Model):
 
 # orders
 class Orders(models.Model):
-    customer_name = models.ForeignKey(Customers, on_delete=models.CASCADE)
-    job_category = models.CharField(max_length=20, default='sales')
-    payment_type = models.CharField(max_length=20, choices=[('pending','pending'),
-                                                     ('collect','collect')])
-    freight_type = models.CharField(max_length=20, choices=[('air freight',
-                        'air freight'),('sea freight', 'sea freight')])
-    type = models.CharField(max_length=20, default='export')
     airline = models.CharField(max_length=50)
-    flight_number = models.IntegerField(unique=True)
+    flight_number = models.IntegerField()
     origin = models.CharField(max_length=255)
     destination = models.CharField(max_length=255)
     shipper_name = models.CharField(max_length=500)
-    shipper_acc_num = models.IntegerField(unique=True)
-    shipper_address = models.TextField(max_length=255, unique=True)
+    shipper_acc_num = models.IntegerField()
+    shipper_address = models.TextField(max_length=255)
     consignee_name = models.CharField(max_length=500)
-    consignee_acc_num = models.IntegerField(unique=True)
-    consignee_address = models.TextField(max_length=255, unique=True)
+    consignee_acc_num = models.IntegerField()
+    consignee_address = models.TextField(max_length=255)
     shipping_agent = models.CharField(max_length=50)
-    shipping_agent_acc_num = models.IntegerField(unique=True)
-    shipping_agent_code = models.IntegerField(unique=True)
-    date = models.DateField()
+    shipping_agent_acc_num = models.IntegerField()
+    order_date = models.DateField(null=True, blank=True)
+    flight_date = models.DateField(null=True, blank=True)
+    notify_name = models.CharField(max_length=100, default='')
+    notify_acc = models.IntegerField(default=0)
+    notify_add = models.TextField(max_length=255, null=True, blank=True)
 
 
 # tracking data

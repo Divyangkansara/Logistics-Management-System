@@ -1,7 +1,7 @@
 import threading
 from django.shortcuts import render , redirect, get_object_or_404,HttpResponseRedirect
 from django.urls import reverse
-from .models import Enquiries , FreightType, JobCategory, Type, Quotations, PaymentType, ClientCurrency
+from .models import Enquiries , FreightType, JobCategory, Type, Quotations, PaymentType, ClientCurrency, Orders
 from django.core.mail import send_mail
 
 
@@ -138,9 +138,10 @@ def save_quotation(request, id):
 
 
 #  update quotation
-def update_quotation(request, id):
+def update_quotation(request, quotation_id, enquiry_id):
 
-    instance = get_object_or_404(Quotations, pk=id)
+    instance = get_object_or_404(Quotations, pk=quotation_id)
+    enquiry = get_object_or_404(Enquiries, pk=enquiry_id)
 
     if request.method == 'POST':
         instance.customer_name = request.POST.get('customer_name')
@@ -164,7 +165,8 @@ def update_quotation(request, id):
         instance.terms = request.POST.get('terms')
 
         instance.save()
-        return render(request, 'logistics/approvequotation.html', {'quotation':instance})
+        return render(request, 'logistics/approvequotation.html', {'quotation':instance,
+                                                                   'instance':enquiry})
 
 
 
@@ -174,9 +176,9 @@ def update_quotation(request, id):
     types = Type.objects.all()
     payment_types = PaymentType.objects.all()
     client_currency = ClientCurrency.objects.all()
-    context = {'inst': instance, 'freight_types':freight_types, 'jobs':jobs,
+    context = {'quotation': instance, 'freight_types':freight_types, 'jobs':jobs,
                         'types':types, 'payment_types':payment_types,
-                         'client_currency':client_currency}
+                         'client_currency':client_currency, 'instance':enquiry}
 
     return render(request, 'logistics/updatequotation.html', context)
 
@@ -205,6 +207,69 @@ def sending_email(request, enquiry_id, quotation_id):
 
 
 #  Order 
-def confirm_order(request, id):
-    enquiry = get_object_or_404(Enquiries, pk=id)
-    return render(request, 'logistics/orders.html', {'instance':enquiry})
+def pending_order(request, enquiry_id, quotation_id):
+    enquiry = get_object_or_404(Enquiries, pk=enquiry_id)
+    quotation = get_object_or_404(Quotations, pk=quotation_id)
+    
+    if request.method == 'POST':
+        shipping_agent = request.POST.get('shipping_agent')
+        order_date = request.POST.get('order_date')
+        shipping_agent_acc_num = request.POST.get('acc_num')
+        airline = request.POST.get('airline')
+        origin = request.POST.get('origin_airport')
+        destination = request.POST.get('destination_airport')
+        flight_date = request.POST.get('flight_date')
+        flight_number = request.POST.get('flight_code')
+        shipper_name = request.POST.get('shipper_name')
+        shipper_acc_num = request.POST.get('shipper_acc')
+        shipper_address = request.POST.get('shipper_add')
+        consignee_name = request.POST.get('consignee_name')
+        consignee_acc_num = request.POST.get('consignee_acc')
+        notify_name = request.POST.get('notify_name')
+        notify_acc = request.POST.get('notify_acc')
+        notify_add = request.POST.get('notify_add')
+
+        order = Orders(shipping_agent=shipping_agent, order_date=order_date, shipping_agent_acc_num=shipping_agent_acc_num, airline=airline, origin=origin, destination=destination, flight_date=flight_date, flight_number=flight_number, shipper_name=shipper_name, shipper_acc_num=shipper_acc_num, shipper_address=shipper_address, consignee_name=consignee_name, consignee_acc_num=consignee_acc_num, notify_name=notify_name, notify_acc=notify_acc, notify_add=notify_add)
+        order.save()
+
+        return render(request, 'logistics/confirmorders.html', {'order':order,
+                                                                'instance':enquiry,
+                                                                'quotation':quotation})
+
+
+    return render(request, 'logistics/orders.html', {'instance':enquiry,
+                                                     'quotation':quotation})
+
+
+
+def update_order(request, order_id, enquiry_id, quotation_id):
+     
+    instance = get_object_or_404(Orders, pk=order_id)
+    enquiry = get_object_or_404(Enquiries, pk=enquiry_id)
+    quotation = get_object_or_404(Quotations, pk=quotation_id)
+
+    context = {'order':instance, 'instance':enquiry, 'quotation':quotation}
+
+    if request.method == 'POST':
+        instance.shipping_agent = request.POST.get('shipping_agent')
+        instance.order_date = request.POST.get('order_date')
+        instance.shipping_agent_acc_num = request.POST.get('acc_num')
+        instance.airline = request.POST.get('airline')
+        instance.origin = request.POST.get('origin_airport')
+        instance.destination = request.POST.get('destination_airport')
+        instance.flight_date = request.POST.get('flight_date')
+        instance.flight_number = request.POST.get('flight_code')
+        instance.shipper_name = request.POST.get('shipper_name')
+        instance.shipper_acc_num = request.POST.get('shipper_acc')
+        instance.shipper_address = request.POST.get('shipper_add')
+        instance.consignee_name = request.POST.get('consignee_name')
+        instance.consignee_acc_num = request.POST.get('consignee_acc')
+        instance.notify_name = request.POST.get('notify_name')
+        instance.notify_acc = request.POST.get('notify_acc')
+        instance.notify_add = request.POST.get('notify_add')
+
+        instance.save()
+        print(Orders.objects.all().count())
+        return render(request, 'logistics/confirmorders.html', context)
+
+    return render(request, 'logistics/updateorder.html', context)
