@@ -1,0 +1,61 @@
+{% extends 'logistics/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'logistics/css/style.css' %}">
+
+<div class="hero">
+    <div class="form-box">
+        <div class="button-box">
+            <div id="btn"></div>
+            <button type="button" class="toggle-btn" id="loginButton">Log In</button>
+            <button type="button" class="toggle-btn ml-3" id="registerButton">Register</button>
+        </div>
+        <form action="" class="input-group" id="login">
+            <input type="text" class="input-field" placeholder="User Id" required>
+            <input type="password" class="input-field" placeholder="Enter Password" required>
+            <input type="checkbox" class="check-box"><span>Remember Password</span>
+            <button type="submit" class="submit-btn ml-4">Log in</button>
+            <div class="ml-5 mt-3">
+                <p>Not a member? <a href="#" id="registerLink">Register</a></p>
+            </div>
+        </form>
+        <form action="" class="input-group-register" id="register">
+            <input type="text" class="input-field" placeholder="User Id" required>
+            <input type="email" class="input-field" placeholder="Email" required>
+            <input type="password" class="input-field" placeholder="Enter Password" required>
+            <input type="checkbox" class="check-box ml-3"><span>I agree the terms & conditions</span>
+            <button type="submit" class="submit-btn">Sign Up</button>
+            <div class="ml-3 mt-3">
+                <p>Already have an account? <a href="#" id="loginLink">Log in</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        var x = $('#login');
+        var y = $('#register');
+        var z = $('#btn');
+
+        function register() {
+            x.css('left', '-400px');
+            y.css('left', '50px');
+            z.css('left', '135px');
+        }
+
+        function login() {
+            x.css('left', '50px');
+            y.css('left', '450px');
+            z.css('left', '0');
+        }
+
+        $('#registerLink').click(register);
+        $('#loginLink').click(login);
+        $('#registerButton').click(register);
+        $('#loginButton').click(login);
+    });
+</script>
+{% endblock content %}

@@ -15,7 +15,7 @@ def home(request):
 def enquiries(request):
 
     enquiry_data = Enquiries.objects.all()
-    return render(request, 'logistics/enquirylist.html', {'data':enquiry_data})
+    return render(request, 'logistics/enquiry_list.html', {'data':enquiry_data})
 
 
 
@@ -40,15 +40,15 @@ def submit_enquiry(request):
         enquiry = Enquiries(scope_of_work=scope_of_work, enquiry_date=enquiry_date, job_category=job_category, customer_name=customer_name, email=email, phone=phone, contact_person=contact_person, sales_person=sales_person, sales_team=sales_team, freight_type=freight_type, type=type, enquiry_details=enquiry_details)
         enquiry.save()
 
-        return render(request, 'logistics/editenquiry.html', {'order': enquiry})
+        return render(request, 'logistics/edit_enquiry.html', {'order': enquiry})
     
-    return render(request, 'logistics/enquiryform.html')
+    return render(request, 'logistics/enquiry_form.html')
 
 
 #  edit enquiry
 def edit_enquiry(request, id): 
     instance = get_object_or_404(Enquiries, pk=id)   
-    return render(request, 'logistics/editenquiry.html', {'order':instance})
+    return render(request, 'logistics/edit_enquiry.html', {'order':instance})
 
 #  update form
 def update_enquiry(request, id):
@@ -72,7 +72,7 @@ def update_enquiry(request, id):
 
         instance.save()
 
-        return render(request, 'logistics/editenquiry.html', {'order': instance})
+        return render(request, 'logistics/edit_enquiry.html', {'order': instance})
     
     freight_types = FreightType.objects.all()
     jobs = JobCategory.objects.all()
@@ -80,7 +80,7 @@ def update_enquiry(request, id):
     context = {'instance': instance, 'freight_types':freight_types, 'jobs':jobs,
                         'types':types}
     
-    return render(request, 'logistics/updateform.html', context)    
+    return render(request, 'logistics/update_form.html', context)    
 
 
 
@@ -131,7 +131,7 @@ def save_quotation(request, id):
         quotation = Quotations(customer_name=customer_name, freight_type=freight_type, type=type, job_category=job_category, sales_person=sales_person, quantity=quantity, dimension=dimension, payment_type=payment_type, quotation_date=quotation_date, origin=origin, destination=destination, final_destination=final_destination, product=product, description=description, unit=unit, weight=weight, client_currency=client_currency, rate=rate, terms=terms)
         quotation.save()
         print("quoatiii", quotation)    
-        return render(request, 'logistics/approvequotation.html', {'quotation':quotation,
+        return render(request, 'logistics/approve_quotation.html', {'quotation':quotation,
                                                             'instance':instance})
     
     return render(request, 'logistics/quotation.html')
@@ -165,7 +165,7 @@ def update_quotation(request, quotation_id, enquiry_id):
         instance.terms = request.POST.get('terms')
 
         instance.save()
-        return render(request, 'logistics/approvequotation.html', {'quotation':instance,
+        return render(request, 'logistics/approve_quotation.html', {'quotation':instance,
                                                                    'instance':enquiry})
 
 
@@ -180,7 +180,7 @@ def update_quotation(request, quotation_id, enquiry_id):
                         'types':types, 'payment_types':payment_types,
                          'client_currency':client_currency, 'instance':enquiry}
 
-    return render(request, 'logistics/updatequotation.html', context)
+    return render(request, 'logistics/update_quotation.html', context)
 
 
 
@@ -199,7 +199,7 @@ def sending_email(request, enquiry_id, quotation_id):
     )).start()
 
     quotation = get_object_or_404(Quotations, pk=quotation_id)
-    return render(request, 'logistics/sentemail.html', {'quotation':quotation,
+    return render(request, 'logistics/sent_email.html', {'quotation':quotation,
                                                         'instance':enquiry})
 
 
@@ -232,7 +232,7 @@ def pending_order(request, enquiry_id, quotation_id):
         order = Orders(shipping_agent=shipping_agent, order_date=order_date, shipping_agent_acc_num=shipping_agent_acc_num, airline=airline, origin=origin, destination=destination, flight_date=flight_date, flight_number=flight_number, shipper_name=shipper_name, shipper_acc_num=shipper_acc_num, shipper_address=shipper_address, consignee_name=consignee_name, consignee_acc_num=consignee_acc_num, notify_name=notify_name, notify_acc=notify_acc, notify_add=notify_add)
         order.save()
 
-        return render(request, 'logistics/confirmorders.html', {'order':order,
+        return render(request, 'logistics/confirm_orders.html', {'order':order,
                                                                 'instance':enquiry,
                                                                 'quotation':quotation})
 
@@ -270,6 +270,10 @@ def update_order(request, order_id, enquiry_id, quotation_id):
 
         instance.save()
         print(Orders.objects.all().count())
-        return render(request, 'logistics/confirmorders.html', context)
+        return render(request, 'logistics/confirm_orders.html', context)
 
-    return render(request, 'logistics/updateorder.html', context)
+    return render(request, 'logistics/update_order.html', context)
+
+
+def login_form(request):
+    return render(request, 'logistics/login_form.html')
