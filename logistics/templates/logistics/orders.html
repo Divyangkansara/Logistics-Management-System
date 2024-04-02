@@ -4,7 +4,7 @@
 {% block content %}
 <link rel="stylesheet" href="{% static 'logistics/css/style.css' %}">
 
-<nav aria-label="breadcrumb" style="margin-top: 50px; margin-bottom: 10px;">
+<nav aria-label="breadcrumb" style="margin-top: 50px;">
     <ol class="breadcrumb" style="font-size: x-large; margin-bottom: auto;">
         <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
         <li class="breadcrumb-item"><a href="{% url 'edit_enquiry' instance.id %}">{{instance.scope_of_work}}</a></li>
@@ -13,10 +13,18 @@
     </ol>
 </nav>
 
-<nav class="navbar navbar-custom navbar-expand-lg" style="margin-top:auto;">
-    <div class="justify-content-start">
-        <a href="" class="btn btn-sm btn-primary">Confirm Order</a>
-        <button class="btn btn-sm btn-outline-dark" type="button">Cancel</button>
+<nav class="navbar navbar-custom navbar-expand-lg" style="margin-top:auto;padding: 0;">
+    <div style="padding-top: 2px;padding-bottom: 2px;margin-left: 15px;">
+        <div class="justify-content-start">
+            <a href="" class="btn btn-sm btn-primary">Confirm Order</a>
+            <button class="btn btn-sm btn-outline-dark" type="button">Cancel</button>
+        </div>
+    </div>
+    <div class="custom-stages ml-auto">
+        <span class="stage active" data-stage="approved"><b>Approved</b></span>
+        <span class="stage" data-stage="order"><b>Order</b></span>
+        <span class="stage" data-stage="delivered"><b>Delivered</b></span>
+        <span class="stage" data-stage="done"><b>Done</b></span>
     </div>
 </nav>
 
@@ -67,19 +75,21 @@
                     </div>
                 </div>
                 <div class="row mt-5"></div>
-                <form action="{% url 'pending_order' instance.id quotation.id %}"  method="POST">
+                <form action="{% url 'pending_order' instance.id quotation.id %}" method="POST">
                     {% csrf_token %}
                     <div class="row ml-3">
                         <div class="col-sm-6 col-md-6 col-lg-5">
                             <div class="form-group">
                                 <label for="shipping_agent"><b>Shipping Agent</b></label>
-                                <input type="text" style="background-color: lightsteelblue; color: black;" class="form-control form-control-sm" id="shipping_agent" name="shipping_agent">
+                                <input type="text" style="background-color: lightsteelblue; color: black;"
+                                    class="form-control form-control-sm" id="shipping_agent" name="shipping_agent">
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
                             <div class="form-group">
                                 <label for="acc_num"><b>Account Number</b></label>
-                                <input type="number" class="form-control form-control-sm" id="acc_num" name="acc_num">
+                                <input type="number" class="form-control form-control-sm" id="acc_num"
+                                    name="shipping_agent_acc_num">
                             </div>
                         </div>
                     </div>
@@ -95,13 +105,15 @@
                         <div class="col-sm-6 col-md-6 col-lg-5">
                             <div class="form-group">
                                 <label for="airline"><b>Airline</b></label>
-                                <input type="text" style="background-color: lightsteelblue; color: black;" class="form-control form-control-sm" id="airline" name="airline">
+                                <input type="text" style="background-color: lightsteelblue; color: black;"
+                                    class="form-control form-control-sm" id="airline" name="airline">
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
                             <div class="form-group">
                                 <label for="flight_date"><b>Flight Date</b></label>
-                                <input type="date" class="form-control form-control-sm" id="flight_date" name="flight_date">
+                                <input type="date" class="form-control form-control-sm" id="flight_date"
+                                    name="flight_date">
                             </div>
                         </div>
                     </div>
@@ -109,13 +121,15 @@
                         <div class="col-sm-6 col-md-6 col-lg-5">
                             <div class="form-group">
                                 <label for="origin_airport"><b>Origin Airport</b></label>
-                                <input type="text" class="form-control form-control-sm" id="origin_airport" name="origin_airport">
+                                <input type="text" class="form-control form-control-sm" id="origin_airport"
+                                    name="origin">
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
                             <div class="form-group">
                                 <label for="flight_code"><b>Flight Code</b></label>
-                                <input type="text" class="form-control form-control-sm" id="flight_code" name="flight_code">
+                                <input type="text" class="form-control form-control-sm" id="flight_code"
+                                    name="flight_number">
                             </div>
                         </div>
                     </div>
@@ -123,7 +137,8 @@
                         <div class="col-sm-6 col-md-6 col-lg-5">
                             <div class="form-group">
                                 <label for="destination_airport"><b>Destination Airport</b></label>
-                                <input type="text" class="form-control form-control-sm" id="destination_airport" name="destination_airport">
+                                <input type="text" class="form-control form-control-sm" id="destination_airport"
+                                    name="destination">
                             </div>
                         </div>
                     </div>
@@ -131,13 +146,14 @@
                     <div class="row ml-4">
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
-                              <a class="nav-link active" id="shipper" aria-current="page" href="#shipper_details">Shipper</a>
+                                <a class="nav-link active" id="shipper" aria-current="page"
+                                    href="#shipper_details">Shipper</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" id="consignee" href="#consignee_details">Consignee</a>
+                                <a class="nav-link" id="consignee" href="#consignee_details">Consignee</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" id="packages" href="#packages_details">Packages</a>
+                                <a class="nav-link" id="packages" href="#packages_details">Packages</a>
                             </li>
                         </ul>
                     </div>
@@ -147,13 +163,15 @@
                             <div class="col-sm-6 col-md-6 col-lg-5">
                                 <div class="form-group">
                                     <label for="shipper_name"><b>Shipper Name</b></label>
-                                    <input type="text" class="form-control form-control-sm" id="shipper_name" name="shipper_name">
+                                    <input type="text" class="form-control form-control-sm" id="shipper_name"
+                                        name="shipper_name">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
                                 <div class="form-group">
                                     <label for="shipper_acc"><b>Account No</b></label>
-                                    <input type="text" class="form-control form-control-sm" id="shipper_acc" name="shipper_acc">
+                                    <input type="text" class="form-control form-control-sm" id="shipper_acc"
+                                        name="shipper_acc_num">
                                 </div>
                             </div>
                         </div>
@@ -161,25 +179,28 @@
                             <div class="col-sm-6 col-md-6 col-lg-5">
                                 <div class="form-group">
                                     <label for="shipper_add"><b>Address</b></label>
-                                    <textarea class="form-control form-control-sm" id="shipper_add" name="shipper_add" rows="3"></textarea>
+                                    <textarea class="form-control form-control-sm" id="shipper_add"
+                                        name="shipper_address" rows="3"></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="row mt-5"></div>
                     </div>
-    
+
                     <div id="consignee_details" style="display: none;">
                         <div class="row ml-3">
                             <div class="col-sm-6 col-md-6 col-lg-5">
                                 <div class="form-group">
                                     <label for="consignee_name"><b>Consignee Name</b></label>
-                                    <input type="text" class="form-control form-control-sm" id="consignee_name" name="consignee_name">
+                                    <input type="text" class="form-control form-control-sm" id="consignee_name"
+                                        name="consignee_name">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
                                 <div class="form-group">
                                     <label for="consignee_acc"><b>Account No</b></label>
-                                    <input type="text" class="form-control form-control-sm" id="consignee_acc" name="consignee_acc">
+                                    <input type="text" class="form-control form-control-sm" id="consignee_acc"
+                                        name="consignee_acc_num">
                                 </div>
                             </div>
                         </div>
@@ -192,13 +213,15 @@
                             <div class="col-sm-6 col-md-6 col-lg-5">
                                 <div class="form-group">
                                     <label for="notify_name"><b>Notify Name</b></label>
-                                    <input type="text" class="form-control form-control-sm" id="notify_name" name="notify_name">
+                                    <input type="text" class="form-control form-control-sm" id="notify_name"
+                                        name="notify_name">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
                                 <div class="form-group">
                                     <label for="notify_acc"><b>Account No</b></label>
-                                    <input type="text" class="form-control form-control-sm" id="notify_acc" name="notify_acc">
+                                    <input type="text" class="form-control form-control-sm" id="notify_acc"
+                                        name="notify_acc">
                                 </div>
                             </div>
                         </div>
@@ -206,25 +229,28 @@
                             <div class="col-sm-6 col-md-6 col-lg-5">
                                 <div class="form-group">
                                     <label for="notify_add"><b>Address</b></label>
-                                    <textarea class="form-control form-control-sm" id="notify_add" name="notify_add" rows="3"></textarea>
+                                    <textarea class="form-control form-control-sm" id="notify_add" name="notify_add"
+                                        rows="3"></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="row mt-5"></div>
                     </div>
-    
+
                     <div id="packages_details" style="display: none;">
                         <div class="row ml-3">
                             <div class="col-sm-6 col-md-6 col-lg-5">
                                 <div class="form-group">
                                     <label for="units"><b>Units</b></label>
-                                    <input type="text" value="{{quotation.unit}}" class="form-control form-control-sm" id="units" name="units">
+                                    <input type="text" value="{{quotation.unit}}" class="form-control form-control-sm"
+                                        id="units" name="units" disabled>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
                                 <div class="form-group">
                                     <label for="weight"><b>Weight(kg)</b></label>
-                                    <input type="text" value="{{quotation.weight}}" class="form-control form-control-sm" id="weight" name="weight">
+                                    <input type="text" value="{{quotation.weight}}" class="form-control form-control-sm"
+                                        id="weight" name="weight" disabled>
                                 </div>
                             </div>
                         </div>
@@ -232,13 +258,15 @@
                             <div class="col-sm-6 col-md-6 col-lg-5">
                                 <div class="form-group">
                                     <label for="quantity"><b>Quantity</b></label>
-                                    <input type="text" value="{{quotation.quantity}}" class="form-control form-control-sm" id="quantity" name="quantity">
+                                    <input type="text" value="{{quotation.quantity}}"
+                                        class="form-control form-control-sm" id="quantity" name="quantity" disabled>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
                                 <div class="form-group">
                                     <label for="dimension"><b>Dimension</b></label>
-                                    <input type="text" value="{{quotation.dimension}}" class="form-control form-control-sm" id="dimension" name="dimension">
+                                    <input type="text" value="{{quotation.dimension}}"
+                                        class="form-control form-control-sm" id="dimension" name="dimension" disabled>
                                 </div>
                             </div>
                         </div>
@@ -246,7 +274,8 @@
                             <div class="col-sm-6 col-md-6 col-lg-5">
                                 <div class="form-group">
                                     <label for="desc"><b>Description of Goods</b></label>
-                                    <textarea class="form-control form-control-sm" id="desc" name="desc">{{instance.enquiry_details}}</textarea>
+                                    <textarea class="form-control form-control-sm" id="desc" name="desc"
+                                        disabled>{{instance.enquiry_details}}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -267,15 +296,22 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     $(document).ready(function () {
-        $("#consignee").click(function(){
-            $("#consignee_details").show(); 
-            $("#shipper_details").hide();                                        
-            $("#packages_details").hide();                   
-            
+        $('.stage[data-stage="approved"]').addClass('active');
+
+        $('#confirm_button').click(function () {
+            $('.stage').removeClass('active');
+            $('.stage[data-stage="order"]').addClass('active');
+        });
+
+        $("#consignee").click(function () {
+            $("#consignee_details").show();
+            $("#shipper_details").hide();
+            $("#packages_details").hide();
+
             $('.nav-link').removeClass('active');
             $(this).addClass('active');
         });
-        $("#shipper").click(function(){
+        $("#shipper").click(function () {
             $("#shipper_details").show();
             $("#consignee_details").hide();
             $("#packages_details").hide();
@@ -283,7 +319,7 @@
             $('.nav-link').removeClass('active');
             $(this).addClass('active');
         });
-        $("#packages").click(function(){
+        $("#packages").click(function () {
             $("#packages_details").show();
             $("#shipper_details").hide();
             $("#consignee_details").hide();
@@ -294,6 +330,3 @@
     });
 </script>
 {% endblock content %}
-
-
-

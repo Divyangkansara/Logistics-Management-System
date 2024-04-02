@@ -12,13 +12,22 @@
         <li class="breadcrumb-item active" aria-current="page">...20030{{instance.id}}</li>
     </ol>
     <a href="{% url 'update_order' order.id instance.id quotation.id %}" class="btn btn-primary ml-3">Edit</a>
-    <a href="" class="btn btn-outline-dark" >Create</a>
+    <a href="" class="btn btn-outline-dark">Create</a>
 </nav>
 
-<nav class="navbar navbar-custom navbar-expand-lg" style="margin-top:auto;">
-    <div class="justify-content-start">
-        <a href="" class="btn btn-sm btn-primary">Confirm Order</a>
-        <button class="btn btn-sm btn-outline-dark" type="button">Cancel</button>
+<nav class="navbar navbar-custom navbar-expand-lg" style="margin-top:auto;padding: 0;">
+    <div style="padding-top: 2px;padding-bottom: 2px;margin-left: 15px;">
+        <div class="justify-content-start">
+            <button id="confirm_button" class="btn btn-sm btn-primary">Confirm Order</button>
+            <a href="{% url 'invoice' instance.id quotation.id order.id %}" class="btn btn-sm btn-primary">Generate Invoice</a>
+            <button class="btn btn-sm btn-outline-dark" type="button">Cancel</button>
+        </div>
+    </div>
+    <div class="custom-stages ml-auto">
+        <span class="stage active" data-stage="approved"><b>Approved</b></span>
+        <span class="stage" data-stage="order"><b>Order</b></span>
+        <span class="stage" data-stage="delivered"><b>Delivered</b></span>
+        <span class="stage" data-stage="done"><b>Done</b></span>
     </div>
 </nav>
 
@@ -128,11 +137,11 @@
                         <div class="row ml-3">
                             <div class="col-xs-4">
                                 <p><b>Account No</b></p>
-                                
+
                             </div>
                             <div class="col-xs-4 ml-5">
                                 <p>{{order.shipper_acc_num}}</p>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -214,15 +223,22 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     $(document).ready(function () {
-        $("#consignee").click(function(){
-            $("#consignee_details").show(); 
-            $("#shipper_details").hide();                                        
-            $("#packages_details").hide();                   
-            
+        $('.stage[data-stage="approved"]').addClass('active');
+
+        $('#confirm_button').click(function () {
+            $('.stage').removeClass('active');
+            $('.stage[data-stage="order"]').addClass('active');
+        });
+
+        $("#consignee").click(function () {
+            $("#consignee_details").show();
+            $("#shipper_details").hide();
+            $("#packages_details").hide();
+
             $('.nav-link').removeClass('active');
             $(this).addClass('active');
         });
-        $("#shipper").click(function(){
+        $("#shipper").click(function () {
             $("#shipper_details").show();
             $("#consignee_details").hide();
             $("#packages_details").hide();
@@ -230,7 +246,7 @@
             $('.nav-link').removeClass('active');
             $(this).addClass('active');
         });
-        $("#packages").click(function(){
+        $("#packages").click(function () {
             $("#packages_details").show();
             $("#shipper_details").hide();
             $("#consignee_details").hide();

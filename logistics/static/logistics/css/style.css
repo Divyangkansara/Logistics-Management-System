@@ -1,3 +1,7 @@
+.signin{
+    margin-left: 460px;
+}
+
 .opportunities{
     margin-top: 2px;
     margin-left: 0px;
@@ -42,8 +46,8 @@
 
 .navbar-custom{
     background-color:white;
-    border-top:1px solid #000;
-    border-bottom: 1px solid #000;   
+    border-top:2px solid #000;
+    border-bottom: 2px solid #000;   
 }
 
 .breadcrumb{
@@ -140,7 +144,7 @@ input[type="radio"]:checked + label::before {
 }
 
 .input-group-register{
-    top: 150px;
+    top: 130px;
     position: absolute;
     width: 280px;
     transition: .5s;
@@ -184,4 +188,164 @@ span{
 
 #register{
     left: 450px;
+}
+
+
+
+/* stages */
+
+.stage {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    /* border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px; */
+    /* transition: background-color 0.5s, color 0.5s; */
+    position:relative;
+}
+.stage.active:after {
+    position: absolute;
+    content: ""; 
+    border-top: 16px solid transparent;
+    border-left: 17px solid lightgray;
+    border-bottom: 17px solid transparent;
+    right: -17px;
+    top: 0;
+}
+
+.stage.active {
+    background-color: lightgray;
+    color: #000;
+}
+
+
+.badge {
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 30px;
+}
+
+
+#order_button{
+    background-color: #fff;
+    border: 1px solid black;
+    margin-left: 50px;
+}
+
+
+/* invoice */
+
+.invoice-body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    margin-top: 40px;
+}
+
+.invoice-container {
+    
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    box-shadow: 2px 6px 10px #000; 
+}
+
+.header {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 20px;
+    margin-top: 20px;
+
+}
+
+.invoice-logo img {
+    width: 130px;
+    height: auto; 
+    margin-left: 10px;
+
+}
+
+.invoice-title {
+    font-size: 40px;
+    color: steelblue;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+    margin-left: 53%;
+}
+
+.invoice-number,
+.date {
+    font-size: 16px;
+    color: #000;
+    margin-left: 180px;
+}
+
+.details {
+    margin-bottom: 20px;
+}
+
+.bill-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.bill-details .bill-to{
+    margin-right: 20px;
+}
+
+.bill-details .bill-from .info{
+    margin-top: 10px;
+}
+
+.bill-details .bill-to .info{
+    margin-top: 10px;
+}
+
+.label {
+    font-weight: bold;
+    color: #333;
+}
+
+.items {
+    width: 90%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+
+.terms {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.total{
+    background-color: steelblue;
+    width: 30%;
+    margin-left: 67%;
+}
+
+.total-label {
+    font-weight: bold;
+}
+
+.total-amount {
+    font-weight: bold;
+    color: ghostwhite;
+    font-size: 24px;
+    margin-left: 20px;
+}
+
+
+.colored-line {
+    border-bottom: 2px solid steelblue;
+    margin-top: 20px; 
 }

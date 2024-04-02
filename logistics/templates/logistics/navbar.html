@@ -1,65 +1,87 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-  <a class="navbar-brand" href="#"><strong>Logistics</strong></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'home' %}">Dashboard <span class="sr-only">(current)</span></a>
+        <a class="navbar-brand" href="#"><strong>Logistics</strong></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" id="home" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" id="dashboard" href="{% url 'dashboard' %}">Dashboard</a>
+      </li>
+      <li class="nav-item dropdown active">
+        <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Logistics</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'enquiry_list' %}">Enquiries</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown active">
+        <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Quotations</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Imports</a>
+          <a class="dropdown-item" href="{% url 'quotation_list' %}">Exports</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'quotation_list' %}">All Quotations</a>
+        </div>
+      </li>
+
+      <li class="nav-item dropdown active">
+        <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Orders</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Imports</a>
+          <a class="dropdown-item" href="#">Exports</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">All Orders</a>
+        </div>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Track Orders</a>
+      </li>
+
+      <li class="nav-item dropdown active">
+        <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Configurations</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Customers</a>
+          <a class="dropdown-item" href="#">Vendors</a>
+          <a class="dropdown-item" href="#">Products</a>
+          <a class="dropdown-item" href="#">Update Currency Rate</a>
+          <a class="dropdown-item" href="#">Flights</a>
+          <a class="dropdown-item" href="#">Airports</a>
+          <a class="dropdown-item" href="#">Sea Ports</a>
+          <a class="dropdown-item" href="#">Vessels</a>
+          <a class="dropdown-item" href="#">Shipper</a>
+          <a class="dropdown-item" href="#">Consignee</a>
+          <a class="dropdown-item" href="#">Terms and Conditions</a>
+        </div>
+      </li>
+
+      {% if request.user.is_authenticated %}
+      <li class="nav-item" style="margin-left:410px">
+        <i class="icon bi bi-person-circle ml-3" style="font-size: 1.7rem; color: silver;"></i>
       </li>
       <li class="nav-item dropdown">
-          <a class="nav-link dropdown active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Logistics</a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{% url 'enquiry_list' %}">Enquiries</a>
-          </div>
+        <a class="nav-link dropdown active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          {{username}}</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+        </div>
       </li>
-      <li class="nav-item dropdown">
-          <a class="nav-link dropdown active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Quotations</a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-             <a class="dropdown-item" href="#">Imports</a>
-             <a class="dropdown-item" href="#">Exports</a>
-             <div class="dropdown-divider"></div>
-             <a class="dropdown-item" href="#">All Quotations</a>
-          </div>
+      {% else %}
+      <li class="signin nav-item">
+        <a href="{% url 'signup_form' %}" type="button" class="btn btn-secondary">Sign In</a>
       </li>
-      
-      <li class="nav-item dropdown">
-          <a class="nav-link dropdown active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Orders</a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Imports</a>
-              <a class="dropdown-item" href="#">Exports</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">All Orders</a>
-          </div>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link active" href="#">Track Orders</a>
-      </li>
-      
-      <li class="nav-item dropdown">
-          <a class="nav-link dropdown active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Configurations</a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Customers</a>
-              <a class="dropdown-item" href="#">Vendors</a>
-              <a class="dropdown-item" href="#">Products</a>
-              <a class="dropdown-item" href="#">Update Currency Rate</a>
-              <a class="dropdown-item" href="#">Flights</a>
-              <a class="dropdown-item" href="#">Airports</a>
-              <a class="dropdown-item" href="#">Sea Ports</a>
-              <a class="dropdown-item" href="#">Vessels</a>
-              <a class="dropdown-item" href="#">Shipper</a>
-              <a class="dropdown-item" href="#">Consignee</a>
-              <a class="dropdown-item" href="#">Terms and Conditions</a>
-          </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" href="{% url 'login_form' %}">Sign in</a>
-    </li>
-     </ul>
+      {% endif %}
+    </ul>
   </div>
 </nav>

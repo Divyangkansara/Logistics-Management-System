@@ -1,0 +1,125 @@
+{% extends 'logistics/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'logistics/css/style.css' %}">
+
+<nav aria-label="breadcrumb" style="margin-top: 50px;">
+    <ol class="breadcrumb" style="font-size: x-large; margin-bottom: auto;">
+        <li class="breadcrumb-item"><a>Opportunities</a></li>
+        <li class="breadcrumb-item"><a>{{instance.scope_of_work}}</a></li>
+        <li class="breadcrumb-item"><a href="">...20030{{instance.id}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">...20030{{instance.id}}</li>
+    </ol>
+</nav>
+
+<nav class="navbar navbar-custom navbar-expand-lg" style="margin-top:auto;padding: 0;">
+    <div style="padding-top: 2px;padding-bottom: 2px;margin-left: 15px;">
+        <div class="justify-content-start">
+            <a href="" class="btn btn-sm btn-primary">Confirm Order</a>
+            <a href="{% url 'invoice' instance.id quotation.id order.id %}" class="btn btn-sm btn-primary">Generate Invoice</a>
+            <button class="btn btn-sm btn-outline-dark" type="button">Cancel</button>
+        </div>
+    </div>
+</nav>
+
+<div class="invoice-body">
+    <div class="invoice-container">
+        <div class="header">
+            <div class="row">
+                <div class="invoice-logo col-sm-6">
+                    <img src="{% static 'logistics/images/invoice-logo.webp' %}" alt="logo">
+                </div>
+                <div class="invoice">
+                    <div class="invoice-title">INVOICE</div>
+                    <div class="invoice-number" style="margin-top: 1px;">Invoice Number: 1{{instance.id}}</div>
+                    <div class="date">Date: {{order.order_date}}</div>
+                </div>
+            </div>
+        </div>
+        <hr class="colored-line">
+        <div class="details">
+            <div class="bill-details">
+                <div class="bill-from">
+                    <div class="label">Bill from:</div>
+                    <div class="info">Sender<br>Street Address, Zip Code<br>Phone Number</div>
+                </div>
+                <div class="bill-to">
+                    <div class="label">Bill to:</div>
+                    <div class="info">{{instance.customer_name}}<br>{{instance.email}}<br>{{instance.phone}}</div>
+                </div>
+            </div>
+            <hr class="colored-line">
+            <div class="row mt-3"></div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Rate</th>
+                        <th>Tax</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{quotation.product}}</td>
+                        <td>{{quotation.quantity}} package</td>
+                        <td>$17.00 <br> per package</td>
+                        <td>0.00</td>
+                        <td>$3228.00</td>
+                    </tr>
+                    <tr>
+                        <td>{{instance.freight_type}}</td>
+                        <td></td>
+                        <td>$04.00 <br> per km</td>
+                        <td>0.00</td>
+                        <td>$51.00</td>
+                    </tr>
+                    <tr>
+                        <td>Rush Delivery</td>
+                        <td>01</td>
+                        <td>$35.00</td>
+                        <td>0.00</td>
+                        <td>$35.00</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="terms mt-5">Terms & Conditions:</div>
+        </div>
+        <div class="footer">
+            <div class="row">
+                <div class="col-sm-4 offset-8">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="total-label">SubTotal:</div>
+                            <div class="total-label mt-2">Discount:</div>
+                            <div class="total-label mt-2">Tax:</div>
+                            <div class="total-label mt-2">Paid:</div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="total-label">$3314.00</div>
+                            <div class="total-label mt-2">$0.00</div>
+                            <div class="total-label mt-2">$0.00</div>
+                            <div class="total-label mt-2">$0.00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="colored-line">
+        <div class="row">
+            <div class="total">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="total-amount">Total</div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="total-amount">$3314.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

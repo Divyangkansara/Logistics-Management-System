@@ -1,7 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 
 #  customers-model 
-class Customers(models.Model):
+class Customer(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField(max_length=50, unique=True)
     contact = models.CharField(max_length=15, unique=True)
@@ -21,14 +23,14 @@ class Update_Currency(models.Model):
 
 
 #  flights 
-class Flights(models.Model):
+class Flight(models.Model):
     name = models.CharField(max_length=50)
     code = models.CharField(max_length=10, unique=True)
     country = models.CharField(max_length=50)
 
 
 #  shipping agents
-class Shipping_Agents(models.Model):
+class Shipping_Agent(models.Model):
     name = models.CharField(max_length=50)
     account_num = models.CharField(max_length=10, unique=True)
     code = models.CharField(max_length=10, unique=True)
@@ -36,27 +38,26 @@ class Shipping_Agents(models.Model):
 
 
 #  create enquiries
-class Enquiries(models.Model):
+class Enquirie(models.Model):
         scope_of_work = models.TextField()
         enquiry_date = models.DateField()
-        status = models.CharField(max_length=20, default='Enquiry')
-        job_category = models.CharField(max_length=20, default='sales')
+        status = models.CharField(max_length=30, default='Enquiry')
+        job_category = models.CharField(max_length=30, default='sales')
         customer_name = models.CharField(max_length=50)
         email = models.EmailField(max_length=50)
-        phone = models.CharField(max_length=20, default='1212121212')
+        phone = models.CharField(max_length=30, default='1212121212')
         contact_person = models.CharField(max_length=50)
         sales_person = models.CharField(max_length=50)
-        sales_team = models.CharField(max_length=20)
-        freight_type = models.CharField(max_length=20, choices=[('air freight',
+        sales_team = models.CharField(max_length=30)
+        freight_type = models.CharField(max_length=30, choices=[('air freight',
                             'air freight'),('sea freight', 'sea freight')])
-        type = models.CharField(max_length=20, default='export')
+        type = models.CharField(max_length=30, default='export')
         enquiry_details = models.TextField()
-        priority_tags = models.CharField(max_length=20, default="normal", choices=
+        priority_tags = models.CharField(max_length=30, default="normal", choices=
                         [('low', 'low'),('normal', 'normal'), ('high', 'high')])
-    
 
 #  quotation management
-class Quotations(models.Model):
+class Quotation(models.Model):
     # customer_name = models.ForeignKey(Customers, on_delete=models.CASCADE)
     customer_name = models.CharField(max_length=50)
     job_category = models.CharField(max_length=20, default='sales')
@@ -82,35 +83,9 @@ class Quotations(models.Model):
     # price = models.DecimalField(max_digits=10, decimal_places=2)
     terms = models.CharField(max_length=100, null=True)
 
-#  quotation approval
-class Approved_Quotations(models.Model):
-    customer_name = models.ForeignKey(Customers, on_delete=models.CASCADE)
-    job_category = models.CharField(max_length=20, default='sales')
-    payment_type = models.CharField(max_length=20, choices=[('pending','pending'),
-                                                     ('collect','collect')])
-    sales_person = models.CharField(max_length=50, default='')
-    origin = models.CharField(max_length=255)
-    destination = models.CharField(max_length=255)
-    final_destination = models.CharField(max_length=255, null=True, blank=True)
-    freight_type = models.CharField(max_length=20, choices=[('air freight',
-                        'air freight'),('sea freight', 'sea freight')])
-    type = models.CharField(max_length=20, default='export')
-    enquiry_date = models.DateField()
-    client_currency = models.CharField(max_length=20, choices=[('USD','USD'),
-                                            ('AED','AED'),('INR','INR')])
-    rate = models.DecimalField(max_digits=10, decimal_places=2)
-    product = models.CharField(max_length=50)
-    description = models.TextField()
-    units = models.CharField(max_length=10)
-    quantity = models.IntegerField()
-    weight = models.DecimalField(max_digits=10, decimal_places=2)
-    dimensions = models.CharField(max_length=20)
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    approved_by = models.CharField(max_length=50)
-
 
 # orders
-class Orders(models.Model):
+class Order(models.Model):
     airline = models.CharField(max_length=50)
     flight_number = models.IntegerField()
     origin = models.CharField(max_length=255)
@@ -132,7 +107,7 @@ class Orders(models.Model):
 
 # tracking data
 class Tracking_Data(models.Model):
-    customer_name = models.ForeignKey(Customers, on_delete=models.CASCADE)
+    customer_name = models.ForeignKey(Customer, on_delete=models.CASCADE)
     tracking_number = models.IntegerField(unique=True)
     date = models.DateField()
     operator = models.CharField(max_length=50, null=True, blank=True)
@@ -142,7 +117,7 @@ class Tracking_Data(models.Model):
 
 
 #  invoices
-class Invoices(models.Model):
+class Invoice(models.Model):
     invoice_id = models.AutoField(unique=True, primary_key=True)
     sender_name = models.CharField(max_length=50)
     sender_email = models.EmailField(max_length=50, unique=True)
@@ -201,3 +176,5 @@ class ClientCurrency(models.Model):
 
     def __str__(self):
         return self.client_currency
+    
+

@@ -4,72 +4,32 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'logistics/css/style.css' %}">
-<script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/classic/ckeditor.js"></script>
+
 
 
 
 <nav aria-label="breadcrumb" style="margin-top: 50px; margin-bottom: 10px;">
     <ol class="breadcrumb" style="font-size: x-large; margin-bottom: auto;">
-      <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
-      <li class="breadcrumb-item"><a href="{% url 'edit_enquiry' instance.id %}">{{instance.scope_of_work}}</a></li>
-      <li class="breadcrumb-item active" aria-current="page">...20030{{instance.id}}</li>
+        <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'edit_enquiry' instance.id %}">{{instance.scope_of_work}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">...20030{{instance.id}}</li>
     </ol>
     <a href="{% url 'update_quotation' instance.id quotation.id %}" class="btn btn-primary ml-3">Edit</a>
-    <a class="btn btn-outline-dark" >Create</a>
+    <a class="btn btn-outline-dark">Create</a>
 </nav>
 
-<nav class="navbar navbar-custom navbar-expand-lg" style="margin-top:auto;">
-    <div class="justify-content-start">
-        <a href="{% url 'pending_order' instance.id quotation.id %}" class="btn btn-sm btn-primary">Approve Quotation</a>
-        
-        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" data-backdrop="static" data-keyboard="false">Send Quotation Email</button>
-        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Send message to {{instance.email}} </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row mt-4"></div>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <label for="recipients"><b>Recipients :</b></label>
-                            </div>
-                            <div class="col-sm-8">
-                                <input type="email" class="form-control form-control-sm" value="{{instance.email}}" id="recipients" name="recipients">
-                            </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-sm-3">
-                                <label for="subject"><b>Subject :</b></label>
-                            </div>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control form-control-sm" style="background-color: lightsteelblue; color: #000;" id="subject" name="subject">
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-sm-12">
-                                <textarea class="form-control" id="message-text" name="message-text">Dear {{instance.customer_name}},<br>
-                                    Here is your <b>quotation</b> for your enquiry amounting in <b>1500 USD.</b><br><br><br><br>
-                                    You can reply to this email if you have any questions. <br>
-                                    Thank You.
-                                </textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-4"></div>
-                    <div class="modal-footer justify-content-start">
-                        <a href="{% url 'send_email' instance.id quotation.id %}" class="send_mail btn btn-primary">Send</a>
-                        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-            </div>
+<nav class="navbar navbar-custom navbar-expand-lg" style="margin-top:auto;padding: 0;">
+    <div style="padding-top: 2px;padding-bottom: 2px;margin-left: 15px;">
+        <div class="justify-content-start">
+            <button id="approve_quotation_button" class="btn btn-sm btn-primary">Approve Quotation</button>
+            <button id="confirm_order_button" class="btn btn-sm btn-primary" type="button">Confirm Order</button>
+            <a href="" class="btn btn-sm btn-outline-dark">Cancel</a>
         </div>
-        
-        <a href="" class="btn btn-sm btn-outline-dark">Cancel</a>
+    </div>
+    <div class="custom-stages ml-auto">
+        <span class="stage active" data-stage="quotation"><b>Quotation</b></span>
+        <span class="stage" data-stage="approved"><b>Approved</b></span>
+        <span class="stage" data-stage="order"><b>Order</b></span>
     </div>
 </nav>
 
@@ -78,8 +38,14 @@
         <div class="col-sm-12 col-md-8 col-lg-10 m-auto">
             <div class="quotation-details">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-6">
                         <h4 class="mt-4 ml-2"><b>COMPANY01EQ20030{{instance.id}}</b></h4>
+                    </div>
+                    <div class="col-sm-3 offset-3 mt-3">
+                        <a href="{% url 'pending_order' instance.id quotation.id %}" type="button" id="order_button"
+                            class="btn btn-lg btn-light ml-5">
+                            <i class="bi bi-bookmarks-fill ml-2"></i> Orders
+                        </a>
                     </div>
                 </div>
                 <div class="row mt-4"></div>
@@ -143,13 +109,15 @@
                 <div class="row ml-2">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                          <a class="nav-link active" id="packages" aria-current="page" href="#packagesContent">Packages</a>
+                            <a class="nav-link active" id="packages" aria-current="page"
+                                href="#packagesContent">Packages</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" id="quantity_dimension" href="#quantityDimensionContent">Quantity & Dimension</a>
+                            <a class="nav-link" id="quantity_dimension" href="#quantityDimensionContent">Quantity &
+                                Dimension</a>
                         </li>
                         <li class="nav-item">
-                          <a class="nav-link" href="#">T&C</a>
+                            <a class="nav-link" href="#">T&C</a>
                         </li>
                     </ul>
                 </div>
@@ -205,7 +173,7 @@
                             <div class="col-xs-4 ml-5">
                                 <p>{{quotation.dimension}}</p>
                             </div>
-                        </div>    
+                        </div>
                     </div>
                 </div>
                 <div class="row mt-5"></div>
@@ -217,24 +185,33 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     $(document).ready(function () {
-        ClassicEditor
-            .create(document.querySelector('#message-text'))
-            .then(editor => {
-                console.log(editor);
-                $(editor.ui.view.editable.element).css('height', '200px');
-            })
-            .catch(error => {
-                console.error(error);
-            });
+        $('.stage[data-stage="quotation"]').addClass('active');
+        $('#order_button').hide();
 
-        $("#quantity_dimension").click(function(){
+        $('#approve_quotation_button').on('click', function () {
+            $('.stage[data-stage="quotation"]').removeClass('active');
+            $('.stage[data-stage="approved"]').addClass('active');
+            $('#order_button').hide();
+        });
+
+        $('#confirm_order_button').click(function () {
+            $('.stage').removeClass('active');
+            $('.stage[data-stage="order"]').addClass('active');
+            $('#order_button').show();
+        });
+    });
+
+
+    $(document).ready(function () {
+
+        $("#quantity_dimension").click(function () {
             $("#packagesContent").hide();
             $("#quantityDimensionContent").show();
 
             $('.nav-link').removeClass('active');
             $(this).addClass('active');
         });
-        $("#packages").click(function(){
+        $("#packages").click(function () {
             $("#packagesContent").show();
             $("#quantityDimensionContent").hide();
 

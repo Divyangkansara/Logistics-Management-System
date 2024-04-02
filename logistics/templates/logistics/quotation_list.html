@@ -8,11 +8,10 @@
 <nav aria-label="breadcrumb" style="margin-top: 50px;">
     <div class="d-flex justify-content-between align-items-center">
         <ol class="breadcrumb" style="font-size:x-large; margin-bottom: auto;">
-            <li class="breadcrumb-item active" aria-current="page">Opportunities</li>
+            <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Quotations</li>
         </ol>
     </div>
-    <a href="{% url 'enquiryform' %}" class="btn btn-primary ml-3">Create</a>
-    <button type="button" class="btn btn-outline-dark">Import</button>
 </nav>
 
 <div class="container-fluid">
@@ -21,16 +20,16 @@
         <table class="table table-striped" id="dataTable" style="overflow-x: auto; display: block;">
             <thead>
                 <tr>
-                    <th scope="col">Customer ID</th>
-                    <th scope="col">Enquiry Date</th>
-                    <th scope="col">Lead</th>
-                    <th scope="col">Enquiry Status</th>
+                    <th scope="col">Quotation ID</th>
+                    <th scope="col">Job Category</th>
+                    <th scope="col">Payment Type</th>
                     <th scope="col">Client Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone</th>
+                    <th scope="col">Origin</th>
+                    <th scope="col">Destination</th>
                     <th scope="col">Freight Type</th>
                     <th scope="col">Type</th>
-                    <th scope="col">Sales Team</th>
+                    <th scope="col">Client Currency</th>
+                    <th scope="col">Rate</th>
                     <!-- <th></th>   -->
                 </tr>
             </thead>
@@ -38,15 +37,15 @@
                 {% for data in data %}
                 <tr>
                     <td>{{ forloop.counter }}</td>
-                    <td>{{ data.enquiry_date }}</td>
-                    <td>{{ data.scope_of_work }}</td>
-                    <td>{{ data.status }}</td>
+                    <td>{{ data.job_category }}</td>
+                    <td>{{ data.payment_type }}</td>
                     <td>{{ data.customer_name }}</td>
-                    <td>{{ data.email }}</td>
-                    <td>{{ data.phone }}</td>
+                    <td>{{ data.origin }}</td>
+                    <td>{{ data.destination }}</td>
                     <td>{{ data.freight_type }}</td>
                     <td>{{ data.type }}</td>
-                    <td>{{ data.sales_team }}</td>
+                    <td>{{ data.client_currency }}</td>
+                    <td>{{ data.rate }}</td>
                     <!-- <td><a href="" class="btn btn-sm btn-primary">New Quotation</a></td> -->
                 </tr>
                 {% endfor %}

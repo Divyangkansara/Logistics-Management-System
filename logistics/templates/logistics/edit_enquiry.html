@@ -8,18 +8,25 @@
 
 <nav aria-label="breadcrumb" style="margin-top: 50px; margin-bottom: 10px;">
     <ol class="breadcrumb" style="font-size: x-large; margin-bottom: auto;">
-      <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
-      <li class="breadcrumb-item active" aria-current="page">{{order.scope_of_work}}</li>
+        <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{order.scope_of_work}}</li>
     </ol>
     <a href="{% url 'edit' order.id %}" class="btn btn-primary ml-3">Edit</a>
-    <a href="" class="btn btn-outline-dark" >Create</a>
+    <a href="" class="btn btn-outline-dark">Create</a>
 </nav>
 
-<nav class="navbar navbar-custom navbar-expand-lg" style="margin-top:auto;">
-    <div class="justify-content-start">
-        <a href="{% url 'quotation' order.id %}" class="btn btn-sm btn-primary">New Freight Quotation</a>
-        <button class="btn btn-sm btn-primary" type="button">Mark Won</button>
-        <button class="btn btn-sm btn-primary" type="button">Mark Lost</button>
+<nav class="navbar navbar-custom navbar-expand-lg" style="margin-top:auto; padding: 0;">
+    <div style="padding-top: 2px;padding-bottom: 2px;margin-left: 15px;">
+        <div class="justify-content-start">
+            <a href="{% url 'quotation' order.id %}" class="btn btn-sm btn-primary" type="button"><b>New Freight Quotation</b></a>
+            <button id="mark_won_button" class="btn btn-sm btn-primary" type="button"><b>Mark Won</b></button>
+            <button class="btn btn-sm btn-primary" type="button"><b>Mark Lost</b></button>
+        </div>
+    </div>
+    <div class="custom-stages ml-auto">
+        <span class="stage active" data-stage="enquiry"><b>New</b></span>
+        <span class="stage" data-stage="qualified"><b>Qualified</b></span>
+        <span class="stage" data-stage="won"><b>Won</b></span>
     </div>
 </nav>
 
@@ -29,13 +36,16 @@
         <div class="col-sm-12 col-md-8 col-lg-10 m-auto">
             <div class="edit-enquiry">
                 <div class="row ml-2">
-                    <div class="col-sm-12">
+                    <div class="col-sm-6">
                         <h2 class="mt-4 ml-2">{{order.scope_of_work}}</h2>
+                    </div>
+                    <div class="col-sm-4 offset-2">
+                        <span class="badge badge-success" id="success-badge">Won</span>
                     </div>
                 </div>
 
                 <div class="row mt-5"></div>
-              
+
                 <div class="row ml-2">
                     <div class="col-sm-6">
                         <div class="row">
@@ -101,12 +111,12 @@
                 </div>
 
                 <div class="row mt-5"></div>
-                
+
 
                 <div class="row ml-4">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                          <a class="nav-link active" href="#"><b>Enquiry Details</b></a>
+                            <a class="nav-link active" href="#"><b>Enquiry Details</b></a>
                         </li>
                     </ul>
                 </div>
@@ -114,7 +124,32 @@
                     <p class="ml-1">{{order.enquiry_details}}</p>
                 </div>
                 <div class="row mt-3"></div>
-            </div> 
-    </section>  
+            </div>
+    </section>
 </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.stage[data-stage="enquiry"]').addClass('active');
+        $('#success-badge').hide();
+
+        $('#mark_won_button').click(function () {
+            $('.stage').removeClass('active');
+            $('.stage[data-stage="won"]').addClass('active');
+            $('#success-badge').show();
+        });
+
+        $('.stage[data-stage="qualified"]').click(function () {
+            $('.stage').removeClass('active');
+            $(this).addClass('active');
+            if ($(this).data('stage') !== 'won') {
+                $('#success-badge').hide();
+            } else {
+                $('#success-badge').show();
+            }
+        });
+    });
+</script>
 {% endblock content %}
