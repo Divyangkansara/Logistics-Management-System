@@ -11,16 +11,16 @@
         <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{order.scope_of_work}}</li>
     </ol>
-    <a href="{% url 'edit' order.id %}" class="btn btn-primary ml-3">Edit</a>
+    <a href="{% url 'edit' order.id %}" class="btn btn-primary ml-3" style="background-color: steelblue;border-color: steelblue;">Edit</a>
     <a href="" class="btn btn-outline-dark">Create</a>
 </nav>
 
 <nav class="navbar navbar-custom navbar-expand-lg" style="margin-top:auto; padding: 0;">
     <div style="padding-top: 2px;padding-bottom: 2px;margin-left: 15px;">
         <div class="justify-content-start">
-            <a href="{% url 'quotation' order.id %}" class="btn btn-sm btn-primary" type="button"><b>New Freight Quotation</b></a>
-            <button id="mark_won_button" class="btn btn-sm btn-primary" type="button"><b>Mark Won</b></button>
-            <button class="btn btn-sm btn-primary" type="button"><b>Mark Lost</b></button>
+            <a href="{% url 'quotation' order.id %}" class="btn btn-sm btn-primary" type="button" style="background-color: steelblue; border: none;"><b>New Freight Quotation</b></a>
+            <button id="mark_won_button" class="btn btn-sm btn-primary" type="button" style="background-color: steelblue; border: none;"><b>Mark Won</b></button>
+            <button class="btn btn-sm btn-primary" type="button" style="background-color: steelblue; border: none;"><b>Mark Lost</b></button>
         </div>
     </div>
     <div class="custom-stages ml-auto">

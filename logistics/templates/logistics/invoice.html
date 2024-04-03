@@ -15,10 +15,16 @@
 <nav class="navbar navbar-custom navbar-expand-lg" style="margin-top:auto;padding: 0;">
     <div style="padding-top: 2px;padding-bottom: 2px;margin-left: 15px;">
         <div class="justify-content-start">
-            <a href="" class="btn btn-sm btn-primary">Confirm Order</a>
-            <a href="{% url 'invoice' instance.id quotation.id order.id %}" class="btn btn-sm btn-primary">Generate Invoice</a>
-            <button class="btn btn-sm btn-outline-dark" type="button">Cancel</button>
+            <a href="{% url 'print_pdf' instance.id quotation.id order.id %}" type="button" id="printButton" class="btn btn-sm btn-primary" style="background-color: steelblue; border: none;"><b>Print Invoice</b></a>
+            <button id="prepare_delivery" class="btn btn-sm btn-primary" style="background-color: steelblue; border: none;"><b>Prepare Delivery</b></button>
+            <button class="btn btn-sm btn-primary" type="button" style="background-color: steelblue; border: none;"><b>Cancel</b></button>
         </div>
+    </div>
+    <div class="custom-stages ml-auto">
+        <span class="stage active" data-stage="order"><b>Order</b></span>
+        <span class="stage" data-stage="on_delivery"><b>On Delivery</b></span>
+        <span class="stage" data-stage="delivered"><b>Delivered</b></span>
+        <span class="stage" data-stage="done"><b>Done</b></span>
     </div>
 </nav>
 
@@ -29,7 +35,7 @@
                 <div class="invoice-logo col-sm-6">
                     <img src="{% static 'logistics/images/invoice-logo.webp' %}" alt="logo">
                 </div>
-                <div class="invoice">
+                <div class="invoice col-sm-6">
                     <div class="invoice-title">INVOICE</div>
                     <div class="invoice-number" style="margin-top: 1px;">Invoice Number: 1{{instance.id}}</div>
                     <div class="date">Date: {{order.order_date}}</div>
@@ -122,4 +128,16 @@
     </div>
 </div>
 
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.stage[data-stage="order"]').addClass('active');
+
+        $('#prepare_delivery').click(function () {
+            $('.stage').removeClass('active');
+            $('.stage[data-stage="on_delivery"]').addClass('active');
+        });
+    });
+</script>
 {% endblock content %}

@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="http://127.0.0.1:8000/static/logistics/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div class="invoice-body">
+        <div class="invoice-container">
+            <div class="header">
+                <div class="row">
+                    <div class="invoice-logo col-sm-6">
+                        <img src="http://127.0.0.1:8000/static/logistics/images/invoice-logo.webp" alt="logo">
+                    </div>
+                    <div class="invoice col-sm-6">
+                        <div class="invoice-title">INVOICE</div>
+                        <div class="invoice-number" style="margin-top: 1px;">Invoice Number: 1{{instance.id}}</div>
+                        <div class="date">Date: {{order.order_date}}</div>
+                    </div>
+                </div>
+            </div>
+            <hr class="colored-line">
+            <div class="details">
+                <div class="bill-details">
+                    <div class="bill-from">
+                        <div class="label">Bill from:</div>
+                        <div class="info">Sender<br>Street Address, Zip Code<br>Phone Number</div>
+                    </div>
+                    <div class="bill-to" style="margin-right: 20px;">
+                        <div class="label">Bill to:</div>
+                        <div class="info">{{instance.customer_name}}<br>{{instance.email}}<br>{{instance.phone}}</div>
+                    </div>
+                </div>
+                <hr class="colored-line">
+                <div class="row mt-3"></div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Quantity</th>
+                            <th>Rate</th>
+                            <th>Tax</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{quotation.product}}</td>
+                            <td>{{quotation.quantity}} package</td>
+                            <td>$17.00 <br> per package</td>
+                            <td>0.00</td>
+                            <td>$3228.00</td>
+                        </tr>
+                        <tr>
+                            <td>{{instance.freight_type}}</td>
+                            <td></td>
+                            <td>$04.00 <br> per km</td>
+                            <td>0.00</td>
+                            <td>$51.00</td>
+                        </tr>
+                        <tr>
+                            <td>Rush Delivery</td>
+                            <td>01</td>
+                            <td>$35.00</td>
+                            <td>0.00</td>
+                            <td>$35.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="terms mt-5">Terms & Conditions:</div>
+            </div>
+            <div class="footer">
+                <div class="row">
+                    <div class="col-sm-4 offset-8">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="total-label">SubTotal: $3314.00</div>
+                                <div class="total-label mt-2">Discount: $0.00</div>
+                                <div class="total-label mt-2">Tax: $0.00</div>
+                                <div class="total-label mt-2">Paid: $0.00</div>
+                            </div>
+                            <!-- <div class="col-sm-6">
+                                <div class="total-label">$3314.00</div>
+                                <div class="total-label mt-2">$0.00</div>
+                                <div class="total-label mt-2">$0.00</div>
+                                <div class="total-label mt-2">$0.00</div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="colored-line">
+            <div class="row">
+                <div class="total" style="width: 30%;">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="total-amount">Total</div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="total-amount">$3314.00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

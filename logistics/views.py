@@ -1,5 +1,5 @@
 import threading
-from django.shortcuts import render , redirect, get_object_or_404
+from django.shortcuts import render , redirect, get_object_or_404, HttpResponse
 from .models import Enquirie, FreightType, JobCategory, Type, Quotation, PaymentType, ClientCurrency, Order
 from django.core.mail import send_mail
 from django.contrib.auth.models import User
@@ -8,6 +8,10 @@ from django.contrib import messages
 from .middlewares import auth, user
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
+from django.template.loader import get_template
+import pdfkit
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
 
 
 
@@ -295,3 +299,41 @@ def invoice(request, enquiry_id, quotation_id, order_id):
                                                           'instance':enquiry,
                                                           'quotation':quotation,
                                                           'order':order})
+     
+def temp_invoice(request, enquiry_id, quotation_id, order_id):
+    enquiry = get_object_or_404(Enquirie, pk=enquiry_id)
+    quotation = get_object_or_404(Quotation, pk=quotation_id)
+    order = get_object_or_404(Order, pk=order_id)
+    return render(request, 'logistics/temp_invoice.html', {'instance':enquiry,
+                                                            'quotation':quotation,
+                                                            'order':order})
+
+
+
+def send_email_async(subject, message, sender, recipient, attachment_filename, attachment_content, attachment_content_type):
+    email = EmailMessage(subject, message, sender, [recipient])
+    email.attach(attachment_filename, attachment_content, attachment_content_type)
+    email.send()
+
+def print_pdf(request, enquiry_id, quotation_id, order_id):
+    enquiry = get_object_or_404(Enquirie, pk=enquiry_id)
+    quotation = get_object_or_404(Quotation, pk=quotation_id)
+    order = get_object_or_404(Order, pk=order_id)
+    template = render_to_string('logistics/temp_invoice.html', {'instance':enquiry,
+                                                                'quotation':quotation,
+                                                                'order':order})
+   
+    pdf = pdfkit.from_string(template, False)
+    filename = f"invoice_1{enquiry.id}.pdf"
+    response = HttpResponse(pdf, content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
+
+    subject = f'Invoice [EQ-1{enquiry.id}] for {quotation.product}'
+    message = f"Dear {enquiry.customer_name},\n\nwe hope you're well. Please find the invoice [EQ-1{enquiry.id}] attached. Please feel free to reach out if you have any questions. \n\nThank you. \n "
+
+    threading.Thread(
+        target=send_email_async,
+        args=(subject, message, 'divyang.kansara@technostacks.com', enquiry.email, filename, response.content, 'application/pdf')
+    ).start()
+
+    return response 

@@ -197,9 +197,6 @@ span{
 .stage {
     cursor: pointer;
     padding: 0.5rem 1rem;
-    /* border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px; */
-    /* transition: background-color 0.5s, color 0.5s; */
     position:relative;
 }
 .stage.active:after {
@@ -276,7 +273,7 @@ span{
     margin-top: 10px;
     margin-bottom: 5px;
     font-weight: bold;
-    margin-left: 53%;
+    margin-left: 49%;
 }
 
 .invoice-number,
@@ -349,3 +346,4 @@ span{
     border-bottom: 2px solid steelblue;
     margin-top: 20px; 
 }
+
