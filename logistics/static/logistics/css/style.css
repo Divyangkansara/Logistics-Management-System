@@ -347,3 +347,69 @@ span{
     margin-top: 20px; 
 }
 
+
+
+/*  Tracking */
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: " > ";
+}
+
+.container{
+    margin-left: 18%;
+}
+
+.tracking_section{
+    width: 70%;
+    text-align: center;
+}
+
+form{
+    margin-top: 5%;
+}
+
+#tracking_email{
+    width: 50%;
+    margin-left: 25%;
+}
+
+#tracking_num{
+    width: 50%;
+    margin-left: 25%;
+}
+
+.track_button{
+    width: 30%;
+    margin-left: 35%;
+    margin-top: 10px;
+    background-color: darkblue;
+    border-color: darkblue;
+    color: ghostwhite;
+    border-radius: 0;
+}
+
+.track_button:hover{
+    background-color: darkorange;
+    border-color: darkorange;
+    color: ghostwhite;
+    transition: .5s;
+}
+
+.form-control-lg::placeholder {
+    font-size: 14px;
+}
+
+.form-control-lg {
+    font-size: 16px;
+}
+
+.form-control-lg:hover{
+    border: 2px solid black;
+    border-color: black !important;
+}
+
+.form-control-lg:focus {
+    border-color: darkblue !important;
+    box-shadow: 0 0 0 0px darkblue;
+}
+

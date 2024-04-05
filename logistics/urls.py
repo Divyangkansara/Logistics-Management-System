@@ -22,5 +22,6 @@ urlpatterns = [
     path('invoice/<int:enquiry_id>/<int:quotation_id>/<int:order_id>/', views.invoice, name='invoice'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('temp_invoice/<int:enquiry_id>/<int:quotation_id>/<int:order_id>/', views.temp_invoice, name='temp_invoice'),
-    path('pdf/<int:enquiry_id>/<int:quotation_id>/<int:order_id>/', views.print_pdf, name='print_pdf')
+    path('pdf/<int:enquiry_id>/<int:quotation_id>/<int:order_id>/', views.print_pdf, name='print_pdf'),
+    path('track_orders/', views.track_order, name='track_order'),
 ]

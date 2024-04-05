@@ -177,6 +177,7 @@ def save_quotation(request, id):
             data = request.POST.dict()
             data.pop('csrfmiddlewaretoken')
             data['quotation_date'] = request.POST.get('quotation_date')
+            data['enquiry']  = instance
             quotation = Quotation.objects.create(**data)   
             return render(request, 'logistics/approve_quotation.html', {'quotation':quotation,
                                      'instance':instance, 'username':user_name})
@@ -251,6 +252,7 @@ def pending_order(request, enquiry_id, quotation_id):
             data.pop('csrfmiddlewaretoken')
             data['order_date'] = request.POST.get('order_date')
             data['flight_date'] = request.POST.get('flight_date')
+            data['quotation']  = quotation
             order = Order.objects.create(**data)
             return render(request, 'logistics/confirm_orders.html', {'order':order,
                                                                     'instance':enquiry,
@@ -337,3 +339,20 @@ def print_pdf(request, enquiry_id, quotation_id, order_id):
     ).start()
 
     return response 
+
+
+
+#  Track Orders
+def track_order(request):
+    if request.method == 'POST':
+        tracking_email = request.POST.get('tracking_email')
+        tracking_num = request.POST.get('tracking_num')
+        
+        order = Order.objects.filter(order_id = tracking_num , quotation__enquiry__email = tracking_email).first()
+
+        if order:
+            status = order.status
+            return render(request, 'logistics/track_order.html', {'order':status})
+        else:
+            return render(request, 'logistics/track_order.html',{'error': 'no data'})
+    return render(request, 'logistics/track_order.html')

@@ -1,6 +1,8 @@
+import random
+import secrets
+import string
 from django.db import models
 from django.contrib.auth.models import User
-
 
 #  customers-model 
 class Customer(models.Model):
@@ -53,8 +55,7 @@ class Enquirie(models.Model):
                             'air freight'),('sea freight', 'sea freight')])
         type = models.CharField(max_length=30, default='export')
         enquiry_details = models.TextField()
-        priority_tags = models.CharField(max_length=30, default="normal", choices=
-                        [('low', 'low'),('normal', 'normal'), ('high', 'high')])
+
 
 #  quotation management
 class Quotation(models.Model):
@@ -82,10 +83,32 @@ class Quotation(models.Model):
     dimension = models.CharField(max_length=20)
     # price = models.DecimalField(max_digits=10, decimal_places=2)
     terms = models.CharField(max_length=100, null=True)
+    enquiry = models.ForeignKey(Enquirie, on_delete=models.CASCADE, null=True, blank=True)
 
+
+
+
+class Status(models.Model):
+    name = models.CharField(max_length=120)
+    def __str__(self):
+        return str(self.name)
+    
+def generate_order_id(length=6):
+    random_string1 = ''.join(secrets.choice(string.ascii_uppercase + string.digits) for _ in range(length))
+    random_string2 = ''.join(secrets.choice(string.ascii_uppercase + string.digits) for _ in range(length-2))
+    return f"LMS-{random_string2}{random_string1}"
 
 # orders
 class Order(models.Model):
+
+    ORDER_STATUS = (
+    ("PENDING", "Pending"),
+    ("IN WAREHOUSE", "in warehouse"),
+    ("OUT FOR DELIVERY", "out for delivery"),
+    ("DELIVERED", "delivered"),
+    )
+
+    order_id = models.CharField(max_length=20, unique=True)
     airline = models.CharField(max_length=50)
     flight_number = models.IntegerField()
     origin = models.CharField(max_length=255)
@@ -103,6 +126,16 @@ class Order(models.Model):
     notify_name = models.CharField(max_length=100, default='')
     notify_acc = models.IntegerField(default=0)
     notify_add = models.TextField(max_length=255, null=True, blank=True)
+    status = models.CharField(max_length=25,choices=ORDER_STATUS,null=True, blank=True)
+    quotation = models.ForeignKey(Quotation, on_delete=models.CASCADE, null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if not self.order_id:
+            self.order_id = generate_order_id(6)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.order_id
 
 
 # tracking data
@@ -176,5 +209,7 @@ class ClientCurrency(models.Model):
 
     def __str__(self):
         return self.client_currency
+    
+
     
 
