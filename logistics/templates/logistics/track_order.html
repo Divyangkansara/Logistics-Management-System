@@ -21,18 +21,47 @@
                 <input type="text" class="form-control form-control-lg" id="tracking_num" name="tracking_num" placeholder="Enter Tracking Number. Example: LMS-OM07YUEVML" required><br>
                 <button type="submit" class="track_button btn btn-primary btn-lg btn-block" style="font-size: 17px;">TRACK</button>
             </form>
-            {% if order %}
-                <div>
-                    <p>Status: {{ order }}</p>
+            <!-- <div class="tracking-info mt-5">
+                <div class="row">
+                    <div class="shipper col-sm-6">
+                        <p><b>Shipper Information</b></p>
+                        <hr>
+                        <p>global logistics</p>
+                        <p>dsfdsbvvf</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p><b>Receiver Information</b></p>
+                        <hr>
+                    </div>
                 </div>
-            {% endif %}
-            {% if error %}
-                <div>
-                    <p>{{ error }}</p>
-                </div>
-            {% endif %}
+            </div> -->
+            <div id="orderStatus" class="mt-5" style="display: none;">
+                
+            </div>
         </section>
     </div>
 </div>
 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+    $('.tracking_form').submit(function(e) {
+        e.preventDefault(); 
+        var formData = $(this).serialize(); 
+        $.ajax({
+            type: 'POST', 
+            url: "{% url 'track_order' %}", 
+            data: formData, 
+            success: function(response) { 
+                if (response.order) {
+                    $('#orderStatus').html('<p>Status: ' + response.order + '</p>').show(); 
+                } else {
+                    $('#orderStatus').html('<p> No data found for the given tracking number.</p>').show();
+                }        
+            },
+        });
+    });
+});
+</script>
 {% endblock content %}

@@ -1,4 +1,5 @@
 import threading
+import pdfkit
 from django.shortcuts import render , redirect, get_object_or_404, HttpResponse
 from .models import Enquirie, FreightType, JobCategory, Type, Quotation, PaymentType, ClientCurrency, Order
 from django.core.mail import send_mail
@@ -9,10 +10,9 @@ from .middlewares import auth, user
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
 from django.template.loader import get_template
-import pdfkit
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
-
+from django.http import JsonResponse
 
 
 #  home page
@@ -347,12 +347,10 @@ def track_order(request):
     if request.method == 'POST':
         tracking_email = request.POST.get('tracking_email')
         tracking_num = request.POST.get('tracking_num')
-        
-        order = Order.objects.filter(order_id = tracking_num , quotation__enquiry__email = tracking_email).first()
-
-        if order:
+        try:
+            order = Order.objects.get(order_id = tracking_num , quotation__enquiry__email = tracking_email)
             status = order.status
-            return render(request, 'logistics/track_order.html', {'order':status})
-        else:
-            return render(request, 'logistics/track_order.html',{'error': 'no data'})
+            return JsonResponse({'order':status})
+        except Order.DoesNotExist:
+            return JsonResponse({'error':'No data found for the given tracking number'})
     return render(request, 'logistics/track_order.html')
