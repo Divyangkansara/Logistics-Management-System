@@ -6,38 +6,143 @@
 
 <nav aria-label="breadcrumb" style="margin-top: 100px; margin-left: 10px">
     <ol class="breadcrumb" style="font-size:medium;">
-        <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Track Orders</li>
+        <li class="track-order breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+        <li class="track-order breadcrumb-item active" aria-current="page">Track Orders</li>
     </ol>
 </nav>
 
-<div class="background" style="margin-top: 60px;">
+<div class="background" style="margin-top: 60px; overflow-x: hidden;">
     <div class="container">
         <section class="tracking_section">
             <h4><b>Enter the Consignement No.</b></h4>
             <form action="{% url 'track_order' %}" method="POST" class="tracking_form">
                 {% csrf_token %}
-                <input type="email" class="form-control form-control-lg" id="tracking_email" name="tracking_email" placeholder="Enter Your Email" required><br>
-                <input type="text" class="form-control form-control-lg" id="tracking_num" name="tracking_num" placeholder="Enter Tracking Number. Example: LMS-OM07YUEVML" required><br>
-                <button type="submit" class="track_button btn btn-primary btn-lg btn-block" style="font-size: 17px;">TRACK</button>
+                <input type="email" class="form-control form-control-lg" id="tracking_email" name="tracking_email"
+                    placeholder="Enter Your Email" required><br>
+                <input type="text" class="form-control form-control-lg" id="tracking_num" name="tracking_num"
+                    placeholder="Enter Tracking Number. Example: LMS-OM07YUEVML" required><br>
+                <button type="submit" class="track_button btn btn-primary btn-lg btn-block"
+                    style="font-size: 17px;">TRACK</button>
             </form>
-            <!-- <div class="tracking-info mt-5">
-                <div class="row">
-                    <div class="shipper col-sm-6">
-                        <p><b>Shipper Information</b></p>
-                        <hr>
-                        <p>global logistics</p>
-                        <p>dsfdsbvvf</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <p><b>Receiver Information</b></p>
-                        <hr>
-                    </div>
-                </div>
-            </div> -->
-            <div id="orderStatus" class="mt-5" style="display: none;">
-                
+            <div id="data_not_found"></div>
+        </section>
+        <section class="tracking_details mt-5" style="display: none;">
+            <div class="logo-temp" style="text-align: center;">
+                <img src="{% static 'logistics/images/OBJECTS.png' %}" alt="logo"
+                    style="width: 30%; display: block; margin: 0 auto;">
+                <p style="font-size:larger; color: gray;">LMS-A3025L4HHL</p>
             </div>
+            <div class="row mt-4">
+                <div class="col-sm-6">
+                    <p style="margin-bottom: 0;"><b>Shipper Information</b></p>
+                    <hr style="margin-top: 0; border-color: black;">
+                    <p id="shipper" style="margin-bottom: 0;"></p>
+                    <p id="" style="margin-top: 0; margin-bottom: 0;">ema comm. 22, Accra</p>
+                    <p id="" style="margin-top: 0; margin-bottom: 0;">0356256583</p>
+                    <p id="shipper_email" style="margin-top: 0;"></p>
+                    </p>
+                </div>
+                <div class="col-sm-6">
+                    <p style="margin-bottom: 0;"><b>Receiver Information</b></p>
+                    <hr style="margin-top: 0; border-color: black;">
+                    <p id="customer" style="margin-bottom: 0;"></p>
+                    <p id="" style="margin-top: 0; margin-bottom: 0;">togo, Lome</p>
+                    <p id="phone" style="margin-top: 0; margin-bottom: 0;">89473626574</p>
+                    <p id="email" style="margin-top: 0;"></p>
+                </div>
+            </div>
+            <div id="shipmentStatus" class="alert alert-dark mt-3" role="alert"
+                style="background-color: gray; color: ghostwhite; text-align: center;">
+            </div>
+            <div class="row mt-4">
+                <div class="col-sm-12">
+                    <p style="margin-bottom: 0;"><b>Shipment Information</b></p>
+                    <hr style="margin-top: 0; border-color: black;">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-sm-4">
+                    <p style="margin-bottom: 0;"><b>Origin:</b></p>
+                    <p id="origin" style="margin-top: 0;"></p>
+                </div>
+                <div class="col-sm-4">
+                    <p style="margin-bottom: 0;"><b>Type:</b></p>
+                    <p style="margin-top: 0;">Import</p>
+                </div>
+                <div class="col-sm-4">
+                    <p style="margin-bottom: 0;"><b>Status:</b></p>
+                    <p class="statusCell" style="margin-top: 0;"></p>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-sm-4">
+                    <p style="margin-bottom: 0;"><b>Destination:</b></p>
+                    <p id="destination" style="margin-top: 0;"></p>
+                </div>
+                <div class="col-sm-4">
+                    <p style="margin-bottom: 0;"><b>Weight:</b></p>
+                    <p id="weight" style="margin-top: 0;">150</p>
+                </div>
+                <div class="col-sm-4">
+                    <p style="margin-bottom: 0;"><b>Freight Type:</b></p>
+                    <p id="freight-type" style="margin-top: 0;"></p>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-sm-4">
+                    <p style="margin-bottom: 0;"><b>Product:</b></p>
+                    <p id="product" style="margin-top: 0;">Desks</p>
+                </div>
+                <div class="col-sm-4">
+                    <p style="margin-bottom: 0;"><b>Qty:</b></p>
+                    <p id="qty" style="margin-top: 0;">3</p>
+                </div>
+                <div class="col-sm-4">
+                    <p style="margin-bottom: 0;"><b>Payment Status:</b></p>
+                    <p style="margin-top: 0;">Pending</p>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-sm-4">
+                    <p style="margin-bottom: 0;"><b>Sales Person:</b></p>
+                    <p id="sales_person" style="margin-top: 0;">Togo</p>
+                </div>
+                <div class="col-sm-4">
+                    <p style="margin-bottom: 0;"><b>Sales Team:</b></p>
+                    <p id="sales_team" style="margin-top: 0;">Europe</p>
+                </div>
+                <div class="col-sm-4">
+                    <p style="margin-bottom: 0;"><b>Payment Mode:</b></p>
+                    <p style="margin-top: 0;">Cash</p>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-sm-12">
+                    <p style="margin-bottom: 0;"><b>Shipment History</b></p>
+                    <hr style="margin-top: 0; border-color: black;">
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-sm-12">
+                    <table class="table table-hover table-bordered">
+                        <thead class="shipment-history">
+                            <th>Order Date</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                            <th>Updated By</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="order_date"></td>
+                                <td id="order_time"></td>
+                                <td class="statusCell"></td>
+                                <td>Admin</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row mt-5"></div>
         </section>
     </div>
 </div>
@@ -45,23 +150,49 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    $(document).ready(function() {
-    $('.tracking_form').submit(function(e) {
-        e.preventDefault(); 
-        var formData = $(this).serialize(); 
-        $.ajax({
-            type: 'POST', 
-            url: "{% url 'track_order' %}", 
-            data: formData, 
-            success: function(response) { 
-                if (response.order) {
-                    $('#orderStatus').html('<p>Status: ' + response.order + '</p>').show(); 
-                } else {
-                    $('#orderStatus').html('<p> No data found for the given tracking number.</p>').show();
-                }        
-            },
+    $(document).ready(function () {
+        function formatStatus(status) {
+            return status.toLowerCase().replace(/\b\w/g, function (char) {
+                return char.toUpperCase();
+            });
+        }
+        $('.tracking_form').submit(function (e) {
+            e.preventDefault();
+            var formData = $(this).serialize();
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'track_order' %}",
+                data: formData,
+                success: function (response) {
+                    console.log(response, "===ddd")
+                    if (response.id) {
+                        const {status, origin, destination, shipper_name, quotation} = response;
+                        $('#shipmentStatus').html('SHIPMENT STATUS: ' + status).show();
+                        var statusData = formatStatus(status);
+                        $('.statusCell').html(statusData).show();
+                        $('#origin').html(origin).show();
+                        $('#destination').html(destination).show();
+                        $('#weight').html(quotation.weight).show();
+                        $('#qty').html(quotation.quantity).show();
+                        $('#product').html(quotation.product).show();
+                        $('#sales_person').html(quotation.sales_person).show();
+                        $('#sales_team').html(quotation.sales_team).show();
+                        $('#customer').html(quotation.customer_name).show();
+                        $('#email').html(quotation.email).show();
+                        $('#phone').html(quotation.phone).show();
+                        $('#freight-type').html(quotation.freight_type).show();
+                        $('#shipper').html(shipper_name).show();
+                        $('#order_date').html(response.order_date).show();
+                        $('#order_time').html(response.order_time).show();
+                        $('.tracking_details').show();
+                    } else {
+                        $('#data_not_found').html('No data found for the given details.').show();
+                    }
+                },
+            });
         });
     });
-});
 </script>
+
+
 {% endblock content %}

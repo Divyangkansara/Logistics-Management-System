@@ -6,13 +6,15 @@ from django.core.mail import send_mail
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .middlewares import auth, user
+from .middlewares import user
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
-from django.template.loader import get_template
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from django.http import JsonResponse
+from django.forms.models import model_to_dict
+from django.utils.timezone import localtime
+
 
 
 #  home page
@@ -48,13 +50,12 @@ def login_page(request):
         user = authenticate(username=username, password=password)    
         if user is not None:
             login(request, user)
-            messages.success(request, 'You have successfully logged in!')
             return redirect('dashboard')
         else:
-            messages.warning(request, 'Invalid username or password')
             return render(request, 'logistics/login_form.html', {'error': 'Invalid username or password'})
     else:
         return render(request, 'logistics/login_form.html')
+    
     
 
 def log_out(request):
@@ -185,7 +186,7 @@ def save_quotation(request, id):
 
 
 #  Update Quotation Information
-@ login_required(login_url='/login')
+@ login_required(login_url='/login') 
 def update_quotation(request, quotation_id, enquiry_id):
     if request.user.is_authenticated:
         user = request.user
@@ -222,16 +223,20 @@ def sending_email(request, enquiry_id, quotation_id):
         user_name = user.get_username()
         print("sending email", enquiry_id, quotation_id)
         enquiry = get_object_or_404(Enquirie, pk=enquiry_id)
+        quotation = get_object_or_404(Quotation, pk=quotation_id)
+        message_content = f"Dear {enquiry.customer_name},\n\n" \
+                          f"Here is the quotation for your enquiry amounting in quotation.amount USD.\n\n" \
+                          f"You can reply to this email if you have any questions.\n\n" \
+                          f"Thank you."
 
         threading.Thread(target=lambda: send_mail(
-            'Testing Mail',
-            'Here is the testing message. Just for confirmation. Logistics Management System project',
+            f'Quotation for {quotation.product}',
+            message_content,
             'divyang.kansara@technostacks.com',
             [enquiry.email],
             fail_silently=False
         )).start()
 
-        quotation = get_object_or_404(Quotation, pk=quotation_id)
         return render(request, 'logistics/sent_email.html', {'quotation':quotation,
                                                             'instance':enquiry, 'username':user_name})
 
@@ -262,7 +267,7 @@ def pending_order(request, enquiry_id, quotation_id):
                                                      'quotation':quotation,
                                                      'username':user_name})
 
-
+                                
 
 #  Update Order Information
 @ login_required(login_url='/login')
@@ -274,7 +279,7 @@ def update_order(request, order_id, enquiry_id, quotation_id):
         enquiry = get_object_or_404(Enquirie, pk=enquiry_id)
         quotation = get_object_or_404(Quotation, pk=quotation_id)
         context = {'order':instance, 'instance':enquiry, 'quotation':quotation, 'username':user_name}
-        if request.method == 'POST':
+        if request.method == 'POST': 
             data = request.POST.dict()
             data.pop('csrfmiddlewaretoken')
             data['order_date'] = request.POST.get('order_date')
@@ -283,9 +288,6 @@ def update_order(request, order_id, enquiry_id, quotation_id):
             instance.save()
             return render(request, 'logistics/confirm_orders.html', context)
     return render(request, 'logistics/update_order.html', context)
-
-
-
 
 
 #  Invoice
@@ -297,10 +299,12 @@ def invoice(request, enquiry_id, quotation_id, order_id):
         enquiry = get_object_or_404(Enquirie, pk=enquiry_id)
         quotation = get_object_or_404(Quotation, pk=quotation_id)
         order = get_object_or_404(Order, pk=order_id)
+        order_date = order.order_date.date()
         return render(request, 'logistics/invoice.html', {'username':user_name,
                                                           'instance':enquiry,
                                                           'quotation':quotation,
-                                                          'order':order})
+                                                          'order':order,
+                                                          'order_date':order_date})
      
 def temp_invoice(request, enquiry_id, quotation_id, order_id):
     enquiry = get_object_or_404(Enquirie, pk=enquiry_id)
@@ -347,10 +351,30 @@ def track_order(request):
     if request.method == 'POST':
         tracking_email = request.POST.get('tracking_email')
         tracking_num = request.POST.get('tracking_num')
+        print("Email:", tracking_email)
+        print("Tracking Number:", tracking_num)
         try:
-            order = Order.objects.get(order_id = tracking_num , quotation__enquiry__email = tracking_email)
-            status = order.status
-            return JsonResponse({'order':status})
-        except Order.DoesNotExist:
-            return JsonResponse({'error':'No data found for the given tracking number'})
+            order = Order.objects.filter(order_id=tracking_num, quotation__enquiry__email=tracking_email).first()   
+            if order:
+                order_dict = model_to_dict(order)
+                order_date = localtime(order.order_date).date()
+                order_time = localtime(order.order_date).time().strftime('%I:%M %p')
+                order_dict['order_date'] = order_date
+                order_dict['order_time'] = order_time
+                order_dict['quotation'] = {'weight': order.quotation.weight,
+                                           'quantity': order.quotation.quantity,
+                                           'product': order.quotation.product,
+                                           'sales_person': order.quotation.enquiry.sales_person,
+                                           'sales_team': order.quotation.enquiry.sales_team,
+                                           'customer_name': order.quotation.enquiry.customer_name,
+                                           'email': order.quotation.enquiry.email,
+                                           'phone': order.quotation.enquiry.phone,
+                                           'freight_type': order.quotation.enquiry.freight_type}
+                print('➡ logistics/views.py:357 order_dict:', order_dict)
+                return JsonResponse(order_dict)
+            else:
+                return JsonResponse({'error': 'No data found for the given tracking number and email'})
+        except Exception as e:
+            print("Exception:", str(e))
+            return JsonResponse({'error': 'An error occurred while processing your request'})
     return render(request, 'logistics/track_order.html')

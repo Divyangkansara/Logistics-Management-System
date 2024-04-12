@@ -10,22 +10,22 @@
     <div class="form-box">
         <div class="row">
             <div class="invoice-logo col-sm-6">
-                <img id="logoimg" src="{% static 'logistics/images/logologistics.png' %}" alt="logo">
+                <img id="logistics-logo" src="{% static 'logistics/images/OBJECTS.png' %}" alt="logo">
             </div>
         </div>
+        <!-- <h5>Sign in with your existing account</h5>
         <div class="button-box">
             <div id="btn"></div>
             <button type="button" class="toggle-btn" id="loginButton">Log In</button>
             <button type="button" class="toggle-btn ml-3" id="registerButton">Register</button>
-        </div>
-        <!-- <h5>Signin with your existing account</h5> -->
-        
+        </div> -->
         <form action="{% url 'login_form' %}" class="input-group" id="login" method="POST">
             {% csrf_token %}
-            <input type="text" class="input-field" name="username" placeholder="User Name" required>
-            <input type="password" class="input-field" name="password" placeholder="Enter Password" required>
+            <h6>Sign in with your existing account</h6>
+            <input type="text" class="input-field mt-5" name="username" id="username" placeholder="User Name" required><br>
+            <input type="password" class="input-field" name="password" id="password" placeholder="Enter Password" required>
             <input type="checkbox" class="check-box"><span>Remember Password</span>
-            <button type="submit" class="submit-btn ml-4">Sign in</button>
+            <button type="submit" class="submit-btn ml-4 mt-5">Sign in</button>
             <div class="ml-4 mt-3">
                 <p>Don't have an account? <a href="#" id="registerLink">Register</a></p>
             </div>
@@ -36,7 +36,7 @@
             <input type="email" class="input-field" name="email" placeholder="Email" required>
             <input type="password" class="input-field" name="password" placeholder="Enter Password" required>
             <input type="checkbox" class="check-box"><span>I agree the terms & conditions</span>
-            <button type="submit" class="submit-btn ml-4">Sign Up</button>
+            <button type="submit" class="submit-btn ml-4 mt-5">Sign Up</button>
             <div class="ml-3 mt-3">
                 <p>Already have an account? <a href="#" id="loginLink">Sign in</a></p>
             </div>
@@ -76,3 +76,6 @@
     });
 </script>
 {% endblock content %}
+
+
+

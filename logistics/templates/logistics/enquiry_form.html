@@ -12,8 +12,6 @@
         <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
         <li class="breadcrumb-item active" aria-current="page">New</li>
     </ol>
-    <!-- <button type="submit" class="btn btn-info ml-3">Save</button>
-    <button type="button" class="btn btn-outline-dark">Discard</button> -->
 </nav>
 
 
@@ -102,17 +100,6 @@
                                 value="Enquiry" disabled>
                         </div>
                     </div>
-                    <!-- <div class="col-sm-5 offset-1">
-                        <label for="priority"><b>Priority Tags</b></label>
-                        <input type="radio" name="priority_tags" id="star1" value="low">
-                        <label class="star-label" for="star1" onclick="checkAndSelectStar(1)"></label>
-
-                        <input type="radio" name="priority_tags" id="star2" value="normal">
-                        <label class="star-label" for="star2" onclick="checkAndSelectStar(2)"></label>
-
-                        <input type="radio" name="priority_tags" id="star3" value="high">
-                        <label class="star-label" for="star3" onclick="checkAndSelectStar(3)"></label>
-                    </div> -->
                 </div>
 
                 <div class="row mt-5"></div>
@@ -182,7 +169,6 @@
                     <div class="col-sm-12">
                         <div class="button">
                             <button type="submit" class="btn btn-sm btn-primary" style="font-size: 17px; background-color: steelblue; border: none; margin-left: 40%;">Add Enquiry</button>
-                            <!-- <button type="button" class="btn btn-sm btn-outline-dark" style="font-size: 16px;">Discard</button> -->
                         </div>
                     </div>
                 </div>
@@ -194,14 +180,4 @@
         </div>
     </section>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- <script>
-    function checkAndSelectStar(starNumber) {
-        for (let i = 1; i <= starNumber; i++) {
-            document.getElementById(`star${i}`).checked = true;
-        }
-    }
-</script> -->
-
 {% endblock content %}

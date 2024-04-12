@@ -59,7 +59,6 @@ class Enquirie(models.Model):
 
 #  quotation management
 class Quotation(models.Model):
-    # customer_name = models.ForeignKey(Customers, on_delete=models.CASCADE)
     customer_name = models.CharField(max_length=50)
     job_category = models.CharField(max_length=20, default='sales')
     payment_type = models.CharField(max_length=20, choices=[('pending','pending'),
@@ -102,12 +101,14 @@ def generate_order_id(length=6):
 class Order(models.Model):
 
     ORDER_STATUS = (
-    ("PENDING", "Pending"),
+    # ("PREPARING", "preparing"),
+    ("CONFIRMED", "confirmed"),
+    ("PICKED UP", "picked up"),
     ("IN WAREHOUSE", "in warehouse"),
-    ("OUT FOR DELIVERY", "out for delivery"),
+    ("IN TRANSIT", "in transit"),
     ("DELIVERED", "delivered"),
     )
-
+    
     order_id = models.CharField(max_length=20, unique=True)
     airline = models.CharField(max_length=50)
     flight_number = models.IntegerField()
@@ -121,12 +122,12 @@ class Order(models.Model):
     consignee_address = models.TextField(max_length=255)
     shipping_agent = models.CharField(max_length=50)
     shipping_agent_acc_num = models.IntegerField()
-    order_date = models.DateField(null=True, blank=True)
+    order_date = models.DateTimeField()
     flight_date = models.DateField(null=True, blank=True)
     notify_name = models.CharField(max_length=100, default='')
     notify_acc = models.IntegerField(default=0)
     notify_add = models.TextField(max_length=255, null=True, blank=True)
-    status = models.CharField(max_length=25,choices=ORDER_STATUS,null=True, blank=True)
+    status = models.CharField(max_length=25,choices=ORDER_STATUS,null=True, blank=True, default='PREPARING')
     quotation = models.ForeignKey(Quotation, on_delete=models.CASCADE, null=True, blank=True)
 
     def save(self, *args, **kwargs):

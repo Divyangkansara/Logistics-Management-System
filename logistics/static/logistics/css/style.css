@@ -1,5 +1,5 @@
 .signin{
-    margin-left: 460px;
+    margin-left: 380px;
 }
 
 .opportunities{
@@ -88,9 +88,9 @@ input[type="radio"]:checked + label::before {
 .hero{
     height: 100%;
     width: 100%;
-    /* background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-                url("../images/logistics.jpg"); */
-    background-image: url('https://ccnssodev.b2clogin.com/static/tenant/templates/backgrounds/1-1.png');
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                url("../images/bg.avif");
+    /* background-image: url('https://ccnssodev.b2clogin.com/static/tenant/templates/backgrounds/1-1.png'); */
     background-position: center;
     background-size: cover;
     position:absolute;
@@ -137,14 +137,16 @@ input[type="radio"]:checked + label::before {
     transition: .5s;
 }
 
-h5{
-    margin-left: 11%;
+#logistics-logo{
+    width: 100%;
+    margin-left: 50%;
+    margin-top: 10px;
 }
 
 .input-group{
-    top: 160px;
+    top: 90px;
     position: absolute;
-    width: 280px;
+    width: 290px;
     transition: .5s;
 }
 
@@ -171,12 +173,13 @@ h5{
     width: 85%;
     padding: 10px 30px;
     cursor: pointer;
-    display: block;
     margin-top: 30px;
-    background: linear-gradient(to right, #1048ff, #06c1ff);
+    /* background: linear-gradient(to right, #1048ff, #06c1ff); */
+    background-color: darkblue;
+    color: ghostwhite;
     border: 0;
     outline: none;
-    border-radius: 30px;
+    border-radius: 10px;
 }
 
 .check-box{
@@ -274,8 +277,9 @@ span{
 }
 
 #logoimg{
-    width: 120%;
-    margin-left: 40%;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 20px;
 }
 
 .invoice-title {
@@ -362,7 +366,7 @@ span{
 
 /*  Tracking */
 
-.breadcrumb-item + .breadcrumb-item::before {
+.track-order + .track-order::before {
     content: " > ";
 }
 
@@ -373,6 +377,11 @@ span{
 .tracking_section{
     width: 70%;
     text-align: center;
+}
+
+.tracking_details{
+    width: 50%;
+    margin-left: 10%;
 }
 
 form{
@@ -399,12 +408,12 @@ form{
     border-radius: 0;
 }
 
-.track_button:hover{
+/* .track_button:hover{
     background-color: darkorange;
     border-color: darkorange;
     color: ghostwhite;
     transition: .5s;
-}
+} */
 
 .form-control-lg::placeholder {
     font-size: 14px;
@@ -429,4 +438,17 @@ form{
     border: 1px solid black;
     margin-left: 20%;
     width: 60%;
+}
+
+table{
+    width: 100%;
+}
+
+th, td{
+    text-align: center;
+}
+
+.shipment-history{
+    background-color: #FF6400;
+    color: ghostwhite;
 }
