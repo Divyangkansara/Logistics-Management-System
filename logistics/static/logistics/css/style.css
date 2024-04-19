@@ -43,6 +43,12 @@
     box-shadow: 2px 6px 10px #000;
 }
 
+.price-details{
+  border-color: black;
+  max-width: 85%;
+  margin-top: 0;
+}
+
 
 .navbar-custom{
     background-color:white;

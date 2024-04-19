@@ -5,7 +5,7 @@
       <li class="nav-item active">
         <a class="navbar-brand" href="#"><strong>Logistics</strong></a>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item active ml-5">
         <a class="nav-link" id="home" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
@@ -64,7 +64,7 @@
       </li>
 
       {% if request.user.is_authenticated %}
-      <li class="nav-item dropdown" style="margin-left:440px">
+      <li class="nav-item dropdown" style="margin-left:390px">
         <a class="nav-link dropdown active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           {{username}}</a>

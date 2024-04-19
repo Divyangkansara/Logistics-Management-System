@@ -233,9 +233,36 @@
                     <div class="row mt-5"></div>
                     <div class="row">
                         <div class="col-sm-4 offset-8">
-                            <p><b id="displayPrice">Total Amount:</b></p>
+                            <hr class="price-details">
+                            <div class="row" style="margin-bottom: 0;">
+                                <div class="col-sm-5 offset-2">
+                                    <p><b>Sub Total:</b></p>
+                                </div>
+                                <div class="col-sm-4 offset-1">
+                                    <p><b id="displayPrice"></b></p>
+                                </div>
+                            </div>
+                            <hr class="price-details">
+                            <div class="row" style="margin-bottom: 0;">
+                                <div class="col-sm-6 offset-1">
+                                    <p><b>Client Currency:</b></p>
+                                </div>
+                                <div class="col-sm-4 offset-1">
+                                    <p><b id="client_currency">$ 0.00</b></p>
+                                </div>
+                            </div>
+                            <hr class="price-details">
+                            <div class="row" style="margin-bottom: 0;">
+                                <div class="col-sm-5 offset-2">
+                                    <p><b>Amount Total:</b></p>
+                                </div>
+                                <div class="col-sm-4 offset-1">
+                                    <p><b id="total_amount"></b></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="row mt-5"></div>
                 </div>
             </div>
         </section>
@@ -280,11 +307,24 @@
                 
                 var weight = $('#weightvalue').html();
                 var price = weight * 10;
-                $('#displayPrice').html("Total amount:" + price + "$")
+                $('#displayPrice').html("₹ " + price + ".00")
+                $('#client_currency').html("$ " + price + ".00")
+                currency = "USD"
+                convert_currency(price, currency);
             }
+
+            function convert_currency(price, currency='USD') {
+                    var client_currency = price * currency_price[currency] || 'USD';
+                    $('#total_amount').html("$ " + client_currency)
+                }
 
             calculatePrice();
         });
+
+        const currency_price = {
+            "USD" : 83.47,
+            "AED" : 22.70
+        }
     </script>
 </body>
 {% endblock content %}
