@@ -3,266 +3,288 @@
 
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'logistics/css/style.css' %}">
-<script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/classic/ckeditor.js"></script>
+
+<body>
+    <link rel="stylesheet" href="{% static 'logistics/css/style.css' %}">
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/classic/ckeditor.js"></script>
 
 
 
-<nav aria-label="breadcrumb" style="margin-top: 50px; margin-bottom: 10px;">
-    <ol class="breadcrumb" style="font-size: x-large; margin-bottom: auto;">
-        <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'edit_enquiry' instance.id %}">{{instance.scope_of_work}}</a></li>
-        <li class="breadcrumb-item active" aria-current="page">...20030{{instance.id}}</li>
-    </ol>
-    <a href="{% url 'update_quotation' instance.id quotation.id %}" class="btn btn-primary ml-3" style="background-color: steelblue; border-color: steelblue;">Edit</a>
-    <a class="btn btn-outline-dark">Create</a>
-</nav>
+    <nav aria-label="breadcrumb" style="margin-top: 50px; margin-bottom: 10px;">
+        <ol class="breadcrumb" style="font-size: x-large; margin-bottom: auto;">
+            <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'edit_enquiry' instance.id %}">{{instance.scope_of_work}}</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">...20030{{instance.id}}</li>
+        </ol>
+        <a href="{% url 'update_quotation' instance.id quotation.id %}" class="btn btn-primary ml-3"
+            style="background-color: steelblue; border-color: steelblue;">Edit</a>
+        <a class="btn btn-outline-dark">Create</a>
+    </nav>
 
-<nav class="navbar navbar-custom navbar-expand-lg" style="margin-top:auto;padding: 0;">
-    <div style="padding-top: 2px;padding-bottom: 2px;margin-left: 15px;">
-        <div class="justify-content-start">
-            <button type="button" class="btn btn-sm btn-primary" style="background-color: steelblue; border:none;"><b>Approve Quotation</b></button>
+    <nav class="navbar navbar-custom navbar-expand-lg" style="margin-top:auto;padding: 0;">
+        <div style="padding-top: 2px;padding-bottom: 2px;margin-left: 15px;">
+            <div class="justify-content-start">
+                <button type="button" class="btn btn-sm btn-primary"
+                    style="background-color: steelblue; border:none;"><b>Approve Quotation</b></button>
 
-            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg"
-                data-backdrop="static" data-keyboard="false" style="background-color: steelblue; border:none;"><b>Send Quotation Email</b></button>
-            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Send message to {{instance.email}} </h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row mt-4"></div>
-                            <div class="row">
-                                <div class="col-sm-3">
-                                    <label for="recipients"><b>Recipients :</b></label>
-                                </div>
-                                <div class="col-sm-8">
-                                    <input type="email" class="form-control form-control-sm" value="{{instance.email}}"
-                                        id="recipients" name="recipients">
-                                </div>
+                <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                    data-target=".bd-example-modal-lg" data-backdrop="static" data-keyboard="false"
+                    style="background-color: steelblue; border:none;"><b>Send Quotation Email</b></button>
+                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Send message to {{instance.email}} </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                            <div class="row mt-2">
-                                <div class="col-sm-3">
-                                    <label for="subject"><b>Subject :</b></label>
+                            <div class="modal-body">
+                                <div class="row mt-4"></div>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label for="recipients"><b>Recipients :</b></label>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <input type="email" class="form-control form-control-sm"
+                                            value="{{instance.email}}" id="recipients" name="recipients">
+                                    </div>
                                 </div>
-                                <div class="col-sm-8">
-                                    <input type="text" class="form-control form-control-sm"
-                                        style="background-color: lightsteelblue; color: #000;" id="subject"
-                                        name="subject">
+                                <div class="row mt-2">
+                                    <div class="col-sm-3">
+                                        <label for="subject"><b>Subject :</b></label>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <input type="text" class="form-control form-control-sm" id="subject"
+                                            name="subject" value="Quotation for {{quotation.product}}">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row mt-4">
-                                <div class="col-sm-12">
-                                    <textarea class="form-control" id="message-text" name="message-text">Dear {{instance.customer_name}},<br>
+                                <div class="row mt-4">
+                                    <div class="col-sm-12">
+                                        <textarea class="form-control" id="message-text" name="message-text">Dear {{instance.customer_name}},<br>
                                     Here is your <b>quotation</b> for your enquiry amounting in <b>1500 USD.</b><br><br><br><br>
                                     You can reply to this email if you have any questions. <br>
                                     Thank You.
                                 </textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-4"></div>
+                            <div class="modal-footer justify-content-start">
+                                <a href="{% url 'send_email' instance.id quotation.id %}"
+                                    class="send_mail btn btn-primary">Send</a>
+                                <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="" class="btn btn-sm btn-primary"
+                    style="background-color: steelblue; border:none;"><b>Cancel</b></a>
+            </div>
+        </div>
+        <div class="custom-stages ml-auto">
+            <span class="stage active" data-stage="quotation"><b>Quotation</b></span>
+            <span class="stage" data-stage="approved"><b>Approved</b></span>
+            <span class="stage" data-stage="order"><b>Order</b></span>
+        </div>
+    </nav>
+
+    <div>
+        <section class="form-section mt-4 mb-4">
+            <div class="col-sm-12 col-md-8 col-lg-10 m-auto">
+                <div class="quotation-details">
+                    <div class="row ml-2">
+                        <div class="col-sm-12">
+                            <h4 class="mt-4 ml-2"><b>COMPANY01EQ20030{{instance.id}}</b></h4>
+                        </div>
+                    </div>
+                    <div class="row mt-4"></div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row ml-2">
+                                <div class="col-xs-4 ml-4">
+                                    <p class="mt-5"><b>Customer</b></p>
+                                    <p class="mt-5"></p>
+                                    <p><b>Job Category</b></p>
+                                    <p><b>Payment Type</b></p>
+                                    <p class="mt-5"></p>
+                                    <p><b>Sales Person</b></p>
+                                    <p><b>Origin</b></p>
+                                    <p><b>Destination</b></p>
+                                    <p><b>Final Destination</b></p>
+                                    <p class="mt-5"></p>
+                                    <p><b>Terms</b></p>
+                                </div>
+                                <div class="col-xs-4 ml-5">
+                                    <p class="mt-5">{{quotation.customer_name}}</p>
+                                    <p class="mt-5"></p>
+                                    <p>{{quotation.job_category}}</p>
+                                    <p>{{quotation.payment_type}}</p>
+                                    <p class="mt-5"></p>
+                                    <p>{{quotation.sales_person}}</p>
+                                    <p>{{quotation.origin}}</p>
+                                    <p>{{quotation.destination}}</p>
+                                    <p>{{quotation.final_destination}}</p>
+                                    <p class="mt-5"></p>
+                                    <p>{{quotation.terms}}</p>
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-4"></div>
-                        <div class="modal-footer justify-content-start">
-                            <a href="{% url 'send_email' instance.id quotation.id %}"
-                                class="send_mail btn btn-primary">Send</a>
-                            <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancel</button>
+                        <div class="col-sm-6">
+                            <div class="row ml-2">
+                                <div class="col-xs-4 ml-4">
+                                    <div class="row mt-5"></div>
+                                    <div class="row mt-4"></div>
+                                    <p class="mt-5"><b>Freight Type</b></p>
+                                    <div class="row mt-5"></div>
+                                    <div class="row mt-3"></div>
+                                    <p class="mt-4"><b>Type</b></p>
+                                    <p><b>Quotation Date</b></p>
+                                </div>
+                                <div class="col-xs-4 ml-5">
+                                    <div class="row mt-5"></div>
+                                    <div class="row mt-4"></div>
+                                    <p class="mt-5">{{quotation.freight_type}}</p>
+                                    <div class="row mt-5"></div>
+                                    <div class="row mt-3"></div>
+                                    <p class="mt-4">{{quotation.type}}</p>
+                                    <p>{{quotation.quotation_date}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-5"></div>
+
+                    <div class="row ml-4">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="packages" aria-current="page"
+                                    href="#packagesContent">Packages</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="quantity_dimension" href="#quantityDimensionContent">Quantity &
+                                    Dimension</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">T&C</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="row mt-5"></div>
+
+                    <div id="packagesContent" class="row ml-4 mt-4 content">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <p class="ml-2"><b>Product</b></p>
+                                    <p class="ml-2"><b>Description</b></p>
+                                    <p class="ml-2"><b>Unit(s)</b></p>
+                                    <p class="ml-2"><b>Weight(kg)</b></p>
+                                </div>
+                                <div class="col-xs-4 ml-5">
+                                    <p>{{quotation.product}}</p>
+                                    <p>{{quotation.description}}</p>
+                                    <p>{{quotation.unit}}</p>
+                                    <p id="weightvalue">{{quotation.weight}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row ml-3">
+                                <div class="col-xs-4">
+                                    <p><b>Client Currency</b></p>
+                                    <p><b>Rate</b></p>
+                                </div>
+                                <div class="col-xs-4 ml-5">
+                                    <p>{{quotation.client_currency}}</p>
+                                    <p>{{quotation.rate}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="quantityDimensionContent" class="row ml-4 mt-4 content" style="display: none;">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <p><b>Quantity</b></p>
+                                </div>
+                                <div class="col-xs-4 ml-5">
+                                    <p>{{quotation.quantity}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <p><b>Dimension</b></p>
+                                </div>
+                                <div class="col-xs-4 ml-5">
+                                    <p>{{quotation.dimension}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-5"></div>
+                    <div class="row mt-5"></div>
+                    <div class="row">
+                        <div class="col-sm-4 offset-8">
+                            <p><b id="displayPrice">Total Amount:</b></p>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <a href="" class="btn btn-sm btn-primary" style="background-color: steelblue; border:none;"><b>Cancel</b></a>
-        </div>
+        </section>
     </div>
-    <div class="custom-stages ml-auto">
-        <span class="stage active" data-stage="quotation"><b>Quotation</b></span>
-        <span class="stage" data-stage="approved"><b>Approved</b></span>
-        <span class="stage" data-stage="order"><b>Order</b></span>
-    </div>
-</nav>
 
-<div>
-    <section class="form-section mt-4 mb-4">
-        <div class="col-sm-12 col-md-8 col-lg-10 m-auto">
-            <div class="quotation-details">
-                <div class="row ml-2">
-                    <div class="col-sm-12">
-                        <h4 class="mt-4 ml-2"><b>COMPANY01EQ20030{{instance.id}}</b></h4>
-                    </div>
-                </div>
-                <div class="row mt-4"></div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="row ml-2">
-                            <div class="col-xs-4 ml-4">
-                                <p class="mt-5"><b>Customer</b></p>
-                                <p class="mt-5"></p>
-                                <p><b>Job Category</b></p>
-                                <p><b>Payment Type</b></p>
-                                <p class="mt-5"></p>
-                                <p><b>Sales Person</b></p>
-                                <p><b>Origin</b></p>
-                                <p><b>Destination</b></p>
-                                <p><b>Final Destination</b></p>
-                                <p class="mt-5"></p>
-                                <p><b>Terms</b></p>
-                            </div>
-                            <div class="col-xs-4 ml-5">
-                                <p class="mt-5">{{quotation.customer_name}}</p>
-                                <p class="mt-5"></p>
-                                <p>{{quotation.job_category}}</p>
-                                <p>{{quotation.payment_type}}</p>
-                                <p class="mt-5"></p>
-                                <p>{{quotation.sales_person}}</p>
-                                <p>{{quotation.origin}}</p>
-                                <p>{{quotation.destination}}</p>
-                                <p>{{quotation.final_destination}}</p>
-                                <p class="mt-5"></p>
-                                <p>{{quotation.terms}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="row ml-2">
-                            <div class="col-xs-4 ml-4">
-                                <div class="row mt-5"></div>
-                                <div class="row mt-4"></div>
-                                <p class="mt-5"><b>Freight Type</b></p>
-                                <div class="row mt-5"></div>
-                                <div class="row mt-3"></div>
-                                <p class="mt-4"><b>Type</b></p>
-                                <p><b>Quotation Date</b></p>
-                            </div>
-                            <div class="col-xs-4 ml-5">
-                                <div class="row mt-5"></div>
-                                <div class="row mt-4"></div>
-                                <p class="mt-5">{{quotation.freight_type}}</p>
-                                <div class="row mt-5"></div>
-                                <div class="row mt-3"></div>
-                                <p class="mt-4">{{quotation.type}}</p>
-                                <p>{{quotation.quotation_date}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            ClassicEditor
+                .create(document.querySelector('#message-text'))
+                .then(editor => {
+                    console.log(editor);
+                    $(editor.ui.view.editable.element).css('height', '200px');
+                })
+                .catch(error => {
+                    console.error(error);
+                });
 
-                <div class="row mt-5"></div>
+            $('.stage[data-stage="quotation"]').addClass('active');
 
-                <div class="row ml-4">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="packages" aria-current="page"
-                                href="#packagesContent">Packages</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="quantity_dimension" href="#quantityDimensionContent">Quantity &
-                                Dimension</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">T&C</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="row mt-5"></div>
-
-                <div id="packagesContent" class="row ml-4 mt-4 content">
-                    <div class="col-sm-6">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <p class="ml-2"><b>Product</b></p>
-                                <p class="ml-2"><b>Description</b></p>
-                                <p class="ml-2"><b>Unit(s)</b></p>
-                                <p class="ml-2"><b>Weight(kg)</b></p>
-                            </div>
-                            <div class="col-xs-4 ml-5">
-                                <p>{{quotation.product}}</p>
-                                <p>{{quotation.description}}</p>
-                                <p>{{quotation.unit}}</p>
-                                <p>{{quotation.weight}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="row ml-3">
-                            <div class="col-xs-4">
-                                <p><b>Client Currency</b></p>
-                                <p><b>Rate</b></p>
-                            </div>
-                            <div class="col-xs-4 ml-5">
-                                <p>{{quotation.client_currency}}</p>
-                                <p>{{quotation.rate}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="quantityDimensionContent" class="row ml-4 mt-4 content" style="display: none;">
-                    <div class="col-sm-6">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <p><b>Quantity</b></p>
-                            </div>
-                            <div class="col-xs-4 ml-5">
-                                <p>{{quotation.quantity}}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="row">
-                            <div class="col-xs-4">
-                                <p><b>Dimension</b></p>
-                            </div>
-                            <div class="col-xs-4 ml-5">
-                                <p>{{quotation.dimension}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mt-5"></div>
-            </div>
-        </div>
-    </section>
-</div>
-
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
-    $(document).ready(function () {
-        ClassicEditor
-            .create(document.querySelector('#message-text'))
-            .then(editor => {
-                console.log(editor);
-                $(editor.ui.view.editable.element).css('height', '200px');
-            })
-            .catch(error => {
-                console.error(error);
+            $('.stage').click(function () {
+                $('.stage').removeClass('active');
+                $(this).addClass('active');
             });
 
-        $('.stage[data-stage="quotation"]').addClass('active');
+            $("#quantity_dimension").click(function () {
+                $("#packagesContent").hide();
+                $("#quantityDimensionContent").show();
 
-        $('.stage').click(function () {
-            $('.stage').removeClass('active');
-            $(this).addClass('active');
+                $('.nav-link').removeClass('active');
+                $(this).addClass('active');
+            });
+            $("#packages").click(function () {
+                $("#packagesContent").show();
+                $("#quantityDimensionContent").hide();
+
+                $('.nav-link').removeClass('active');
+                $(this).addClass('active');
+            });
+
+            function calculatePrice() {
+                
+                var weight = $('#weightvalue').html();
+                var price = weight * 10;
+                $('#displayPrice').html("Total amount:" + price + "$")
+            }
+
+            calculatePrice();
         });
-
-        $("#quantity_dimension").click(function () {
-            $("#packagesContent").hide();
-            $("#quantityDimensionContent").show();
-
-            $('.nav-link').removeClass('active');
-            $(this).addClass('active');
-        });
-        $("#packages").click(function () {
-            $("#packagesContent").show();
-            $("#quantityDimensionContent").hide();
-
-            $('.nav-link').removeClass('active');
-            $(this).addClass('active');
-        });
-    });
-</script>
+    </script>
+</body>
 {% endblock content %}

@@ -15,11 +15,13 @@
     </ol>
 </nav>
 
-<nav class="navbar navbar-custom navbar-expand-lg" style="margin-top:auto;">
-    <div class="justify-content-start">
-        <a href="" class="btn btn-sm btn-primary">Approve Quotation</a>
-        <a href="" class="btn btn-sm btn-primary">Send Quotation Email</a>
-        <a href="" class="btn btn-sm btn-outline-dark">Cancel</a>
+<nav class="navbar navbar-custom navbar-expand-lg" style="margin-top:auto; padding: 0;">
+    <div style="padding-top: 2px;padding-bottom: 2px;margin-left: 15px;">
+        <div class="justify-content-start">
+            <a href="" class="btn btn-sm btn-primary" style="background-color: steelblue; border: none;"><b>Approve Quotation</b></a>
+            <a href="" class="btn btn-sm btn-primary" style="background-color: steelblue; border: none;"><b>Send Quotation Email</b></a>
+            <a href="" class="btn btn-sm btn-outline-dark" style="color: ghostwhite ;background-color: steelblue; border: none;"><b>Cancel</b></a>
+        </div>
     </div>
     <div class="custom-stages ml-auto">
         <span class="stage active" data-stage="quotation"><b>Quotation</b></span>
@@ -119,7 +121,7 @@
                     <div class=" col-sm-5 offset-1">
                         <div class="form-group">
                             <label for="quotation_date"><b>Quotation Date</b></label>
-                            <input type="datetime-local" value="{{ quotation.quotation_date|date:'Y-m-d\TH:i' }}" class="form-control form-control-sm" style="color: #000;" id="quotation_date" name="quotation_date">
+                            <input type="date" value="{{ quotation.quotation_date|date:'Y-m-d' }}" class="form-control form-control-sm" style="color: #000;" id="quotation_date" name="quotation_date">
                         </div>
                     </div>
                 </div>
@@ -257,7 +259,7 @@
                 <div class="row mt-3 ml-2">
                     <div class="col-sm-12">
                         <div class="button">
-                            <button type="submit" class="btn btn-sm btn-primary" style="font-size: 17px;">Update</button>
+                            <button type="submit" class="btn btn-sm btn-primary" style="font-size: 17px; background-color: steelblue; border: none;">Update</button>
                         </div>
                     </div>
                 </div>

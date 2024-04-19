@@ -59,33 +59,11 @@
     margin-left: 25px;
 }
 
-/* Style the radio buttons as stars */
-
-input[type="radio"] {
-    display: none; 
-}
-
-input[type="radio"] + label {
-    cursor: pointer;
-    font-size: 30px; 
-    display: inline-block;
-}
-
-input[type="radio"] + label::before {
-    content: '\2605'; 
-    margin-right: 5px;
-    color: #ccc; 
-}
-
-input[type="radio"]:checked + label::before {
-    color:lightslategray; 
-}
-
 
 
 /* login page */
 
-.hero{
+.login-signup-form{
     height: 100%;
     width: 100%;
     background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
@@ -408,12 +386,9 @@ form{
     border-radius: 0;
 }
 
-/* .track_button:hover{
-    background-color: darkorange;
-    border-color: darkorange;
+.track_button.btn:hover {
     color: ghostwhite;
-    transition: .5s;
-} */
+}
 
 .form-control-lg::placeholder {
     font-size: 14px;
@@ -452,3 +427,8 @@ th, td{
     background-color: #FF6400;
     color: ghostwhite;
 }
+
+
+
+
+/*  Template    */

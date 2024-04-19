@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="{% static 'logistics/css/style.css' %}">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
 
+
 <nav aria-label="breadcrumb" style="margin-top: 50px;">
     <div class="d-flex justify-content-between align-items-center">
         <ol class="breadcrumb" style="font-size:x-large; margin-bottom: auto;">
@@ -15,13 +16,13 @@
     <button type="button" class="btn btn-outline-dark">Import</button>
 </nav>
 
-<div class="container-fluid">
+<div class="container-fluid" style="overflow-x: auto;">
     <div class="table-responsive mt-4">
         {% if data %}
-        <table class="table table-striped" id="dataTable" style="overflow-x: auto; display: block;">
+        <table class="table table-striped" id="dataTable">
             <thead>
                 <tr>
-                    <th scope="col">Customer ID</th>
+                    <th scope="col">Sr No.</th>
                     <th scope="col">Enquiry Date</th>
                     <th scope="col">Lead</th>
                     <th scope="col">Enquiry Status</th>
@@ -29,7 +30,7 @@
                     <th scope="col">Email</th>
                     <th scope="col">Phone</th>
                     <th scope="col">Freight Type</th>
-                    <th scope="col">Type</th>
+                    <!-- <th scope="col">Type</th> -->
                     <th scope="col">Sales Team</th>
                     <!-- <th></th>   -->
                 </tr>
@@ -45,7 +46,7 @@
                     <td>{{ data.email }}</td>
                     <td>{{ data.phone }}</td>
                     <td>{{ data.freight_type }}</td>
-                    <td>{{ data.type }}</td>
+                    <!-- <td>{{ data.type }}</td> -->
                     <td>{{ data.sales_team }}</td>
                     <!-- <td><a href="" class="btn btn-sm btn-primary">New Quotation</a></td> -->
                 </tr>
@@ -61,7 +62,10 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('#dataTable').DataTable();
+        $('#dataTable').DataTable({
+            "scrollX" : true,
+            // "autoWidth": false
+        });
     });
 </script>
 

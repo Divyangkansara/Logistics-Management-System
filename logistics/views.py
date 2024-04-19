@@ -84,8 +84,8 @@ def enquiries(request):
         user_name = user.get_username()
         gps = user.groups.all()
         return render(request, 'logistics/enquiry_list.html', {'data':enquiry_data,
-                                                               'username':user_name,
-                                                              'groups':gps})
+                                                            'username':user_name,
+                                                            'groups':gps})
 
 
 
@@ -146,7 +146,7 @@ def all_quotations(request):
         user_name = user.get_username()
         quotations = Quotation.objects.all()
         return render(request, 'logistics/quotation_list.html', {'data':quotations,
-                                                               'username':user_name})
+                                                                'username':user_name})
 
 
 # Add Quotation
@@ -241,7 +241,15 @@ def sending_email(request, enquiry_id, quotation_id):
                                                             'instance':enquiry, 'username':user_name})
 
 
-
+#  All Orders
+@ login_required(login_url='/login')
+def all_orders(request):
+    if request.user.is_authenticated:
+        user = request.user
+        user_name = user.get_username()
+        orders = Order.objects.all()
+        return render(request, 'logistics/order_list.html', {'data':orders,
+                                                            'username':user_name})
 
 
 #  Creating Order 
@@ -271,7 +279,7 @@ def pending_order(request, enquiry_id, quotation_id):
 
 #  Update Order Information
 @ login_required(login_url='/login')
-def update_order(request, order_id, enquiry_id, quotation_id):
+def update_order(request, order_id, enquiry_id, quotation_id):   
     if request.user.is_authenticated: 
         user = request.user
         user_name = user.get_username()
@@ -315,7 +323,6 @@ def temp_invoice(request, enquiry_id, quotation_id, order_id):
                                                             'order':order})
 
 
-
 def send_email_async(subject, message, sender, recipient, attachment_filename, attachment_content, attachment_content_type):
     email = EmailMessage(subject, message, sender, [recipient])
     email.attach(attachment_filename, attachment_content, attachment_content_type)
@@ -337,7 +344,7 @@ def print_pdf(request, enquiry_id, quotation_id, order_id):
     subject = f'Invoice [EQ-1{enquiry.id}] for {quotation.product}'
     message = f"Dear {enquiry.customer_name},\n\nwe hope you're well. Please find the invoice [EQ-1{enquiry.id}] attached. Please feel free to reach out if you have any questions. \n\nThank you. \n "
 
-    threading.Thread(
+    threading.Thread(                             
         target=send_email_async,
         args=(subject, message, 'divyang.kansara@technostacks.com', enquiry.email, filename, response.content, 'application/pdf')
     ).start()

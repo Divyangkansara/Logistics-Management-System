@@ -15,11 +15,11 @@
 
 <nav class="navbar navbar-custom navbar-expand-lg" style="margin-top:auto;padding: 0;">
     <div style="padding-top: 2px;padding-bottom: 2px;margin-left: 15px;">
-    <div class="justify-content-start">
-        <a href="" class="btn btn-sm btn-primary" style="background-color: steelblue; border: none;"><b>Approve Quotation</b></a>
-        <a href="" class="btn btn-sm btn-primary" style="background-color: steelblue; border: none;"><b>Send Quotation Email</b></a>
-        <a href="{% url 'edit_enquiry' instance.id %}" class="btn btn-sm btn-primary" style="background-color: steelblue; border:none;"><b>Cancel</b></a>
-    </div>
+        <div class="justify-content-start">
+            <a href="" class="btn btn-sm btn-primary" style="background-color: steelblue; border: none;"><b>Approve Quotation</b></a>
+            <a href="" class="btn btn-sm btn-primary" style="background-color: steelblue; border: none;"><b>Send Quotation Email</b></a>
+            <a href="{% url 'edit_enquiry' instance.id %}" class="btn btn-sm btn-primary" style="background-color: steelblue; border:none;"><b>Cancel</b></a>
+        </div>
     </div>
     <div class="custom-stages ml-auto">
         <span class="stage active" data-stage="quotation"><b>Quotation</b></span>
@@ -118,7 +118,7 @@
                     <div class=" col-sm-5 offset-1">
                         <div class="form-group">
                             <label for="quotation_date"><b>Quotation Date</b></label>
-                            <input type="datetime-local" class="form-control form-control-sm" style="color: #000;" id="quotation_date" name="quotation_date">
+                            <input type="date" class="form-control form-control-sm" style="color: #000;" id="quotation_date" name="quotation_date">
                         </div>
                     </div>
                 </div>
@@ -290,7 +290,7 @@
             $('.bd-example-modal-lg').modal('hide');
         });
     });
-</script>
+</script> 
 
 {% endblock content %}
 

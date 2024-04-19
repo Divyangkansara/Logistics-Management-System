@@ -38,7 +38,7 @@
                 <div class="invoice col-sm-6">
                     <div class="invoice-title">INVOICE</div>
                     <div class="invoice-number" style="margin-top: 1px;">Invoice Number: 1{{instance.id}}</div>
-                    <div class="date">Date: {{order_date}}</div>
+                    <div class="date">Date: {{order_date|date:"d/m/Y"}}</div>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
             <div class="bill-details">
                 <div class="bill-from">
                     <div class="label">Bill from:</div>
-                    <div class="info">Sender<br>Street Address, Zip Code<br>Phone Number</div>
+                    <div class="info">{{order.shipper_name}}<br>{{order.shipper_address}}<br>Phone Number</div>
                 </div>
                 <div class="bill-to">
                     <div class="label">Bill to:</div>

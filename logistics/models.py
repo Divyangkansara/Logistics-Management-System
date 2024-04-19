@@ -70,7 +70,7 @@ class Quotation(models.Model):
     freight_type = models.CharField(max_length=20, choices=[('air freight',
                         'air freight'),('sea freight', 'sea freight')])
     type = models.CharField(max_length=20, default='export')
-    quotation_date = models.DateTimeField()
+    quotation_date = models.DateField()
     client_currency = models.CharField(max_length=20, choices=[('USD','USD'),
                                             ('AED','AED'),('INR','INR')])
     rate = models.DecimalField(max_digits=10, decimal_places=2)
@@ -79,8 +79,8 @@ class Quotation(models.Model):
     unit = models.CharField(max_length=10)
     quantity = models.PositiveIntegerField()
     weight = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     dimension = models.CharField(max_length=20)
-    # price = models.DecimalField(max_digits=10, decimal_places=2)
     terms = models.CharField(max_length=100, null=True)
     enquiry = models.ForeignKey(Enquirie, on_delete=models.CASCADE, null=True, blank=True)
 
@@ -101,7 +101,6 @@ def generate_order_id(length=6):
 class Order(models.Model):
 
     ORDER_STATUS = (
-    # ("PREPARING", "preparing"),
     ("CONFIRMED", "confirmed"),
     ("PICKED UP", "picked up"),
     ("IN WAREHOUSE", "in warehouse"),
@@ -127,7 +126,7 @@ class Order(models.Model):
     notify_name = models.CharField(max_length=100, default='')
     notify_acc = models.IntegerField(default=0)
     notify_add = models.TextField(max_length=255, null=True, blank=True)
-    status = models.CharField(max_length=25,choices=ORDER_STATUS,null=True, blank=True, default='PREPARING')
+    status = models.CharField(max_length=25,choices=ORDER_STATUS,null=True, blank=True, default='CONFIRMED')
     quotation = models.ForeignKey(Quotation, on_delete=models.CASCADE, null=True, blank=True)
 
     def save(self, *args, **kwargs):
