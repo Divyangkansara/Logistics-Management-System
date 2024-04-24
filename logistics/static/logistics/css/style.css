@@ -52,8 +52,8 @@
 
 .navbar-custom{
     background-color:white;
-    border-top:2px solid #000;
-    border-bottom: 2px solid #000;   
+    border-top:1px solid #000;
+    border-bottom: 1px solid #000;   
 }
 
 .breadcrumb{
@@ -256,6 +256,7 @@ span{
 .invoice-logo img {
     width: 60%;
     height: auto; 
+    margin-left: 20px;
     /* object-fit: contain;
     mix-blend-mode: color-burn; */
 }
@@ -425,9 +426,9 @@ table{
     width: 100%;
 }
 
-th, td{
+/* th, td{
     text-align: center;
-}
+} */
 
 .shipment-history{
     background-color: #FF6400;

@@ -1,5 +1,6 @@
 import threading
 import pdfkit
+import json
 from django.shortcuts import render , redirect, get_object_or_404, HttpResponse
 from .models import Enquirie, FreightType, JobCategory, Type, Quotation, PaymentType, ClientCurrency, Order
 from django.core.mail import send_mail
@@ -50,7 +51,7 @@ def login_page(request):
         user = authenticate(username=username, password=password)    
         if user is not None:
             login(request, user)
-            return redirect('dashboard')
+            return redirect('enquiry_list')
         else:
             return render(request, 'logistics/login_form.html', {'error': 'Invalid username or password'})
     else:
@@ -63,16 +64,6 @@ def log_out(request):
         logout(request)
         messages.success(request, 'You have successfully logged out!')
         return redirect('home')
-    
-
-
-@login_required(login_url='/login')
-def dashboard(request):
-    if request.user.is_authenticated:
-        user = request.user
-        user_name = user.get_username()
-        return render(request, 'logistics/dashboard.html', {'username':user_name})
-
 
 
 # enquiry list    
@@ -357,33 +348,37 @@ def print_pdf(request, enquiry_id, quotation_id, order_id):
 
 #  Track Orders
 def track_order(request):
-    if request.method == 'POST':
-        tracking_email = request.POST.get('tracking_email')
-        tracking_num = request.POST.get('tracking_num')
-        print("Email:", tracking_email)
-        print("Tracking Number:", tracking_num)
-        try:
-            order = Order.objects.filter(order_id=tracking_num, quotation__enquiry__email=tracking_email).first()   
-            if order:
-                order_dict = model_to_dict(order)
-                order_date = localtime(order.order_date).date()
-                order_time = localtime(order.order_date).time().strftime('%I:%M %p')
-                order_dict['order_date'] = order_date
-                order_dict['order_time'] = order_time
-                order_dict['quotation'] = {'weight': order.quotation.weight,
-                                           'quantity': order.quotation.quantity,
-                                           'product': order.quotation.product,
-                                           'sales_person': order.quotation.enquiry.sales_person,
-                                           'sales_team': order.quotation.enquiry.sales_team,
-                                           'customer_name': order.quotation.enquiry.customer_name,
-                                           'email': order.quotation.enquiry.email,
-                                           'phone': order.quotation.enquiry.phone,
-                                           'freight_type': order.quotation.enquiry.freight_type}
-                print('➡ logistics/views.py:357 order_dict:', order_dict)
-                return JsonResponse(order_dict)
-            else:
-                return JsonResponse({'error': 'No data found for the given tracking number and email'})
-        except Exception as e:
-            print("Exception:", str(e))
-            return JsonResponse({'error': 'An error occurred while processing your request'})
-    return render(request, 'logistics/track_order.html')
+    if request.user.is_authenticated:
+            user = request.user
+            user_name = user.get_username() 
+            if request.method == 'POST':
+                    tracking_email = request.POST.get('tracking_email')
+                    tracking_num = request.POST.get('tracking_num')
+                    print("Email:", tracking_email)
+                    print("Tracking Number:", tracking_num)
+                    try:
+                        order = Order.objects.filter(order_id=tracking_num, quotation__enquiry__email=tracking_email).first()   
+                        if order:
+                            order_dict = model_to_dict(order)
+                            order_date = localtime(order.order_date).date()
+                            order_time = localtime(order.order_date).time().strftime('%I:%M %p')
+                            order_dict['order_date'] = order_date
+                            order_dict['order_time'] = order_time
+                            order_dict['quotation'] = {'weight': order.quotation.weight,
+                                                    'quantity': order.quotation.quantity,
+                                                    'product': order.quotation.product,
+                                                    'sales_person': order.quotation.enquiry.sales_person,
+                                                    'sales_team': order.quotation.enquiry.sales_team,
+                                                    'customer_name': order.quotation.enquiry.customer_name,
+                                                    'email': order.quotation.enquiry.email,
+                                                    'phone': order.quotation.enquiry.phone,
+                                                    'freight_type': order.quotation.enquiry.freight_type}
+                            print('➡ logistics/views.py:357 order_dict:', order_dict)
+                            return JsonResponse(order_dict)
+                        else:
+                            return JsonResponse({'error': 'No data found for the given tracking number and email'})
+                    except Exception as e:
+                        print("Exception:", str(e))
+                        return JsonResponse({'error': 'An error occurred while processing your request'})
+    context = {'username' : user_name}
+    return render(request, 'logistics/track_order.html', context)

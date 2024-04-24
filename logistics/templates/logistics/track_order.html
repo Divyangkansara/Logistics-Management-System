@@ -38,7 +38,7 @@
                     <hr style="margin-top: 0; border-color: black;">
                     <p id="shipper" style="margin-bottom: 0;"></p>
                     <p id="" style="margin-top: 0; margin-bottom: 0;">ema comm. 22, Accra</p>
-                    <p id="" style="margin-top: 0; margin-bottom: 0;">0356256583</p>
+                    <p id="shipper_phone" style="margin-top: 0; margin-bottom: 0;"></p>
                     <p id="shipper_email" style="margin-top: 0;"></p>
                     </p>
                 </div>
@@ -126,17 +126,17 @@
                 <div class="col-sm-12">
                     <table class="table table-hover table-bordered">
                         <thead class="shipment-history">
-                            <th>Order Date</th>
-                            <th>Time</th>
-                            <th>Status</th>
-                            <th>Updated By</th>
+                            <th>Flight Date</th>
+                            <th>Flight No</th>
+                            <th>Last Status</th>
+                            <th>Last Updated</th>
                         </thead>
                         <tbody>
                             <tr>
-                                <td id="order_date"></td>
-                                <td id="order_time"></td>
+                                <td id="flight_date"></td>
+                                <td>FL-00125</td>
                                 <td class="statusCell"></td>
-                                <td>Admin</td>
+                                <td>By Admin</td>
                             </tr>
                         </tbody>
                     </table>
@@ -166,7 +166,7 @@
                 success: function (response) {
                     console.log(response, "===ddd")
                     if (response.id) {
-                        const {status, origin, destination, shipper_name, quotation} = response;
+                        const {status, origin, destination, shipper_name, shipper_phone, shipper_email, flight_date, flight_number, quotation} = response;
                         $('#shipmentStatus').html('SHIPMENT STATUS: ' + status).show();
                         var statusData = formatStatus(status);
                         $('.statusCell').html(statusData).show();
@@ -182,8 +182,10 @@
                         $('#phone').html(quotation.phone).show();
                         $('#freight-type').html(quotation.freight_type).show();
                         $('#shipper').html(shipper_name).show();
-                        $('#order_date').html(response.order_date).show();
-                        $('#order_time').html(response.order_time).show();
+                        $('#shipper_phone').html(shipper_phone).show();
+                        $('#shipper_email').html(shipper_email).show();
+                        $('#flight_date').html(flight_date).show();
+                        $('#flight_no').html(flight_number).show();
                         $('.tracking_details').show();
                     } else {
                         $('#data_not_found').html('No data found for the given details.').show();

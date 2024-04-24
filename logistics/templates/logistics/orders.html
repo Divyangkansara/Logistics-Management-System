@@ -6,9 +6,9 @@
 
 <nav aria-label="breadcrumb" style="margin-top: 50px;">
     <ol class="breadcrumb" style="font-size: x-large; margin-bottom: auto;">
-        <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'edit_enquiry' instance.id %}">{{instance.scope_of_work}}</a></li>
-        <li class="breadcrumb-item"><a href="{% url 'save_quotation' instance.id %}">...20030{{instance.id}}</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}" style="color: steelblue;">Opportunities</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'edit_enquiry' instance.id %}" style="color: steelblue;">{{instance.scope_of_work}}</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'save_quotation' instance.id %}" style="color: steelblue;">...20030{{instance.id}}</a></li>
         <li class="breadcrumb-item active" aria-current="page">...20030{{instance.id}}</li>
     </ol>
 </nav>
@@ -22,8 +22,8 @@
     </div>
     <div class="custom-stages ml-auto">
         <span class="stage active" data-stage="approved"><b>Approved</b></span>
-        <span class="stage" data-stage="order"><b>Order</b></span>
-        <span class="stage" data-stage="delivered"><b>Delivered</b></span>
+        <span class="stage" data-stage="order"><b>Confirmed</b></span>
+        <span class="stage" data-stage="delivered"><b>In Transit</b></span>
         <span class="stage" data-stage="done"><b>Done</b></span>
     </div>
 </nav>
@@ -45,7 +45,7 @@
                                 <p class="mt-5"><b>Customer</b></p>
                                 <p class="mt-5"></p>
                                 <p><b>Freight Type</b></p>
-                                <p><b>Track Number</b></p>
+                                <p><b>Enquiry Number</b></p>
                             </div>
                             <div class="col-xs-4 ml-5">
                                 <p class="mt-5">{{instance.customer_name}}</p>
@@ -81,8 +81,11 @@
                         <div class="col-sm-6 col-md-6 col-lg-5">
                             <div class="form-group">
                                 <label for="shipping_agent"><b>Shipping Agent</b></label>
-                                <input type="text" style="background-color: lightsteelblue; color: black;"
-                                    class="form-control form-control-sm" id="shipping_agent" name="shipping_agent">
+                                <select class="form-control form-control-sm" id="shipping_agent" name="shipping_agent">
+                                    <option selected>Select</option>
+                                    <option value="Sam">Sam</option>
+                                    <option value="Karan">Karan</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
@@ -105,8 +108,14 @@
                         <div class="col-sm-6 col-md-6 col-lg-5">
                             <div class="form-group">
                                 <label for="airline"><b>Airline</b></label>
-                                <input type="text" style="background-color: lightsteelblue; color: black;"
-                                    class="form-control form-control-sm" id="airline" name="airline">
+                                <select class="form-control form-control-sm" id="airline" name="airline">
+                                    <option selected>Select</option>
+                                    <option value="Air China Cargo (ACC)">Air China Cargo (ACC)</option>
+                                    <option value="Air China (CCA)">Air China (CCA)</option>
+                                    <option value="Air Great Wall (AGW)">Air Great Wall (AGW)</option>
+                                    <option value="Shehzhen Donghal Airlines (SDA)">Shehzhen Donghal Airlines (SDA)</option>
+                                    <option value="Cathey Patric (CPA)">Cathey Patric (CPA)</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
@@ -121,13 +130,19 @@
                         <div class="col-sm-6 col-md-6 col-lg-5">
                             <div class="form-group">
                                 <label for="origin_airport"><b>Origin Airport</b></label>
-                                <input type="text" class="form-control form-control-sm" id="origin_airport"
-                                    name="origin">
+                                <select class="form-control form-control-sm" id="origin_airport" name="origin">
+                                    <option selected>Select</option>
+                                    <option value="Sault Site Marie Airport">Sault Site Marie Airport</option>
+                                    <option value="Winnipeg / St. Andrews Airport">Winnipeg / St. Andrews Airport</option>
+                                    <option value="Hellfax / CFW Airport">Hellfax / CFW Airport</option>
+                                    <option value="St. Anthony Airport">St. Anthony Airport</option>
+                                    <option value="Tofino / Long Beach Airport">Tofino / Long Beach Airport</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
                             <div class="form-group">
-                                <label for="flight_code"><b>Flight Code</b></label>
+                                <label for="flight_code"><b>Flight No</b></label>
                                 <input type="text" class="form-control form-control-sm" id="flight_code"
                                     name="flight_number">
                             </div>
@@ -137,8 +152,14 @@
                         <div class="col-sm-6 col-md-6 col-lg-5">
                             <div class="form-group">
                                 <label for="destination_airport"><b>Destination Airport</b></label>
-                                <input type="text" class="form-control form-control-sm" id="destination_airport"
-                                    name="destination">
+                                <select class="form-control form-control-sm" id="destination_airport" name="destination">
+                                    <option selected>Select</option>
+                                    <option value="Sault Site Marie Airport">Sault Site Marie Airport</option>
+                                    <option value="Winnipeg / St. Andrews Airport">Winnipeg / St. Andrews Airport</option>
+                                    <option value="Hellfax / CFW Airport">Hellfax / CFW Airport</option>
+                                    <option value="St. Anthony Airport">St. Anthony Airport</option>
+                                    <option value="Tofino / Long Beach Airport">Tofino / Long Beach Airport</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -147,13 +168,13 @@
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
                                 <a class="nav-link active" id="shipper" aria-current="page"
-                                    href="#shipper_details">Shipper</a>
+                                    href="#shipper_details"><b>Shipper Details</b></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="consignee" href="#consignee_details">Consignee</a>
+                                <a class="nav-link" id="consignee" href="#consignee_details"><b>Consignee Details</b></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="packages" href="#packages_details">Packages</a>
+                                <a class="nav-link" id="packages" href="#packages_details"><b>Package Details</b></a>
                             </li>
                         </ul>
                     </div>
@@ -163,8 +184,11 @@
                             <div class="col-sm-6 col-md-6 col-lg-5">
                                 <div class="form-group">
                                     <label for="shipper_name"><b>Shipper Name</b></label>
-                                    <input type="text" class="form-control form-control-sm" id="shipper_name"
-                                        name="shipper_name">
+                                    <select class="form-control form-control-sm" id="shipper_name" name="shipper_name">
+                                        <option selected>Select</option>
+                                        <option value="Henry Ezra">Henry Ezra</option>
+                                        <option value="Jack">Jack</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
@@ -178,9 +202,16 @@
                         <div class="row ml-3">
                             <div class="col-sm-6 col-md-6 col-lg-5">
                                 <div class="form-group">
-                                    <label for="shipper_add"><b>Address</b></label>
-                                    <textarea class="form-control form-control-sm" id="shipper_add"
-                                        name="shipper_address" rows="3"></textarea>
+                                    <label for="shipper_email"><b>Shipper Email</b></label>
+                                    <input type="text" class="form-control form-control-sm" id="shipper_email"
+                                        name="shipper_email">
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
+                                <div class="form-group">
+                                    <label for="shipper_phone"><b>Shipper Contact</b></label>
+                                    <input type="text" class="form-control form-control-sm" id="shipper_phone"
+                                        name="shipper_phone">
                                 </div>
                             </div>
                         </div>
@@ -192,8 +223,10 @@
                             <div class="col-sm-6 col-md-6 col-lg-5">
                                 <div class="form-group">
                                     <label for="consignee_name"><b>Consignee Name</b></label>
-                                    <input type="text" class="form-control form-control-sm" id="consignee_name"
-                                        name="consignee_name">
+                                    <select class="form-control form-control-sm" id="consignee_name" name="consignee_name">
+                                        <option selected>Select</option>
+                                        <option value="Ram">Ram</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
@@ -213,8 +246,11 @@
                             <div class="col-sm-6 col-md-6 col-lg-5">
                                 <div class="form-group">
                                     <label for="notify_name"><b>Notify Name</b></label>
-                                    <input type="text" class="form-control form-control-sm" id="notify_name"
-                                        name="notify_name">
+                                    <select class="form-control form-control-sm" id="notify_name" name="notify_name">
+                                        <option selected>Select</option>
+                                        <option value="George">George</option>
+                                        <option value="Archie">Archie</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
@@ -281,8 +317,8 @@
                         </div>
                         <div class="row mt-5"></div>
                     </div>
-                    <div class="row ml-4">
-                        <button type="submit" class="btn btn-sm btn-primary ml-2" style="font-size: 17px; background-color: steelblue; border: none;">Save</button>
+                    <div class="row ml-4 mt-5">
+                        <button type="submit" class="btn btn-sm btn-primary" style="font-size: 18px; background-color: steelblue; border: none; margin-left: 40%; width: 15%;">Save</button>
                     </div>
                     <div class="row mt-3"></div>
                 </form>
@@ -296,6 +332,108 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     $(document).ready(function () {
+        // Shipping Agent Details
+        var accountNum = {
+            'Sam': '00123546879',
+            'Karan': '00186362254'
+        }
+
+        $('#shipping_agent').change(function () {
+            var selectedShippingAgent = $(this).val();
+            var accField = $('#acc_num');
+
+            if (selectedShippingAgent === 'Sam') {
+                accField.val(accountNum[selectedShippingAgent]);
+            } else {
+                accField.val('');
+            }
+        });
+
+        // Airline Details
+        var airline = {
+            'Air China Cargo (ACC)' : 'FL-00125'
+        }
+
+        $('#airline').change(function () {
+            var selectedAirline = $(this).val();
+            var codeField = $('#flight_code');
+
+            if (selectedAirline === 'Air China Cargo (ACC)') {
+                codeField.val(airline[selectedAirline]);
+            } else {
+                codeField.val('');
+            }
+        });
+
+        // Shipper Details
+        var shipperDetails = {
+            'Henry Ezra': {
+                'accountNum': '00123456789',
+                'email': 'henry.ezra@yopmail.com',
+                'phone': '+1 (751) 466-1189'
+            },
+            'Jack': {
+                'accountNum': '987654321',
+                'email': 'jack@example.com',
+                'phone': '987-654-3210'
+            }
+        };
+
+        $('#shipper_name').change(function () {
+            var selectedShipper = $(this).val();
+            var accField = $('#shipper_acc');
+            var emailField = $('#shipper_email');
+            var phoneField = $('#shipper_phone');
+
+            if (selectedShipper in shipperDetails) {
+                accField.val(shipperDetails[selectedShipper]['accountNum']);
+                emailField.val(shipperDetails[selectedShipper]['email']);
+                phoneField.val(shipperDetails[selectedShipper]['phone']);
+            } else {
+                accField.val('');
+                emailField.val('');
+                phoneField.val('');
+            }
+        });
+
+        // Consignee Details
+        var accNum = {
+            'Ram': '00123541294',
+        }
+
+        $('#consignee_name').change(function () {
+            var selectedConsigneeAgent = $(this).val();
+            var accField = $('#consignee_acc');
+
+            if (selectedConsigneeAgent === 'Ram') {
+                accField.val(accNum[selectedConsigneeAgent]);
+            } else {
+                accField.val('');
+            }
+        });
+
+        // Notify Details
+        var notifyDetails = {
+            'George': {
+                'accountNum': '00938516247',
+                'address' : '1291, Leila Ave, \nHenderson Street, Winnipeg \nCanada, R2L 1C9'
+            }
+        };
+
+        $('#notify_name').change(function () {
+            var selectedNotify = $(this).val();
+            var notifyAccField = $('#notify_acc');
+            var notifyAddField = $('#notify_add');
+
+            if (selectedNotify === 'George') {
+                notifyAccField.val(notifyDetails[selectedNotify]['accountNum']);
+                notifyAddField.val(notifyDetails[selectedNotify]['address']);
+            } else {
+                notifyAccField.val('');
+                notifyAddField.val('');
+            }
+        });
+
         $('.stage[data-stage="approved"]').addClass('active');
 
         $('#confirm_button').click(function () {

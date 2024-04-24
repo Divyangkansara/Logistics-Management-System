@@ -22,12 +22,11 @@
         <table class="table table-striped" id="dataTable">
             <thead>
                 <tr>
-                    <th scope="col">Sr No.</th>
                     <th scope="col">Enquiry Date</th>
-                    <th scope="col">Lead</th>
-                    <th scope="col">Enquiry Status</th>
-                    <th scope="col">Client Name</th>
-                    <th scope="col">Email</th>
+                    <th scope="col" style="width: 15%;">Lead</th>
+                    <th scope="col">Status</th>
+                    <th scope="col" style="width: 15%;">Client Name</th>
+                    <th scope="col" style="width: 20%;">Email</th>
                     <th scope="col">Phone</th>
                     <th scope="col">Freight Type</th>
                     <!-- <th scope="col">Type</th> -->
@@ -38,8 +37,7 @@
             <tbody>
                 {% for data in data %}
                 <tr>
-                    <td>{{ forloop.counter }}</td>
-                    <td>{{ data.enquiry_date }}</td>
+                    <td>{{ data.enquiry_date|date:"d/m/Y" }}</td>
                     <td>{{ data.scope_of_work }}</td>
                     <td>{{ data.status }}</td>
                     <td>{{ data.customer_name }}</td>
@@ -47,7 +45,7 @@
                     <td>{{ data.phone }}</td>
                     <td>{{ data.freight_type }}</td>
                     <!-- <td>{{ data.type }}</td> -->
-                    <td>{{ data.sales_team }}</td>
+                    <td style="text-align: center;">{{ data.sales_team }}</td>
                     <!-- <td><a href="" class="btn btn-sm btn-primary">New Quotation</a></td> -->
                 </tr>
                 {% endfor %}

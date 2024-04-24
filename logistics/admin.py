@@ -44,7 +44,7 @@ class Tracking_DataAdmin(admin.ModelAdmin):
 @admin.register(Order)
 class OrdersAdmin(admin.ModelAdmin):
      list_display = ('airline','flight_number','origin','destination',
-                     'shipper_name','shipper_acc_num','shipper_address',
+                     'shipper_name','shipper_acc_num',
                      'consignee_name','consignee_acc_num','consignee_address',
                      'shipping_agent','shipping_agent_acc_num',
                      'order_date', 'flight_date', 'notify_name', 'notify_acc', 'notify_add')
@@ -72,3 +72,4 @@ admin.site.register(Status)
 
 admin.site.site_header = 'Logistics Management System'
 admin.site.index_title = 'Logistics Management System'
+

@@ -19,7 +19,7 @@
                     <div class="invoice col-sm-6">
                         <div class="invoice-title">INVOICE</div>
                         <div class="invoice-number" style="margin-top: 1px;">Invoice Number: 1{{instance.id}}</div>
-                        <div class="date">Date: {{order.order_date|date:"d/m/Y"}}</div>
+                        <div class="date">Date: {{order.order_date|date:"d-m-Y"}}</div>
                     </div>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                 <div class="bill-details">
                     <div class="bill-from">
                         <div class="label">Bill from:</div>
-                        <div class="info">{{order.shipper_name}}<br>{{order.shipper_address}}<br>Phone Number</div>
+                        <div class="info">{{order.shipper_name}}<br>{{order.shipper_email}}<br>{{order.shipper_phone}}</div>
                     </div>
                     <div class="bill-to" style="margin-right: 20px;">
                         <div class="label">Bill to:</div>
@@ -41,8 +41,8 @@
                     <thead>
                         <tr>
                             <th>Item</th>
-                            <th>Quantity</th>
-                            <th>Rate</th>
+                            <th style="text-align: center;">Quantity</th>
+                            <th style="text-align: center;">Rate</th>
                             <th>Tax</th>
                             <th>Amount</th>
                         </tr>
@@ -50,12 +50,12 @@
                     <tbody>
                         <tr>
                             <td>{{quotation.product}}</td>
-                            <td>{{quotation.quantity}} package</td>
-                            <td>$17.00 <br> per package</td>
+                            <td style="text-align: center;">{{quotation.quantity}}</td>
+                            <td style="text-align: center;">$362.5 <br> per peice</td>
                             <td>0.00</td>
-                            <td>$3228.00</td>
+                            <td>$725.00</td>
                         </tr>
-                        <tr>
+                        <!-- <tr>
                             <td>{{instance.freight_type}}</td>
                             <td></td>
                             <td>$04.00 <br> per km</td>
@@ -68,17 +68,18 @@
                             <td>$35.00</td>
                             <td>0.00</td>
                             <td>$35.00</td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
-                <div class="terms mt-5">Terms & Conditions:</div>
+                <div class="terms mt-5" style="color: steelblue; margin-bottom: 0;">Terms & Conditions:</div>
+                <p style="margin-top: 0;">Payment is due within 15 days</p>
             </div>
             <div class="footer">
                 <div class="row">
                     <div class="col-sm-4 offset-8">
                         <div class="row">
                             <div class="col-sm-6">
-                                <div class="total-label">SubTotal: $3314.00</div>
+                                <div class="total-label">SubTotal: $725.00</div>
                                 <div class="total-label mt-2">Discount: $0.00</div>
                                 <div class="total-label mt-2">Tax: $0.00</div>
                                 <div class="total-label mt-2">Paid: $0.00</div>
@@ -101,7 +102,7 @@
                             <div class="total-amount">Total</div>
                         </div>
                         <div class="col-sm-4">
-                            <div class="total-amount">$3314.00</div>
+                            <div class="total-amount">$725.00</div>
                         </div>
                     </div>
                 </div>

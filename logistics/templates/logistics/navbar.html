@@ -2,53 +2,50 @@
 
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item active">
+      <li class="nav-item ">
         <a class="navbar-brand" href="#"><strong>Logistics</strong></a>
       </li>
-      <li class="nav-item active ml-5">
+      <li class="home nav-item active ml-5" style="font-size: 15px;">
         <a class="nav-link" id="home" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" id="dashboard" href="{% url 'dashboard' %}">Dashboard</a>
-      </li>
-      <li class="nav-item dropdown active">
+      <li class="nav-item dropdown active" style="font-size: 15px;">
         <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           Logistics</a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="font-size: 15px;">
           <a class="dropdown-item" href="{% url 'enquiry_list' %}">Enquiries</a>
         </div>
       </li>
-      <li class="nav-item dropdown active">
+      <li class="nav-item dropdown active" style="font-size: 15px;">
         <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           Quotations</a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="font-size: 15px;">
           <a class="dropdown-item" href="#">Imports</a>
           <a class="dropdown-item" href="{% url 'quotation_list' %}">Exports</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="{% url 'quotation_list' %}">All Quotations</a>
+          <a class="all dropdown-item" href="{% url 'quotation_list' %}">All Quotations</a>
         </div>
       </li>
-      <li class="nav-item dropdown active">
+      <li class="nav-item dropdown active" style="font-size: 15px;">
         <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           Orders</a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="font-size: 15px;">
           <a class="dropdown-item" href="#">Imports</a>
           <a class="dropdown-item" href="#">Exports</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="{% url 'order_list' %}">All Orders</a>
         </div>
       </li>
-      <li class="nav-item active">
+      <li class="nav-item active" style="font-size: 15px;">
         <a class="nav-link" href="{% url 'track_order' %}">Track Orders</a>
       </li>
-      <li class="nav-item dropdown active">
+      <li class="nav-item dropdown active" style="font-size: 15px;">
         <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           Configurations</a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="font-size: 15px;">
           <a class="dropdown-item" href="#">Customers</a>
           <a class="dropdown-item" href="#">Vendors</a>
           <a class="dropdown-item" href="#">Products</a>
@@ -64,7 +61,7 @@
       </li>
 
       {% if request.user.is_authenticated %}
-      <li class="nav-item dropdown" style="margin-left:390px">
+      <li class="nav-item dropdown" style="margin-left: 515px;">
         <a class="nav-link dropdown active" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
           {{username}}</a>
@@ -76,7 +73,7 @@
         <i class="icon bi bi-person-circle" style="font-size: 1.7rem; color: silver;"></i>
       </li>
       {% else %}
-      <li class="signin nav-item">
+      <li class="signin nav-item" style="margin-left: 470px;">
         <a href="{% url 'signup_form' %}" type="button" class="nav-link active">MEMBER LOGIN</a>
       </li>
       {% endif %}

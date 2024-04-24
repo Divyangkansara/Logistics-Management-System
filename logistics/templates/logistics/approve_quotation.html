@@ -12,8 +12,8 @@
 
     <nav aria-label="breadcrumb" style="margin-top: 50px; margin-bottom: 10px;">
         <ol class="breadcrumb" style="font-size: x-large; margin-bottom: auto;">
-            <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'edit_enquiry' instance.id %}">{{instance.scope_of_work}}</a>
+            <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}"  style="color: steelblue;">Opportunities</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'edit_enquiry' instance.id %}"  style="color: steelblue;">{{instance.scope_of_work}}</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">...20030{{instance.id}}</li>
         </ol>
@@ -64,7 +64,7 @@
                                 <div class="row mt-4">
                                     <div class="col-sm-12">
                                         <textarea class="form-control" id="message-text" name="message-text">Dear {{instance.customer_name}},<br>
-                                    Here is your <b>quotation</b> for your enquiry amounting in <b>1500 USD.</b><br><br><br><br>
+                                    Here is your <b>quotation</b> for your enquiry amounting in <b>725 USD.</b><br><br><br><br>
                                     You can reply to this email if you have any questions. <br>
                                     Thank You.
                                 </textarea>
@@ -74,7 +74,7 @@
                             <div class="row mt-4"></div>
                             <div class="modal-footer justify-content-start">
                                 <a href="{% url 'send_email' instance.id quotation.id %}"
-                                    class="send_mail btn btn-primary">Send</a>
+                                    class="send_mail btn btn-primary" style="background-color: steelblue; border-color: steelblue;">Send</a>
                                 <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancel</button>
                             </div>
                         </div>
@@ -163,14 +163,14 @@
                         <ul class="nav nav-tabs">
                             <li class="nav-item">
                                 <a class="nav-link active" id="packages" aria-current="page"
-                                    href="#packagesContent">Packages</a>
+                                    href="#packagesContent"><b>Packages</b></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="quantity_dimension" href="#quantityDimensionContent">Quantity &
-                                    Dimension</a>
+                                <a class="nav-link" id="quantity_dimension" href="#quantityDimensionContent"><b>Quantity &
+                                    Dimension</b></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">T&C</a>
+                                <a class="nav-link" href="#"><b>T&C</b></a>
                             </li>
                         </ul>
                     </div>
@@ -211,7 +211,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <p><b>Quantity</b></p>
+                                    <p class="ml-2"><b>Quantity</b></p>
                                 </div>
                                 <div class="col-xs-4 ml-5">
                                     <p>{{quotation.quantity}}</p>
@@ -221,7 +221,7 @@
                         <div class="col-sm-6">
                             <div class="row">
                                 <div class="col-xs-4">
-                                    <p><b>Dimension</b></p>
+                                    <p class="ml-2"><b>Dimension</b></p>
                                 </div>
                                 <div class="col-xs-4 ml-5">
                                     <p>{{quotation.dimension}}</p>
@@ -236,28 +236,28 @@
                             <hr class="price-details">
                             <div class="row" style="margin-bottom: 0;">
                                 <div class="col-sm-5 offset-2">
-                                    <p><b>Sub Total:</b></p>
+                                    <p style="font-size:medium;"><b>Sub Total:</b></p>
                                 </div>
-                                <div class="col-sm-4 offset-1">
-                                    <p><b id="displayPrice"></b></p>
+                                <div class="col-sm-5">
+                                    <p style="font-size: medium;"><b>₹  60426.93</b></p>
                                 </div>
                             </div>
                             <hr class="price-details">
                             <div class="row" style="margin-bottom: 0;">
                                 <div class="col-sm-6 offset-1">
-                                    <p><b>Client Currency:</b></p>
+                                    <p style="font-size: medium;"><b>Client Currency:</b></p>
                                 </div>
-                                <div class="col-sm-4 offset-1">
-                                    <p><b id="client_currency">$ 0.00</b></p>
+                                <div class="col-sm-5">
+                                    <p style="font-size: medium;"><b>$ 725.00</b></p>
                                 </div>
                             </div>
                             <hr class="price-details">
                             <div class="row" style="margin-bottom: 0;">
-                                <div class="col-sm-5 offset-2">
-                                    <p><b>Amount Total:</b></p>
+                                <div class="col-sm-6 offset-1">
+                                    <p style="font-size: 20px"><b>Amount Total:</b></p>
                                 </div>
-                                <div class="col-sm-4 offset-1">
-                                    <p><b id="total_amount"></b></p>
+                                <div class="col-sm-5">
+                                    <p style="font-size: 20px;"><b>$ 725.00</b></p>
                                 </div>
                             </div>
                         </div>
@@ -314,7 +314,7 @@
             }
 
             function convert_currency(price, currency='USD') {
-                    var client_currency = price * currency_price[currency] || 'USD';
+                    var client_currency = price / currency_price[currency] || 'USD';
                     $('#total_amount').html("$ " + client_currency)
                 }
 

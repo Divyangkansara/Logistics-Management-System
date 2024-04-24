@@ -7,10 +7,10 @@
 
 
 
-<nav aria-label="breadcrumb" style="margin-top: 50px; margin-bottom: 10px;">
+<nav aria-label="breadcrumb" style="margin-top: 50px;">
     <ol class="breadcrumb" style="font-size: x-large; margin-bottom: auto;">
-      <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
-      <li class="breadcrumb-item"><a href="{% url 'edit_enquiry' instance.id %}">{{instance.scope_of_work}}</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}" style="color: steelblue;">Opportunities</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'edit_enquiry' instance.id %}" style="color: steelblue;">{{instance.scope_of_work}}</a></li>
       <li class="breadcrumb-item active" aria-current="page">...20030{{instance.id}}</li>
     </ol>
 </nav>
@@ -115,8 +115,15 @@
                     <div class="col-sm-5">
                         <div class="form-group">
                             <label for="origin"><b>Origin</b></label>
-                            <input type="text" value="{{quotation.origin}}" class="form-control form-control-sm" style="color: #000;" id="origin" name="origin">
-                        </div>
+                            <select class="form-control form-control-sm" id="origin" name="origin" style="color: #000;">
+                                <option selected>Select</option>
+                                <option value="Australian Capital Territory">Australian Capital Territory</option>
+                                <option value="New South Wales">New South Wales</option>
+                                <option value="Northern Territory">Northern Territory</option>
+                                <option value="Queensland">Queensland</option>
+                                <option value="South Australia">South Australia</option>
+                                <option value="Victoria">Victoria</option>
+                            </select>                        </div>
                     </div>
                     <div class=" col-sm-5 offset-1">
                         <div class="form-group">
@@ -130,7 +137,16 @@
                     <div class="col-sm-5">
                         <div class="form-group">
                             <label for="destination"><b>Destination</b></label>
-                            <input type="text" value="{{quotation.destination}}" class="form-control form-control-sm" style="color: #000;" id="destination" name="destination">
+                            <select class="form-control form-control-sm" id="destination" name="destination"
+                                style="color: #000;">
+                                <option selected>Select</option>
+                                <option value="Australian Capital Territory">Australian Capital Territory</option>
+                                <option value="New South Wales">New South Wales</option>
+                                <option value="Northern Territory">Northern Territory</option>
+                                <option value="Queensland">Queensland</option>
+                                <option value="South Australia">South Australia</option>
+                                <option value="Victoria">Victoria</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -139,14 +155,23 @@
                     <div class=" col-sm-5">
                         <div class="form-group">
                             <label for="final_destination"><b>Final Destination</b></label>
-                            <input type="text" value="{{quotation.final_destination}}" class="form-control form-control-sm" style="color: #000;" id="final_destination" name="final_destination">
+                            <select class="form-control form-control-sm" id="final_destination" name="final_destination"
+                            style="color: #000;">
+                                <option selected>Select</option>
+                                <option value="Australian Capital Territory">Australian Capital Territory</option>
+                                <option value="New South Wales">New South Wales</option>
+                                <option value="Northern Territory">Northern Territory</option>
+                                <option value="Queensland">Queensland</option>
+                                <option value="South Australia">South Australia</option>
+                                <option value="Victoria">Victoria</option>
+                            </select>
                         </div>
                     </div>
                     <div class=" col-sm-5 offset-1">
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="terms"><b>Terms</b></label>
                             <input type="text" value="{{quotation.terms}}" class="form-control form-control-sm" style="color: #000;" id="terms" name="terms">
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -242,7 +267,13 @@
                     <div class=" col-sm-5">
                         <div class="form-group">
                             <label for="unit"><b>Unit</b></label>
-                            <input type="number" value="{{quotation.unit}}" class="form-control form-control-sm" style="color: #000;" id="unit " name="unit">
+                            <select class="form-control form-control-sm"
+                            id="unit" name="unit">
+                               <option selected>Select</option>
+                               <option value="Dozen(s)">Dozen(s)</option>
+                               <option value="Litre(s)">Litre(s)</option>
+                               <option value="Unit(s)">Unit(s)</option>
+                           </select>                        
                         </div>
                     </div>
                 </div>
@@ -259,7 +290,7 @@
                 <div class="row mt-3 ml-2">
                     <div class="col-sm-12">
                         <div class="button">
-                            <button type="submit" class="btn btn-sm btn-primary" style="font-size: 17px; background-color: steelblue; border: none;">Update</button>
+                            <button type="submit" class="btn btn-sm btn-primary" style="font-size: 18px; background-color: steelblue; border: none; margin-left: 40%; width: 15%;">Update</button>
                         </div>
                     </div>
                 </div>
@@ -274,6 +305,32 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     $(document).ready(function () {
+        $('#destination').change(function () {
+            var selectedDestination = $(this).val();
+            $('#final_destination').val(selectedDestination);
+        });
+
+        var CurrencyRates = {
+            'USD': 83.36,
+            'AED': 22.70
+        }
+
+        $('#client_currency').change(function () {
+            var selectedCurrency = $(this).val();
+            var rateField = $('#rate');
+
+            if (selectedCurrency === 'USD') {
+                rateField.val(CurrencyRates[selectedCurrency]);
+                rateField.prop('readonly', true);
+            } else if (selectedCurrency === 'AED') {
+                rateField.val(CurrencyRates[selectedCurrency]);
+                rateField.prop('readonly', true);
+            } else {
+                rateField.val('');
+                rateField.prop('readonly', false);
+            }
+        });
+        
         $('#quantity_dimension').click(function(){
             $('.nav-link').removeClass('active');
             $(this).addClass('active');

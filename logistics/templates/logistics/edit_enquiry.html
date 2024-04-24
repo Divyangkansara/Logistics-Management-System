@@ -8,7 +8,7 @@
 
 <nav aria-label="breadcrumb" style="margin-top: 50px; margin-bottom: 10px;">
     <ol class="breadcrumb" style="font-size: x-large; margin-bottom: auto;">
-        <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}" style="color: steelblue;">Opportunities</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{order.scope_of_work}}</li>
     </ol>
     <a href="{% url 'edit' order.id %}" class="btn btn-primary ml-3" style="background-color: steelblue;border-color: steelblue;">Edit</a>
@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="row mt-5"></div>
-
+                
                 <div class="row ml-2">
                     <div class="col-sm-6">
                         <div class="row">

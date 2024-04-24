@@ -26,12 +26,13 @@
                     <th scope="col" style="width: 15%;">Freight Type</th>
                     <th scope="col" style="width: 10%;">Type</th>
                     <th scope="col" style="width: 15%;">Sales Person</th>
-                    <th scope="col" style="width: 15%;">Quotation Date</th>
+                    <th scope="col" style="width: 10%; text-align: center;">Date</th>
                     <th scope="col" style="width: 20%;">Origin</th>
+                    <th scope="col" style="width: 20%;">Destination</th>
                     <!-- <th scope="col">Job Category</th>
                     <th scope="col">Payment Type</th>
                     <th scope="col">Destination</th> -->
-                    <th scope="col">Currency</th>
+                    <th scope="col" style="text-align: center;">Currency</th>
                     <!-- <th></th>   -->
                 </tr>
             </thead>
@@ -43,12 +44,13 @@
                     <td>{{ data.freight_type }}</td>
                     <td>{{ data.type }}</td>
                     <td>{{ data.sales_person }}</td>
-                    <td>{{ data.quotation_date|date:"d/m/Y" }}</td>
+                    <td style="text-align: center;">{{ data.quotation_date|date:"d/m/Y" }}</td>
                     <td>{{ data.origin }}</td>
+                    <td>{{ data.destination }}</td>
                     <!-- <td>{{ data.job_category }}</td>
                     <td>{{ data.payment_type }}</td>
                     <td>{{ data.destination }}</td> -->
-                    <td>{{ data.client_currency }}</td>
+                    <td style="text-align: center;">{{ data.client_currency }}</td>
                     <!-- <td><a href="" class="btn btn-sm btn-primary">New Quotation</a></td> -->
                 </tr>
                 {% endfor %}

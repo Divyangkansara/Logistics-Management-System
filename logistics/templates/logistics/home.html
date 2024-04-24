@@ -1,352 +1,395 @@
-{% extends 'logistics/base.html' %}
+<!-- {% extends 'logistics/base.html' %}
 {% load static %}
 
 {% block content %}
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link rel="stylesheet" href="{% static 'logistics/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'logistics/css/home.css' %}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
     href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Rubik:wght@400;500;600;700&display=swap"
     rel="stylesheet">
-<div>
+<div> -->
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <title>Logistics Management System</title>
+
+    <!-- 
+        - favicon
+      -->
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+    <!-- 
+        - custom css link
+      -->
+    <link rel="stylesheet" href="{% static 'logistics/css/home.css' %}">
+
+    <!--
+        - google font link
+      -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Rubik:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- 
+        - preload images
+      -->
+</head>
 
 
+<body id="top">
 
-    <body id="top">
+    <header class="header" data-header>
+        <div class="container">
 
-        <!-- <header class="header" data-header>
-            <div class="container">
+            <h1>
+                <a href="#" class="logo"><b>Logistics</b></a>
+            </h1>
 
-                <h1>
+            <nav class="navbar" data-navbar>
+
+                <div class="navbar-top">
                     <a href="#" class="logo">Transportio</a>
-                </h1>
 
-                <nav class="navbar" data-navbar>
-
-                    <div class="navbar-top">
-                        <a href="#" class="logo">Transportio</a>
-
-                        <button class="nav-close-btn" aria-label="Clsoe menu" data-nav-toggler>
-                            <ion-icon name="close-outline"></ion-icon>
-                        </button>
-                    </div>
-
-                    <ul class="navbar-list">
-
-                        <li class="navbar-item">
-                            <a href="#home" class="navbar-link" data-nav-link>
-                                <span>Home</span>
-
-                                <ion-icon name="chevron-forward"></ion-icon>
-                            </a>
-                        </li>
-
-                        <li class="navbar-item">
-                            <a href="#about" class="navbar-link" data-nav-link>
-                                <span>About</span>
-
-                                <ion-icon name="chevron-forward"></ion-icon>
-                            </a>
-                        </li>
-
-                        <li class="navbar-item">
-                            <a href="#service" class="navbar-link" data-nav-link>
-                                <span>Service</span>
-
-                                <ion-icon name="chevron-forward"></ion-icon>
-                            </a>
-                        </li>
-
-                        <li class="navbar-item">
-                            <a href="#blog" class="navbar-link" data-nav-link>
-                                <span>Blog</span>
-
-                                <ion-icon name="chevron-forward"></ion-icon>
-                            </a>
-                        </li>
-
-                        <li class="navbar-item">
-                            <a href="#" class="navbar-link" data-nav-link>
-                                <span>Contact</span>
-
-                                <ion-icon name="chevron-forward"></ion-icon>
-                            </a>
-                        </li>
-
-                    </ul>
-
-                </nav>
-
-                <div class="header-contact">
-
-                    <div>
-                        <p class="contact-label">Free Call In U.S.A</p>
-
-                        <a href="tel:12345678910" class="contact-number">1 234 567 8910</a>
-                    </div>
-
-                    <div class="contact-icon">
-                        <ion-icon name="call-outline"></ion-icon>
-                    </div>
-
+                    <button class="nav-close-btn" aria-label="Clsoe menu" data-nav-toggler>
+                        <ion-icon name="close-outline"></ion-icon>
+                    </button>
                 </div>
 
-                <button class="nav-open-btn" aria-label="Open menu" data-nav-toggler>
-                    <ion-icon name="menu-outline"></ion-icon>
-                </button>
+                <ul class="navbar-list">
 
-                <div class="overlay" data-nav-toggler data-overlay></div>
+                    <li class="navbar-item">
+                        <a href="#home" class="navbar-link" data-nav-link>
+                            <span>Home</span>
+
+                            <ion-icon name="chevron-forward"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li class="navbar-item">
+                        <a href="#service" class="navbar-link" data-nav-link>
+                            <span>Service</span>
+
+                            <ion-icon name="chevron-forward"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li class="navbar-item">
+                        <a href="#about" class="navbar-link" data-nav-link>
+                            <span>About</span>
+
+                            <ion-icon name="chevron-forward"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li class="navbar-item">
+                        <a href="#contact" class="navbar-link" data-nav-link>
+                            <span>Contact</span>
+
+                            <ion-icon name="chevron-forward"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li class="navbar-item">
+                        <a href="{% url 'track_order' %}" class="navbar-link" data-nav-link>
+                            <span>Track Order</span>
+
+                            <ion-icon name="chevron-forward"></ion-icon>
+                        </a>
+                    </li>
+
+                    <li class="navbar-item">
+                        <a href="{% url 'signup_form' %}" class="navbar-link" data-nav-link>
+                            <span>Member Login</span>
+
+                            <ion-icon name="chevron-forward"></ion-icon>
+                        </a>
+                    </li>
+
+                </ul>
+
+            </nav>
+
+            <div class="header-contact">
+
+                <div>
+                    <p class="contact-label">Free Call In U.S.A</p>
+
+                    <a href="tel:12345678910" class="contact-number">1 234 567 8910</a>
+                </div>
+
+                <div class="contact-icon">
+                    <ion-icon name="call-outline"></ion-icon>
+                </div>
 
             </div>
-        </header> -->
+
+            <button class="nav-open-btn" aria-label="Open menu" data-nav-toggler>
+                <ion-icon name="menu-outline"></ion-icon>
+            </button>
+
+            <div class="overlay" data-nav-toggler data-overlay></div>
+
+        </div>
+    </header>
 
 
 
 
 
-        <main>
-            <article>
+    <main>
+        <article>
 
-                <!-- 
+            <!-- 
               - #HERO
             -->
 
-                <section class="section hero" aria-label="home" id="home"
-                    style="background-image: url('/static/logistics/images/hero-banner.jpg')">
-                    <div class="container">
+            <section class="section hero" aria-label="home" id="home"
+                style="background-image: url('/static/logistics/images/hero-banner.jpg')">
+                <div class="container">
 
-                        <div class="hero-content">
+                    <div class="hero-content">
 
-                            <h2 class="h1 hero-title">
-                                <span class="span">To Every</span> Direction
-                            </h2>
+                        <h2 class="h1 hero-title">
+                            <span class="span">To Every</span> Direction
+                        </h2>
 
-                            <div class="hero-text">
-                                <p style="font-size:medium; color: darkorange;">GLOBAL LOGISTICS SERVICE PROVIDER</p>
-                                <p>WE PROVIDE FAST & SAFE TRANSPORT</p>
-                            </div>
-
-                            <a href="#" class="btn-outline">View Services</a>
-
-                            <img src="{% static 'logistics/images/hero-shape.png' %}" width="116" height="116"
-                                loading="lazy" class="hero-shape shape-1">
-
-                            <img src="{% static 'logistics/images/hero-shape.png' %}" width="116" height="116"
-                                loading="lazy" class="hero-shape shape-2">
-
+                        <div class="hero-text">
+                            <p style="font-size:medium; color: darkorange;">GLOBAL LOGISTICS SERVICE PROVIDER</p>
+                            <p>WE PROVIDE FAST & SAFE TRANSPORT</p>
                         </div>
+
+                        <a href="#" class="btn-outline">View Services</a>
+
+                        <img src="{% static 'logistics/images/hero-shape.png' %}" width="116" height="116"
+                            loading="lazy" class="hero-shape shape-1">
+
+                        <img src="{% static 'logistics/images/hero-shape.png' %}" width="116" height="116"
+                            loading="lazy" class="hero-shape shape-2">
+
                     </div>
-                </section>
+                </div>
+            </section>
 
 
 
 
 
-                <!-- 
+            <!-- 
               - #ABOUT
             -->
 
-                <section class="section about" id="about" aria-label="about">
-                    <div class="container">
+            <section class="section about" aria-label="about">
+                <div class="container">
 
-                        <figure class="about-banner img-holder" style="--width: 400; --height: 720;">
-                            <img src="{% static 'logistics/images/about-banner.jpg' %}" width="400" height="720"
-                                loading="lazy" alt="" class="img-cover">
+                    <figure class="about-banner img-holder" style="--width: 400; --height: 720;">
+                        <img src="{% static 'logistics/images/about-banner.jpg' %}" width="400" height="720"
+                            loading="lazy" alt="" class="img-cover">
 
-                            <!-- <img src="{% static 'logistics/images/about-shape-1.png' %}" width="260" height="170" loading="lazy" alt=""
+                        <!-- <img src="{% static 'logistics/images/about-shape-1.png' %}" width="260" height="170" loading="lazy" alt=""
                     class="abs-img abs-img-1"> -->
 
-                            <img src="{% static 'logistics/images/about-shape-2.png' %}" width="500" height="500"
-                                loading="lazy" alt="" class="abs-img abs-img-2">
-                        </figure>
+                        <img src="{% static 'logistics/images/about-shape-2.png' %}" width="500" height="500"
+                            loading="lazy" alt="" class="abs-img abs-img-2">
+                    </figure>
 
-                        <div class="about-content">
+                    <div class="about-content">
 
-                            <p class="section-subtitle">Why Choose Us</p>
+                        <p class="section-subtitle">Why Choose Us</p>
 
-                            <h2 class="h2 section-title">We Are Professional Logistics & cargo Agency</h2>
+                        <h2 class="h2 section-title">We Are Professional Logistics & cargo Agency</h2>
 
-                            <p class="section-text">
-                                We understand the need for reliable service from origin to delivery locations, and that
-                                is why we have
-                                dedicated teams ensuring and efficient and seamless flow of your cargo.
-                            </p>
+                        <p class="section-text">
+                            We understand the need for reliable service from origin to delivery locations, and that
+                            is why we have
+                            dedicated teams ensuring and efficient and seamless flow of your cargo.
+                        </p>
 
-                            <ul class="about-list">
+                        <ul class="about-list">
 
-                                <li class="about-item">
-                                    <div class="about-icon">
-                                        <ion-icon name="chevron-forward"></ion-icon>
-                                    </div>
+                            <li class="about-item">
+                                <div class="about-icon">
+                                    <ion-icon name="chevron-forward"></ion-icon>
+                                </div>
 
-                                    <p class="about-text">
-                                        Safe & Secure Delivery Services
-                                    </p>
-                                </li>
+                                <p class="about-text">
+                                    Safe & Secure Delivery Services
+                                </p>
+                            </li>
 
-                                <li class="about-item">
-                                    <div class="about-icon">
-                                        <ion-icon name="chevron-forward"></ion-icon>
-                                    </div>
+                            <li class="about-item">
+                                <div class="about-icon">
+                                    <ion-icon name="chevron-forward"></ion-icon>
+                                </div>
 
-                                    <p class="about-text">
-                                        Cost Saving
-                                    </p>
-                                </li>
+                                <p class="about-text">
+                                    Cost Saving
+                                </p>
+                            </li>
 
-                                <li class="about-item">
-                                    <div class="about-icon">
-                                        <ion-icon name="chevron-forward"></ion-icon>
-                                    </div>
+                            <li class="about-item">
+                                <div class="about-icon">
+                                    <ion-icon name="chevron-forward"></ion-icon>
+                                </div>
 
-                                    <p class="about-text">
-                                        Transport Optimization
-                                    </p>
-                                </li>
+                                <p class="about-text">
+                                    Transport Optimization
+                                </p>
+                            </li>
 
-                                <li class="about-item">
-                                    <div class="about-icon">
-                                        <ion-icon name="chevron-forward"></ion-icon>
-                                    </div>
+                            <li class="about-item">
+                                <div class="about-icon">
+                                    <ion-icon name="chevron-forward"></ion-icon>
+                                </div>
 
-                                    <p class="about-text">
-                                        Most Competitive Rates for Customized Solution
-                                    </p>
-                                </li>
+                                <p class="about-text">
+                                    Most Competitive Rates for Customized Solution
+                                </p>
+                            </li>
 
-                                <li class="about-item">
-                                    <div class="about-icon">
-                                        <ion-icon name="chevron-forward"></ion-icon>
-                                    </div>
+                            <li class="about-item">
+                                <div class="about-icon">
+                                    <ion-icon name="chevron-forward"></ion-icon>
+                                </div>
 
-                                    <p class="about-text">
-                                        Expertise in Diverse Commodities for Export & Import
-                                    </p>
-                                </li>
+                                <p class="about-text">
+                                    Expertise in Diverse Commodities for Export & Import
+                                </p>
+                            </li>
 
-                                <li class="about-item">
-                                    <div class="about-icon">
-                                        <ion-icon name="chevron-forward"></ion-icon>
-                                    </div>
+                            <li class="about-item">
+                                <div class="about-icon">
+                                    <ion-icon name="chevron-forward"></ion-icon>
+                                </div>
 
-                                    <p class="about-text">
-                                        Worldwide Network of Associates
-                                    </p>
-                                </li>
+                                <p class="about-text">
+                                    Worldwide Network of Associates
+                                </p>
+                            </li>
 
-                            </ul>
+                        </ul>
 
-                            <a href="#" class="btn">Learn More</a>
-
-                        </div>
+                        <a href="#" class="btn">Learn More</a>
 
                     </div>
-                </section>
+
+                </div>
+            </section>
 
 
 
 
 
-                <!-- 
+            <!-- 
               - #SERVICE
             -->
 
-                <section class="section service" id="service" aria-label="service">
-                    <div class="container">
+            <section class="section service" id="service" aria-label="service">
+                <div class="container">
 
-                        <p class="section-subtitle">All Services</p>
+                    <p class="section-subtitle">All Services</p>
 
-                        <h2 class="h2 section-title">Trusted For Our Services</h2>
+                    <h2 class="h2 section-title">Trusted For Our Services</h2>
 
-                        <p class="section-text">
-                            We provide the unbeatable warehouse service and supply operations to ensure that our
-                            customers distribute
-                            their service on the promised time.
-                        </p>
+                    <p class="section-text">
+                        We provide the unbeatable warehouse service and supply operations to ensure that our
+                        customers distribute
+                        their service on the promised time.
+                    </p>
 
-                        <ul class="service-list grid-list">
+                    <ul class="service-list grid-list">
 
-                            <li>
-                                <div class="service-card">
+                        <li>
+                            <div class="service-card">
 
-                                    <div class="card-icon">
-                                        <img src="{% static 'logistics/images/service-icon-3.png' %}" width="80"
-                                            height="60" loading="lazy" alt="Truck">
-                                    </div>
-
-                                    <h3 class="h3 card-title">
-                                        <span class="span">01</span> Air Freight
-                                    </h3>
-
-                                    <p class="card-text">
-                                        We offer a wide range of options- from expedited and consolidated flights to
-                                        deferred flights.
-                                    </p>
-
-                                    <a href="#" class="btn-link">
-                                        <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
-
-                                        <span class="span">View Detail</span>
-                                    </a>
-
+                                <div class="card-icon">
+                                    <img src="{% static 'logistics/images/service-icon-3.png' %}" width="80" height="60"
+                                        loading="lazy" alt="Truck">
                                 </div>
-                            </li>
 
-                            <li>
-                                <div class="service-card">
+                                <h3 class="h3 card-title">
+                                    <span class="span">01</span> Air Freight
+                                </h3>
 
-                                    <div class="card-icon">
-                                        <img src="{% static 'logistics/images/service-icon-5.png' %}" width="63"
-                                            height="60" loading="lazy" alt="Trolley">
-                                    </div>
+                                <p class="card-text">
+                                    We offer a wide range of options- from expedited and consolidated flights to
+                                    deferred flights.
+                                </p>
 
-                                    <h3 class="h3 card-title">
-                                        <span class="span" style="margin-top: 29px;">02</span> Warehousing
-                                    </h3>
+                                <a href="#" class="btn-link">
+                                    <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
 
-                                    <p class="card-text">
-                                        We have various loading docks with sufficient space which makes it easy for
-                                        shipping and receiving.
-                                    </p>
+                                    <span class="span">View Detail</span>
+                                </a>
 
-                                    <a href="#" class="btn-link">
-                                        <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
+                            </div>
+                        </li>
 
-                                        <span class="span">View Detail</span>
-                                    </a>
+                        <li>
+                            <div class="service-card">
 
+                                <div class="card-icon">
+                                    <img src="{% static 'logistics/images/service-icon-5.png' %}" width="63" height="60"
+                                        loading="lazy" alt="Trolley">
                                 </div>
-                            </li>
 
-                            <li>
-                                <div class="service-card">
+                                <h3 class="h3 card-title">
+                                    <span class="span" style="margin-top: 29px;">02</span> Warehousing
+                                </h3>
 
-                                    <div class="card-icon" style="margin-top: 5px;">
-                                        <img src="{% static 'logistics/images/service-icon-2.png' %}" width="60"
-                                            height="60" loading="lazy" alt="Airplane">
-                                    </div>
+                                <p class="card-text">
+                                    We have various loading docks with sufficient space which makes it easy for
+                                    shipping and receiving.
+                                </p>
 
-                                    <h3 class="h3 card-title">
-                                        <span class="span" style="margin-top: 33px;">03</span> Sea Freight
-                                    </h3>
+                                <a href="#" class="btn-link">
+                                    <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
 
-                                    <p class="card-text">
-                                        Our experience brings efficiency and accountability to the movement of sea
-                                        freight.
-                                    </p>
+                                    <span class="span">View Detail</span>
+                                </a>
 
-                                    <a href="#" class="btn-link">
-                                        <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
+                            </div>
+                        </li>
 
-                                        <span class="span">View Detail</span>
-                                    </a>
+                        <li>
+                            <div class="service-card">
 
+                                <div class="card-icon" style="margin-top: 5px;">
+                                    <img src="{% static 'logistics/images/service-icon-2.png' %}" width="60" height="60"
+                                        loading="lazy" alt="Airplane">
                                 </div>
-                            </li>
 
-                            <!-- <li>
+                                <h3 class="h3 card-title">
+                                    <span class="span" style="margin-top: 33px;">03</span> Sea Freight
+                                </h3>
+
+                                <p class="card-text">
+                                    Our experience brings efficiency and accountability to the movement of sea
+                                    freight.
+                                </p>
+
+                                <a href="#" class="btn-link">
+                                    <ion-icon name="chevron-forward" aria-hidden="true"></ion-icon>
+
+                                    <span class="span">View Detail</span>
+                                </a>
+
+                            </div>
+                        </li>
+
+                        <!-- <li>
                     <div class="service-card">
       
                       <div class="card-icon">
@@ -370,7 +413,7 @@
                     </div>
                   </li> -->
 
-                            <!-- <li>
+                        <!-- <li>
                     <div class="service-card">
       
                       <div class="card-icon">
@@ -394,7 +437,7 @@
                     </div>
                   </li> -->
 
-                            <!-- <li>
+                        <!-- <li>
                     <div class="service-card">
       
                       <div class="card-icon">
@@ -418,142 +461,142 @@
                     </div>
                   </li> -->
 
-                        </ul>
+                    </ul>
 
-                    </div>
-                </section>
-
-
+                </div>
+            </section>
 
 
 
-                <!-- 
+
+
+            <!-- 
               - #FEATURE
             -->
 
-                <section class="section feature" aria-label="feature">
-                    <div class="container">
+            <section class="section feature" aria-label="feature">
+                <div class="container">
 
-                        <div class="title-wrapper">
+                    <div class="title-wrapper">
 
-                            <div>
-                                <p class="section-subtitle">Estimation</p>
+                        <div>
+                            <p class="section-subtitle">Estimation</p>
 
-                                <h2 class="h2 section-title">Has a wide range of solutions</h2>
+                            <h2 class="h2 section-title">Has a wide range of solutions</h2>
 
-                                <p class="section-text">
-                                    We offers comprehensive solutions tailored to streamline and optimize various
-                                    aspects of logistics
-                                    operations.
-                                </p>
-                            </div>
-
-                            <a href="#" class="btn">Read More</a>
-
+                            <p class="section-text">
+                                We offers comprehensive solutions tailored to streamline and optimize various
+                                aspects of logistics
+                                operations.
+                            </p>
                         </div>
 
-                        <ul class="feature-list grid-list">
-
-                            <li>
-                                <div class="feature-card" style="--card-number: '01'">
-
-                                    <div class="card-icon">
-                                        <img src="{% static 'logistics/images/feature-icon-1.png' %}" width="72"
-                                            height="91" alt="">
-                                    </div>
-
-                                    <h3 class="h3 card-title">Solutions and specialized</h3>
-
-                                    <p class="card-text">
-                                        Our aim is to optimize and improve your supply chain so that we can give you the
-                                        best service.
-                                    </p>
-
-                                    <a href="#" class="card-btn" aria-label="Read more">
-                                        <ion-icon name="arrow-forward"></ion-icon>
-                                    </a>
-
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="feature-card" style="--card-number: '02'">
-
-                                    <div class="card-icon">
-                                        <img src="{% static 'logistics/images/feature-icon-2.png' %}" width="94"
-                                            height="94" alt="">
-                                    </div>
-
-                                    <h3 class="h3 card-title">Multiple warehouses</h3>
-
-                                    <p class="card-text">
-                                        We provide multiple drop off and pickup locations so you don't have to worry.
-                                        And you should not face
-                                        any kind...
-                                    </p>
-
-                                    <a href="#" class="card-btn" aria-label="Read more">
-                                        <ion-icon name="arrow-forward"></ion-icon>
-                                    </a>
-
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="feature-card" style="--card-number: '03'">
-
-                                    <div class="card-icon">
-                                        <img src="{% static 'logistics/images/feature-icon-3.png' %}" width="93"
-                                            height="93" alt="">
-                                    </div>
-
-                                    <h3 class="h3 card-title">Tracking made easy</h3>
-
-                                    <p class="card-text">
-                                        A tracking number for the entire process. so that you can find the exact
-                                        status of your goods.
-                                    </p>
-
-                                    <a href="#" class="card-btn" aria-label="Read more">
-                                        <ion-icon name="arrow-forward"></ion-icon>
-                                    </a>
-
-                                </div>
-                            </li>
-
-                        </ul>
+                        <a href="#" class="btn">Read More</a>
 
                     </div>
-                </section>
+
+                    <ul class="feature-list grid-list">
+
+                        <li>
+                            <div class="feature-card" style="--card-number: '01'">
+
+                                <div class="card-icon">
+                                    <img src="{% static 'logistics/images/feature-icon-1.png' %}" width="72" height="91"
+                                        alt="">
+                                </div>
+
+                                <h3 class="h3 card-title">Solutions and specialized</h3>
+
+                                <p class="card-text">
+                                    Our aim is to optimize and improve your supply chain so that we can give you the
+                                    best service.
+                                </p>
+
+                                <a href="#" class="card-btn" aria-label="Read more">
+                                    <ion-icon name="arrow-forward"></ion-icon>
+                                </a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="feature-card" style="--card-number: '02'">
+
+                                <div class="card-icon">
+                                    <img src="{% static 'logistics/images/feature-icon-2.png' %}" width="94" height="94"
+                                        alt="">
+                                </div>
+
+                                <h3 class="h3 card-title">Multiple warehouses</h3>
+
+                                <p class="card-text">
+                                    We provide multiple drop off and pickup locations so you don't have to worry.
+                                    And you should not face
+                                    any kind...
+                                </p>
+
+                                <a href="#" class="card-btn" aria-label="Read more">
+                                    <ion-icon name="arrow-forward"></ion-icon>
+                                </a>
+
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="feature-card" style="--card-number: '03'">
+
+                                <div class="card-icon">
+                                    <img src="{% static 'logistics/images/feature-icon-3.png' %}" width="93" height="93"
+                                        alt="">
+                                </div>
+
+                                <h3 class="h3 card-title">Tracking made easy</h3>
+
+                                <p class="card-text">
+                                    A tracking number for the entire process. so that you can find the exact
+                                    status of your goods.
+                                </p>
+
+                                <a href="#" class="card-btn" aria-label="Read more">
+                                    <ion-icon name="arrow-forward"></ion-icon>
+                                </a>
+
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </section>
 
 
 
 
 
-                <!-- 
+            <!-- 
               - #PROJECT
             -->
 
-                <section class="section project" aria-label="project">
-                    <div class="container">
+            <section class="section project" aria-label="project" id="about">
+                <div class="container">
 
-                        <!-- <p class="section-subtitle">About</p> -->
+                    <!-- <p class="section-subtitle">About</p> -->
 
-                        <h2 class="h2 section-title">ABOUT US</h2>
+                    <h2 class="h2 section-title">ABOUT US</h2>
 
-                        <p class="section-text">
-                            We provide end-to-end global trade solutions for importers and exporters across all major
-                            trade routes
-                            internationally. Situated across strategic trade lanes, Kenn Global Logistics provides the
-                            ideal platform to
-                            facilitate and manage comprehensive supply chain solutions that enable organisations to
-                            achieve a
-                            competitive advantage through innovative supply chain solutions leading in Asia.
-                        </p>
+                    <p class="section-text">
+                        We provide end-to-end global trade solutions for importers and exporters across all major
+                        trade routes
+                        internationally. Situated across strategic trade lanes, Kenn Global Logistics provides the
+                        ideal platform to
+                        facilitate and manage comprehensive supply chain solutions that enable organisations to
+                        achieve a
+                        competitive advantage through innovative supply chain solutions leading in Asia.
+                    </p>
 
-                        <ul class="project-list">
+                    <ul class="project-list">
 
-                            <!-- <li class="project-item">
+                        <!-- <li class="project-item">
                     <div class="project-card">
       
                       <figure class="card-banner img-holder" style="--width: 397; --height: 352;">
@@ -578,57 +621,57 @@
                     </div>
                   </li> -->
 
-                            <li class="project-item">
-                                <div class="project-card">
+                        <li class="project-item">
+                            <div class="project-card">
 
-                                    <figure class="card-banner img-holder" style="--width: 397; --height: 352;">
-                                        <img src="{% static 'logistics/images/project-2.jpg' %}" width="397"
-                                            height="352" loading="lazy" alt="Warehouse inventory" class="img-cover">
-                                    </figure>
+                                <figure class="card-banner img-holder" style="--width: 397; --height: 352;">
+                                    <img src="{% static 'logistics/images/project-2.jpg' %}" width="397" height="352"
+                                        loading="lazy" alt="Warehouse inventory" class="img-cover">
+                                </figure>
 
-                                    <button class="action-btn" aria-label="View image">
-                                        <ion-icon name="expand-outline"></ion-icon>
-                                    </button>
+                                <button class="action-btn" aria-label="View image">
+                                    <ion-icon name="expand-outline"></ion-icon>
+                                </button>
 
-                                    <div class="card-content">
-                                        <p class="card-tag">Warehousing , Distrbution</p>
+                                <div class="card-content">
+                                    <p class="card-tag">Warehousing , Distrbution</p>
 
-                                        <h3 class="h3">
-                                            <a href="#" class="card-title">Managing Goods</a>
-                                        </h3>
+                                    <h3 class="h3">
+                                        <a href="#" class="card-title">Managing Goods</a>
+                                    </h3>
 
-                                        <a href="#" class="card-link">Read More</a>
-                                    </div>
-
+                                    <a href="#" class="card-link">Read More</a>
                                 </div>
-                            </li>
 
-                            <li class="project-item">
-                                <div class="project-card">
+                            </div>
+                        </li>
 
-                                    <figure class="card-banner img-holder" style="--width: 397; --height: 352;">
-                                        <img src="{% static 'logistics/images/project-3.jpg' %}" width="397"
-                                            height="352" loading="lazy" alt="Warehouse inventory" class="img-cover">
-                                    </figure>
+                        <li class="project-item">
+                            <div class="project-card">
 
-                                    <button class="action-btn" aria-label="View image">
-                                        <ion-icon name="expand-outline"></ion-icon>
-                                    </button>
+                                <figure class="card-banner img-holder" style="--width: 397; --height: 352;">
+                                    <img src="{% static 'logistics/images/project-3.jpg' %}" width="397" height="352"
+                                        loading="lazy" alt="Warehouse inventory" class="img-cover">
+                                </figure>
 
-                                    <div class="card-content">
-                                        <p class="card-tag">Delivery Before Time</p>
+                                <button class="action-btn" aria-label="View image">
+                                    <ion-icon name="expand-outline"></ion-icon>
+                                </button>
 
-                                        <h3 class="h3">
-                                            <a href="#" class="card-title">Customer Relationship</a>
-                                        </h3>
+                                <div class="card-content">
+                                    <p class="card-tag">Delivery Before Time</p>
 
-                                        <a href="#" class="card-link">Read More</a>
-                                    </div>
+                                    <h3 class="h3">
+                                        <a href="#" class="card-title">Customer Relationship</a>
+                                    </h3>
 
+                                    <a href="#" class="card-link">Read More</a>
                                 </div>
-                            </li>
 
-                            <!-- <li class="project-item">
+                            </div>
+                        </li>
+
+                        <!-- <li class="project-item">
                     <div class="project-card">
       
                       <figure class="card-banner img-holder" style="--width: 397; --height: 352;">
@@ -653,7 +696,7 @@
                     </div>
                   </li> -->
 
-                            <!-- <li class="project-item">
+                        <!-- <li class="project-item">
                     <div class="project-card">
       
                       <figure class="card-banner img-holder" style="--width: 397; --height: 352;">
@@ -678,98 +721,98 @@
                     </div>
                   </li> -->
 
-                            <li class="project-item">
-                                <div class="project-card">
+                        <li class="project-item">
+                            <div class="project-card">
 
-                                    <figure class="card-banner img-holder" style="--width: 397; --height: 352;">
-                                        <img src="{% static 'logistics/images/project-6.jpg' %}" width="397"
-                                            height="352" loading="lazy" alt="Warehouse inventory" class="img-cover">
-                                    </figure>
+                                <figure class="card-banner img-holder" style="--width: 397; --height: 352;">
+                                    <img src="{% static 'logistics/images/project-6.jpg' %}" width="397" height="352"
+                                        loading="lazy" alt="Warehouse inventory" class="img-cover">
+                                </figure>
 
-                                    <button class="action-btn" aria-label="View image">
-                                        <ion-icon name="expand-outline"></ion-icon>
-                                    </button>
+                                <button class="action-btn" aria-label="View image">
+                                    <ion-icon name="expand-outline"></ion-icon>
+                                </button>
 
-                                    <div class="card-content">
-                                        <p class="card-tag">Logistics, Analytics</p>
+                                <div class="card-content">
+                                    <p class="card-tag">Logistics, Analytics</p>
 
-                                        <h3 class="h3">
-                                            <a href="#" class="card-title">Minimize Manufacturing</a>
-                                        </h3>
+                                    <h3 class="h3">
+                                        <a href="#" class="card-title">Minimize Manufacturing</a>
+                                    </h3>
 
-                                        <a href="#" class="card-link">Read More</a>
-                                    </div>
-
+                                    <a href="#" class="card-link">Read More</a>
                                 </div>
-                            </li>
 
-                        </ul>
+                            </div>
+                        </li>
 
-                    </div>
-                </section>
+                    </ul>
+
+                </div>
+            </section>
 
 
 
 
 
-                <!-- 
+            <!-- 
               - #BLOG
             -->
 
-                <section class="section blog" aria-label="blog" id="blog">
-                    <div class="container">
+            <section class="section blog" aria-label="blog" id="contact">
+                <div class="container">
 
-                        <p class="section-subtitle">Contact Us</p>
-                        <h2 class="h2 section-title">Send Us A Message</h2>
-                        <!-- <p class="section-text">
+                    <p class="section-subtitle">Contact Us</p>
+                    <h2 class="h2 section-title">Send Us A Message</h2>
+                    <!-- <p class="section-text">
                   Send us a message and Our team will reach you shortly.
                 </p> -->
 
-                        <div class="contact-form">
-                            <section class="form-section">
-                                <form class="form" action="" method="POST">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-lg-6">
-                                            <input type="text" class="form-control form-control-lg" id="name"
-                                                name="name" placeholder="Enter Your Name"
-                                                style="background-color: lightsteelblue; color: black;">
-                                        </div>
-                                        <div class="col-sm-6 col-lg-6">
-                                            <input type="email" class="form-control form-control-lg" id="email"
-                                                name="email" placeholder="Enter Your Email"
-                                                style="background-color:lightsteelblue; color: black;">
-                                        </div>
-                                    </div> <br>
-                                    <div class="row">
-                                        <div class="col-sm-6 col-lg-6">
-                                            <input type="text" class="form-control form-control-lg" id="name"
-                                                name="name" placeholder="Enter Your contact"
-                                                style="background-color:lightsteelblue; color: black;">
-                                        </div>
-                                        <div class="col-sm-6 col-lg-6">
-                                            <input type="email" class="form-control form-control-lg" id="email"
-                                                name="email" placeholder="Subject"
-                                                style="background-color:lightsteelblue; color: black;">
-                                        </div>
-                                    </div> <br>
-                                    <div class="row">
-                                        <textarea class="form-control form-control-lg" id="desc" name="desc" rows="3"
-                                            placeholder="Enter Your Message"
-                                            style="background-color:lightsteelblue; color: black;"></textarea>
-                                    </div><br>
-                                    <div class="row" style="margin-top: 20px;">
-                                        <a href="#" class="btn" style=" margin-left: 270px;">Send Message</a>
+                    <div class="contact-form">
+                        <section class="form-section">
+                            <form class="form" action="" method="POST">
+                                <div class="row">
+                                    <div class="col-sm-6 col-lg-6">
+                                        <input type="text" class="form-control form-control-lg" id="name" name="name"
+                                            placeholder="Enter Your Name"
+                                            style="background-color: lightsteelblue; color: black;">
                                     </div>
-                                </form>
-                            </section>
-                        </div>
-                        <div class="row" style="margin-top: 100px;"></div>
+                                    <div class="col-sm-6 col-lg-6">
+                                        <input type="email" class="form-control form-control-lg" id="email" name="email"
+                                            placeholder="Enter Your Email"
+                                            style="background-color:lightsteelblue; color: black;">
+                                    </div>
+                                </div> <br>
+                                <div class="row">
+                                    <div class="col-sm-6 col-lg-6">
+                                        <input type="text" class="form-control form-control-lg" id="name" name="name"
+                                            placeholder="Enter Your contact"
+                                            style="background-color:lightsteelblue; color: black;">
+                                    </div>
+                                    <div class="col-sm-6 col-lg-6">
+                                        <input type="email" class="form-control form-control-lg" id="email" name="email"
+                                            placeholder="Subject"
+                                            style="background-color:lightsteelblue; color: black;">
+                                    </div>
+                                </div> <br>
+                                <div class="row">
+                                    <textarea class="form-control form-control-lg" id="desc" name="desc" rows="3"
+                                        placeholder="Enter Your Message"
+                                        style="background-color:lightsteelblue; color: black;"></textarea>
+                                </div><br>
+                                <div class="row" style="margin-top: 20px;">
+                                    <a href="#" class="btn" style=" margin-left: 270px;">Send Message</a>
+                                </div>
+                            </form>
+                        </section>
                     </div>
+                    <div class="row" style="margin-top: 100px;"></div>
+                </div>
 
 
 
 
-                    <!-- <h2 class="h2 section-title">Recent news & events</h2>
+                <!-- <h2 class="h2 section-title">Recent news & events</h2>
       
                 <p class="section-text">
                   Lorem Ipsum is simply dummy text of the printing and typesetting industry the standard dummy text ever since
@@ -859,205 +902,205 @@
       
                 </ul> -->
 
-</div>
-</section>
+                </div>
+            </section>
 
 
 
 
 
-<!-- 
+            <!-- 
               - #NEWSLETTER
             -->
 
-<section class="section newsletter" aria-label="newsletter">
-    <div class="container">
+            <section class="section newsletter" aria-label="newsletter">
+                <div class="container">
 
-        <figure class="newsletter-banner img-holder">
-            <img src="{% static 'logistics/images/newsletter-banner.png' %}" width="303" height="381"
-                alt="newsletter banner" class="w-100">
-        </figure>
+                    <figure class="newsletter-banner img-holder">
+                        <img src="{% static 'logistics/images/newsletter-banner.png' %}" width="303" height="381"
+                            alt="newsletter banner" class="w-100">
+                    </figure>
 
-        <div class="newsletter-content">
+                    <div class="newsletter-content">
 
-            <h2 class="h2 section-title">Subscribe for offers and news</h2>
+                        <h2 class="h2 section-title">Subscribe for offers and news</h2>
 
-            <form action="" class="newsletter-form">
-                <input type="email" name="email_address" placeholder="Enter Your Email" aria-label="email"
-                    class="email-field">
+                        <form action="" class="newsletter-form">
+                            <input type="email" name="email_address" placeholder="Enter Your Email" aria-label="email"
+                                class="email-field">
 
-                <button type="submit" class="newsletter-btn">Subscribe Now</button>
-            </form>
-
-
-        </div>
-
-    </div>
-</section>
-
-</article>
-</main>
+                            <button type="submit" class="newsletter-btn">Subscribe Now</button>
+                        </form>
 
 
+                    </div>
+
+                </div>
+            </section>
+
+        </article>
+    </main>
 
 
 
-<!-- 
+
+
+    <!-- 
           - #FOOTER
         -->
 
-<footer class="footer">
-    <div class="container">
+    <footer class="footer">
+        <div class="container">
 
-        <div class="footer-top section">
+            <div class="footer-top section">
 
-            <div class="footer-brand">
+                <div class="footer-brand">
 
-                <a href="#" class="logo">Logistics</a>
+                    <a href="#" class="logo">Logistics</a>
 
-                <p class="footer-text">
-                    We provide end-to-end global trade solutions for importers and exporters across all major trade
-                    routes internationally. </p>
+                    <p class="footer-text">
+                        We provide end-to-end global trade solutions for importers and exporters across all major trade
+                        routes internationally. </p>
 
-                <ul class="social-list">
+                    <ul class="social-list">
+
+                        <li>
+                            <a href="#" class="social-link">
+                                <ion-icon name="logo-facebook"></ion-icon>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="social-link">
+                                <ion-icon name="logo-twitter"></ion-icon>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="social-link">
+                                <ion-icon name="logo-instagram"></ion-icon>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="social-link">
+                                <ion-icon name="logo-youtube"></ion-icon>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <ul class="footer-list">
 
                     <li>
-                        <a href="#" class="social-link">
-                            <ion-icon name="logo-facebook"></ion-icon>
-                        </a>
+                        <p class="footer-list-title">Quick Links</p>
                     </li>
 
                     <li>
-                        <a href="#" class="social-link">
-                            <ion-icon name="logo-twitter"></ion-icon>
-                        </a>
+                        <a href="#about" class="footer-link">About</a>
                     </li>
 
                     <li>
-                        <a href="#" class="social-link">
-                            <ion-icon name="logo-instagram"></ion-icon>
-                        </a>
+                        <a href="#service" class="footer-link">Services</a>
                     </li>
 
                     <li>
-                        <a href="#" class="social-link">
-                            <ion-icon name="logo-youtube"></ion-icon>
-                        </a>
+                        <a href="#" class="footer-link">FAQ</a>
+                    </li>
+
+                    <li>
+                        <a href="#contact" class="footer-link">Contact Us</a>
+                    </li>
+
+                </ul>
+
+                <ul class="footer-list">
+
+                    <li>
+                        <p class="footer-list-title">Services</p>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Warehouse</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Air Freight</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Sea Freight</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Packaging</a>
+                    </li>
+
+                </ul>
+
+                <ul class="footer-list">
+
+                    <li>
+                        <p class="footer-list-title">Community</p>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Business Consulting</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Track Your Shipment</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Privacy Policy</a>
+                    </li>
+
+                    <li>
+                        <a href="#" class="footer-link">Terms & Condition</a>
                     </li>
 
                 </ul>
 
             </div>
 
-            <ul class="footer-list">
-
-                <li>
-                    <p class="footer-list-title">Quick Links</p>
-                </li>
-
-                <li>
-                    <a href="#" class="footer-link">About</a>
-                </li>
-
-                <li>
-                    <a href="#" class="footer-link">Services</a>
-                </li>
-
-                <li>
-                    <a href="#" class="footer-link">FAQ</a>
-                </li>
-
-                <li>
-                    <a href="#" class="footer-link">Contact Us</a>
-                </li>
-
-            </ul>
-
-            <ul class="footer-list">
-
-                <li>
-                    <p class="footer-list-title">Services</p>
-                </li>
-
-                <li>
-                    <a href="#" class="footer-link">Warehouse</a>
-                </li>
-
-                <li>
-                    <a href="#" class="footer-link">Air Freight</a>
-                </li>
-
-                <li>
-                    <a href="#" class="footer-link">Sea Freight</a>
-                </li>
-
-                <li>
-                    <a href="#" class="footer-link">Packaging</a>
-                </li>
-
-            </ul>
-
-            <ul class="footer-list">
-
-                <li>
-                    <p class="footer-list-title">Community</p>
-                </li>
-
-                <li>
-                    <a href="#" class="footer-link">Business Consulting</a>
-                </li>
-
-                <li>
-                    <a href="#" class="footer-link">Track Your Shipment</a>
-                </li>
-
-                <li>
-                    <a href="#" class="footer-link">Privacy Policy</a>
-                </li>
-
-                <li>
-                    <a href="#" class="footer-link">Terms & Condition</a>
-                </li>
-
-            </ul>
+            <div class="footer-bottom">
+                <p class="copyright">
+                    &copy; 2022 Transportio. All Rights Reserved by <a href="#" class="copyright-link">codewithsadee</a>
+                </p>
+            </div>
 
         </div>
-
-        <div class="footer-bottom">
-            <p class="copyright">
-                &copy; 2022 Transportio. All Rights Reserved by <a href="#" class="copyright-link">codewithsadee</a>
-            </p>
-        </div>
-
-    </div>
-</footer>
+    </footer>
 
 
 
 
 
-<!-- 
+    <!-- 
           - #BACK TO TOP
         -->
 
-<a href="#top" class="back-top-btn" aria-label="Back to top" data-back-top-btn>
-    <ion-icon name="chevron-up"></ion-icon>
-</a>
+    <a href="#top" class="back-top-btn" aria-label="Back to top" data-back-top-btn>
+        <ion-icon name="chevron-up"></ion-icon>
+    </a>
 
 
 
 
 
-<!-- 
+    <!-- 
           - custom js link
         -->
-<script src="{% static 'logistics/js/script.js' %}" defer></script>
+    <script src="{% static 'logistics/js/script.js' %}" defer></script>
 
-<!-- 
+    <!-- 
           - ionicon link
         -->
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </body>
 

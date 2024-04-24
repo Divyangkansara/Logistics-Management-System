@@ -7,9 +7,9 @@
 
 
 
-<nav aria-label="breadcrumb" style="margin-top: 50px; margin-bottom: 10px;">
+<nav aria-label="breadcrumb" style="margin-top: 50px;">
     <ol class="breadcrumb" style="font-size: x-large; margin-bottom: auto;">
-        <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}" style="color: steelblue;">Opportunities</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{instance.scope_of_work}}</li>
     </ol>
 </nav>
@@ -134,8 +134,13 @@
                     <div class="col-sm-5 offset-1">
                         <div class="form-group">
                             <label for="sales_person"><b>Sales Person</b></label>
-                            <input type="text" value="{{instance.sales_person}}" class="form-control form-control-sm"
-                                id="sales_person" name="sales_person" required>
+                            <select class="form-control form-control-sm" id="sales_person" name="sales_person">
+                                <option selected>Select</option>
+                                <option value="Louis">Louis</option>
+                                <option value="Williams">Williams</option>
+                                <option value="Mitchell Admin">Mitchell Admin</option>
+                                <option value="David">David</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -151,8 +156,12 @@
                     <div class="col-sm-5 offset-1">
                         <div class="form-group">
                             <label for="sales_team"><b>Sales Team</b></label>
-                            <input type="text" value="{{instance.sales_team}}" class="form-control form-control-sm"
-                                id="sales_team" name="sales_team" required>
+                            <select class="form-control form-control-sm" id="sales_team" name="sales_team">
+                                <option selected>Select</option>
+                                <option value="Europe">Europe</option>
+                                <option value="Canada">Canada</option>
+                                <option value="China">China</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -172,8 +181,7 @@
                 <div class="row mt-3 ml-2">
                     <div class="col-sm-12">
                         <div class="button">
-                            <button type="submit" class="btn btn-sm btn-primary"
-                                style="font-size: 17px; background-color: steelblue; border-color: steelblue;">Update</button>
+                            <button type="submit" class="btn btn-sm btn-primary" style="font-size: 18px; background-color: steelblue; border: none; margin-left: 40%;">Update</button>
                         </div>
                     </div>
                 </div>
@@ -185,4 +193,14 @@
         </div>
     </section>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#customer_name').on('input', function () {
+            var customerName = $(this).val();
+            $('#contact_person').val(customerName);
+        });
+    });
+</script>
 {% endblock content %}

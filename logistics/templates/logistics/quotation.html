@@ -5,20 +5,25 @@
 <link rel="stylesheet" href="{% static 'logistics/css/style.css' %}">
 
 
+
 <nav aria-label="breadcrumb" style="margin-top: 50px;">
     <ol class="breadcrumb" style="font-size: x-large; margin-bottom: auto;">
-      <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}">Opportunities</a></li>
-      <li class="breadcrumb-item"><a href="{% url 'edit_enquiry' instance.id %}">{{instance.scope_of_work}}</a></li>
-      <li class="breadcrumb-item active" aria-current="page">New</li>
+        <li class="breadcrumb-item"><a href="{% url 'enquiry_list' %}" style="color: steelblue;">Opportunities</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'edit_enquiry' instance.id %}"
+                style="color: steelblue;">{{instance.scope_of_work}}</a></li>
+        <li class="breadcrumb-item active" aria-current="page">New</li>
     </ol>
 </nav>
 
 <nav class="navbar navbar-custom navbar-expand-lg" style="margin-top:auto;padding: 0;">
     <div style="padding-top: 2px;padding-bottom: 2px;margin-left: 15px;">
         <div class="justify-content-start">
-            <a href="" class="btn btn-sm btn-primary" style="background-color: steelblue; border: none;"><b>Approve Quotation</b></a>
-            <a href="" class="btn btn-sm btn-primary" style="background-color: steelblue; border: none;"><b>Send Quotation Email</b></a>
-            <a href="{% url 'edit_enquiry' instance.id %}" class="btn btn-sm btn-primary" style="background-color: steelblue; border:none;"><b>Cancel</b></a>
+            <a href="" class="btn btn-sm btn-primary" style="background-color: steelblue; border: none;"><b>Approve
+                    Quotation</b></a>
+            <a href="" class="btn btn-sm btn-primary" style="background-color: steelblue; border: none;"><b>Send
+                    Quotation Email</b></a>
+            <a href="{% url 'edit_enquiry' instance.id %}" class="btn btn-sm btn-primary"
+                style="background-color: steelblue; border:none;"><b>Cancel</b></a>
         </div>
     </div>
     <div class="custom-stages ml-auto">
@@ -30,15 +35,17 @@
 
 <div class="">
     <section class="formsection mt-4 mb-4">
-         <div class="col-sm-12 col-md-8 col-lg-10 m-auto">
+        <div class="col-sm-12 col-md-8 col-lg-10 m-auto">
             <form id="enquiry_form" method="POST" action="{% url 'save_quotation' instance.id %}">
                 {% csrf_token %}
                 <div class="row ml-2">
                     <div class="col-sm-5 mt-2">
                         <div class="form-group">
                             <label for="customer" class="mt-5"><b>Customer</b></label>
-                            <input type="text" readonly value="{{instance.customer_name}}" class=
-                            "form-control form-control-sm" style="background-color:lightsteelblue; color: #000;" id="customer_name" name="customer_name" required>
+                            <input type="text" readonly value="{{instance.customer_name}}"
+                                class="form-control form-control-sm"
+                                style="background-color:lightsteelblue; color: #000;" id="customer_name"
+                                name="customer_name" required>
                         </div>
                     </div>
                 </div>
@@ -49,13 +56,15 @@
                     <div class="col-sm-5">
                         <div class="form-group">
                             <label for="job_category"><b>Job Category</b></label>
-                            <select class="form-control form-control-sm" id="job_category" name="job_category" style="color: #000;" disabled>
+                            <select class="form-control form-control-sm" id="job_category" name="job_category"
+                                style="color: #000;" disabled>
                                 <option selected>Select</option>
                                 {% for jc in jobs %}
-                                    <option value="{{ jc.job_category }}" {% if jc.job_category == instance.job_category %}selected{% endif %}>{{ jc.job_category }}</option>
+                                <option value="{{ jc.job_category }}" {% if jc.job_category == instance.job_category %}selected{% endif %}>{{ jc.job_category }}</option>
                                 {% endfor %}
                             </select>
-                            <input type="text" id="job_category_value" name="job_category" value="{{instance.job_category}}" hidden>
+                            <input type="text" id="job_category_value" name="job_category"
+                                value="{{instance.job_category}}" hidden>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-5 offset-1">
@@ -64,19 +73,21 @@
                             <select class="form-control form-control-sm" id="freight_type" name="freight_type" disabled>
                                 <option selected>Select</option>
                                 {% for ft in freight_types %}
-                                     <option value="{{ ft.freight_type }}" {% if ft.freight_type == instance.freight_type %} selected{% endif %}>{{ ft.freight_type }}</option>
+                                <option value="{{ ft.freight_type }}" {% if ft.freight_type == instance.freight_type %}selected{% endif %}>{{ ft.freight_type }}</option>
                                 {% endfor %}
                             </select>
-                            <input type="text" id="freight_type_value" name="freight_type" value="{{ instance.freight_type }}" hidden>
+                            <input type="text" id="freight_type_value" name="freight_type"
+                                value="{{ instance.freight_type }}" hidden>
                         </div>
                     </div>
-                </div>  
+                </div>
 
                 <div class="row ml-2">
                     <div class="col-sm-5">
                         <div class="form-group">
                             <label for="payment_type"><b>Payment Type</b></label>
-                            <select class="form-control form-control-sm" id="payment_type" name="payment_type" style="color: #000;">
+                            <select class="form-control form-control-sm" id="payment_type" name="payment_type"
+                                style="color: #000;">
                                 <option selected>Select</option>
                                 <option value="Pending">Pending</option>
                                 <option value="Collect">Collect</option>
@@ -91,7 +102,8 @@
                     <div class="col-sm-5">
                         <div class="form-group">
                             <label for="sales_person"><b>Sales Person</b></label>
-                            <input type="text" readonly value="{{instance.sales_person}}" style="color: #000;" class="form-control form-control-sm" id="sales_person" name="sales_person" required>
+                            <input type="text" readonly value="{{instance.sales_person}}" style="color: #000;"
+                                class="form-control form-control-sm" id="sales_person" name="sales_person" required>
                         </div>
                     </div>
                     <div class="col-sm-5 offset-1">
@@ -100,10 +112,10 @@
                             <select class="form-control form-control-sm" id="type" name="type" disabled>
                                 <option selected>Select</option>
                                 {% for type in types %}
-                                    <option value="{{ type.type }}" {% if type.type == instance.type %}selected{% endif %}>{{ type.type }}</option>
+                                <option value="{{ type.type }}" {% if type.type == instance.type %}selected{% endif %}>{{type.type }}</option>
                                 {% endfor %}
                             </select>
-                            <input type="text" id="type_value" name="type" value= "{{instance.type}}" hidden>
+                            <input type="text" id="type_value" name="type" value="{{instance.type}}" hidden>
                         </div>
                     </div>
                 </div>
@@ -112,13 +124,22 @@
                     <div class="col-sm-5">
                         <div class="form-group">
                             <label for="origin"><b>Origin</b></label>
-                            <input type="text" class="form-control form-control-sm" style="color: #000;" id="origin" name="origin">
-                        </div>
+                            <select class="form-control form-control-sm" id="origin" name="origin" style="color: #000;">
+                                <option selected>Select</option>
+                                <option value="Australian Capital Territory">Australian Capital Territory</option>
+                                <option value="New South Wales">New South Wales</option>
+                                <option value="Northern Territory">Northern Territory</option>
+                                <option value="Queensland">Queensland</option>
+                                <option value="South Australia">South Australia</option>
+                                <option value="Victoria">Victoria</option>
+                            </select>
+                        </div>                        
                     </div>
                     <div class=" col-sm-5 offset-1">
                         <div class="form-group">
                             <label for="quotation_date"><b>Quotation Date</b></label>
-                            <input type="date" class="form-control form-control-sm" style="color: #000;" id="quotation_date" name="quotation_date">
+                            <input type="date" class="form-control form-control-sm" style="color: #000;"
+                                id="quotation_date" name="quotation_date">
                         </div>
                     </div>
                 </div>
@@ -127,7 +148,16 @@
                     <div class="col-sm-5">
                         <div class="form-group">
                             <label for="destination"><b>Destination</b></label>
-                            <input type="text" class="form-control form-control-sm" style="color: #000;" id="destination" name="destination">
+                            <select class="form-control form-control-sm" id="destination" name="destination"
+                                style="color: #000;">
+                                <option selected>Select</option>
+                                <option value="Australian Capital Territory">Australian Capital Territory</option>
+                                <option value="New South Wales">New South Wales</option>
+                                <option value="Northern Territory">Northern Territory</option>
+                                <option value="Queensland">Queensland</option>
+                                <option value="South Australia">South Australia</option>
+                                <option value="Victoria">Victoria</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -136,14 +166,24 @@
                     <div class=" col-sm-5">
                         <div class="form-group">
                             <label for="final_destination"><b>Final Destination</b></label>
-                            <input type="text" class="form-control form-control-sm" style="color: #000;" id="final_destination" name="final_destination">
+                            <select class="form-control form-control-sm" id="final_destination" name="final_destination"
+                                style="color: #000;">
+                                <option selected>Select</option>
+                                <option value="Australian Capital Territory">Australian Capital Territory</option>
+                                <option value="New South Wales">New South Wales</option>
+                                <option value="Northern Territory">Northern Territory</option>
+                                <option value="Queensland">Queensland</option>
+                                <option value="South Australia">South Australia</option>
+                                <option value="Victoria">Victoria</option>
+                            </select>
                         </div>
                     </div>
                     <div class=" col-sm-5 offset-1">
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="terms"><b>Terms</b></label>
-                            <input type="text" class="form-control form-control-sm" style="color: #000;" id="terms" name="terms">
-                        </div>
+                            <input type="text" class="form-control form-control-sm" style="color: #000;" id="terms"
+                                name="terms">
+                        </div> -->
                     </div>
                 </div>
 
@@ -153,17 +193,21 @@
                 <div class="row ml-4">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                          <a class="nav-link active" id="packages" href="#"><b>Packages</b></a>
+                            <a class="nav-link active" id="packages" href="#"><b>Packages</b></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="quantity_dimension" href="" data-toggle="modal" data-target=".bd-example-modal-lg" data-backdrop="static" data-keyboard="false"><b>Quantity & Dimensions</b></a>
-                            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <a class="nav-link" id="quantity_dimension" href="" data-toggle="modal"
+                                data-target=".bd-example-modal-lg" data-backdrop="static"
+                                data-keyboard="false"><b>Quantity & Dimensions</b></a>
+                            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+                                aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-lg">
-                                  <div class="modal-content">
+                                    <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel"><b>Create Quantity & Dimension</b></h5>
+                                            <h5 class="modal-title" id="exampleModalLabel"><b>Create Quantity &
+                                                    Dimension</b></h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
+                                                <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
                                         <hr>
@@ -171,21 +215,25 @@
                                             <div class="col-sm-5">
                                                 <div class="form-group">
                                                     <label for="quantity"><b>Quantity</b></label>
-                                                    <input type="number" class="form-control form-control-sm" style="color: #000;" id="quantity" name="quantity" min="1">
+                                                    <input type="number" class="form-control form-control-sm"
+                                                        style="color: #000;" id="quantity" name="quantity" min="1">
                                                 </div>
                                             </div>
                                             <div class="col-sm-5 offset-1">
                                                 <div class="form-group">
                                                     <label for="dimension"><b>Dimension ( L x W x H )</b></label>
-                                                    <input type="text" class="form-control form-control-sm" style="color: #000;" id="dimension" name="dimension">
+                                                    <input type="text" class="form-control form-control-sm"
+                                                        style="color: #000;" id="dimension" name="dimension">
                                                 </div>
                                             </div>
-                                        </div> 
+                                        </div>
                                         <div class="row mt-2"></div>
                                         <hr>
                                         <div class="modal-footer">
-                                            <button type="button" id="closeButton" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
-                                            <button type="button" id="saveChangesBtn" class="btn btn-primary">Save changes</button>
+                                            <button type="button" id="closeButton" class="btn btn-outline-dark"
+                                                data-dismiss="modal">Close</button>
+                                            <button type="button" id="saveChangesBtn" class="btn btn-primary" style="background-color: steelblue; border-color: steelblue;">Save
+                                                changes</button>
                                         </div>
                                     </div>
                                 </div>
@@ -203,13 +251,16 @@
                     <div class=" col-sm-5">
                         <div class="form-group">
                             <label for="product"><b>Product</b></label>
-                            <input type="text" class="form-control form-control-sm" style="color: #000;" id="product" name="product">
+                            <input type="text" class="form-control form-control-sm" style="color: #000;" id="product"
+                                name="product">
                         </div>
                     </div>
                     <div class="col-sm-5 offset-1">
                         <div class="form-group">
                             <label for="client_currency"><b>Client Currency</b></label>
-                            <select class="form-control form-control-sm" style="background-color:lightsteelblue; color: #000;" id="client_currency" name="client_currency">
+                            <select class="form-control form-control-sm"
+                                style="background-color:lightsteelblue; color: #000;" id="client_currency"
+                                name="client_currency">
                                 <option selected>Select</option>
                                 <option value="INR">INR </option>
                                 <option value="USD">USD </option>
@@ -223,14 +274,15 @@
                     <div class=" col-sm-5">
                         <div class="form-group">
                             <label for="description"><b>Description</b></label>
-                            <textarea class="form-control form-control-sm" style="color: #000;" id="description" name="description"
-                                rows="1" required></textarea>
+                            <textarea class="form-control form-control-sm" style="color: #000;" id="description"
+                                name="description" rows="1" required></textarea>
                         </div>
                     </div>
                     <div class=" col-sm-5 offset-1">
                         <div class="form-group">
                             <label for="rate"><b>Rate</b></label>
-                            <input type="text" class="form-control form-control-sm" style="background-color:lightsteelblue; color: #000;" id="rate" name="rate">
+                            <input type="text" class="form-control form-control-sm"
+                                style="background-color:lightsteelblue; color: #000;" id="rate" name="rate">
                         </div>
                     </div>
                 </div>
@@ -239,7 +291,13 @@
                     <div class=" col-sm-5">
                         <div class="form-group">
                             <label for="unit"><b>Unit</b></label>
-                            <input type="number" class="form-control form-control-sm" style="color: #000;" id="unit " name="unit">
+                            <select class="form-control form-control-sm"
+                             id="unit" name="unit">
+                                <option selected>Select</option>
+                                <option value="Dozen(s)">Dozen(s)</option>
+                                <option value="Litre(s)">Litre(s)</option>
+                                <option value="Unit(s)">Unit(s)</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -248,7 +306,8 @@
                     <div class=" col-sm-5">
                         <div class="form-group">
                             <label for="weight"><b>Weight</b></label>
-                            <input type="number" class="form-control form-control-sm" style="color: #000;" id="weight" name="weight">
+                            <input type="number" class="form-control form-control-sm" style="color: #000;" id="weight"
+                                name="weight">
                         </div>
                     </div>
                 </div>
@@ -256,20 +315,48 @@
                 <div class="row mt-3 ml-2">
                     <div class="col-sm-12">
                         <div class="button">
-                            <button type="submit" class="btn btn-sm btn-primary" style="font-size: 17px; background-color: steelblue; border: none;">Save</button>
+                            <button type="submit" class="btn btn-sm btn-primary"
+                                style="font-size: 18px; background-color: steelblue; border: none; margin-left: 40%; width: 15%;">Save</button>
                         </div>
                     </div>
                 </div>
                 <div class="row mt-3"></div>
 
-            </form>  
-         </div>
+            </form>
+        </div>
     </section>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     $(document).ready(function () {
+
+        $('#destination').change(function () {
+            var selectedDestination = $(this).val();
+            $('#final_destination').val(selectedDestination);
+        });
+
+        var CurrencyRates = {
+            'USD': 83.36,
+            'AED': 22.70
+        }
+
+        $('#client_currency').change(function () {
+            var selectedCurrency = $(this).val();
+            var rateField = $('#rate');
+
+            if (selectedCurrency === 'USD') {
+                rateField.val(CurrencyRates[selectedCurrency]);
+                rateField.prop('readonly', true);
+            } else if (selectedCurrency === 'AED') {
+                rateField.val(CurrencyRates[selectedCurrency]);
+                rateField.prop('readonly', true);
+            } else {
+                rateField.val('');
+                rateField.prop('readonly', false);
+            }
+        });
+
         $('#saveChangesBtn').on('click', function () {
             var quantityModalValue = $('#quantity').val();
             var dimensionModalValue = $('#dimension').val();
@@ -280,7 +367,7 @@
             $('.bd-example-modal-lg').modal('hide');
         });
 
-        $('#closeButton').on('click', function() {
+        $('#closeButton').on('click', function () {
             $('#quantity').val('');
             $('#dimension').val('');
 
@@ -290,7 +377,6 @@
             $('.bd-example-modal-lg').modal('hide');
         });
     });
-</script> 
+</script>
 
 {% endblock content %}
-
