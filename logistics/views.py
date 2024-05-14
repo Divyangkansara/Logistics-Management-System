@@ -216,7 +216,7 @@ def sending_email(request, enquiry_id, quotation_id):
         enquiry = get_object_or_404(Enquirie, pk=enquiry_id)
         quotation = get_object_or_404(Quotation, pk=quotation_id)
         message_content = f"Dear {enquiry.customer_name},\n\n" \
-                          f"Here is the quotation for your enquiry amounting in quotation.amount USD.\n\n" \
+                          f"Here is the quotation for your enquiry amounting in $ 650.00 USD.\n\n\n\n" \
                           f"You can reply to this email if you have any questions.\n\n" \
                           f"Thank you."
 
@@ -333,7 +333,7 @@ def print_pdf(request, enquiry_id, quotation_id, order_id):
     response['Content-Disposition'] = 'attachment; filename="' + filename + '"'
 
     subject = f'Invoice [EQ-1{enquiry.id}] for {quotation.product}'
-    message = f"Dear {enquiry.customer_name},\n\nwe hope you're well. Please find the invoice [EQ-1{enquiry.id}] attached. Please feel free to reach out if you have any questions. \n\nThank you. \n "
+    message = f"Dear {enquiry.customer_name},\n\nwe hope you're well. Please find the invoice [EQ-1{enquiry.id}] attached. Here is your order tracking number {order.order_id}. You can track your order status anytime. \n\nPlease feel free to reach out if you have any questions. \n\nThank you. \n "
 
     threading.Thread(                             
         target=send_email_async,
@@ -341,9 +341,6 @@ def print_pdf(request, enquiry_id, quotation_id, order_id):
     ).start()
 
     return response 
-
-
-
 
 
 #  Track Orders

@@ -45,7 +45,7 @@ class Tracking_DataAdmin(admin.ModelAdmin):
 class OrdersAdmin(admin.ModelAdmin):
      list_display = ('airline','flight_number','origin','destination',
                      'shipper_name','shipper_acc_num',
-                     'consignee_name','consignee_acc_num','consignee_address',
+                     'consignee_name','consignee_acc_num',
                      'shipping_agent','shipping_agent_acc_num',
                      'order_date', 'flight_date', 'notify_name', 'notify_acc', 'notify_add')
      

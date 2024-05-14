@@ -23,10 +23,10 @@
                 <tr>
                     <th scope="col" style="width: 20%;">Booking No</th>
                     <th scope="col" style="width: 15%;">Customer</th>
-                    <th scope="col" style="width: 15%;">Freight Type</th>
-                    <th scope="col" style="width: 10%;">Type</th>
-                    <th scope="col" style="width: 15%;">Order Status</th>
-                    <th scope="col" style="width: 20%;">Sales Person</th>
+                    <th scope="col" style="width: 15%; text-align: center;">Freight Type</th>
+                    <th scope="col" style="width: 10%; text-align: center;">Type</th>
+                    <th scope="col" style="width: 15%; text-align: center;">Order Status</th>
+                    <th scope="col" style="width: 20%; text-align: center;">Sales Person</th>
                     <th scope="col" style="width: 15%;">Date</th>
                 </tr>
             </thead>
@@ -35,10 +35,10 @@
                 <tr>
                     <td>{{ data.order_id}}</td>
                     <td>{{ data.quotation.enquiry.customer_name }}</td>
-                    <td>{{ data.quotation.freight_type }}</td>
-                    <td>{{ data.quotation.type }}</td>
-                    <td>{{ data.status|lower|capfirst }}</td>
-                    <td>{{ data.quotation.enquiry.sales_person }}</td>
+                    <td style="text-align: center;">{{ data.quotation.freight_type }}</td>
+                    <td style="text-align: center;">{{ data.quotation.type }}</td>
+                    <td style="text-align: center;">{{ data.status|lower|capfirst }}</td>
+                    <td style="text-align: center;">{{ data.quotation.enquiry.sales_person }}</td>
                     <td>{{ data.order_date|date:"d/m/Y" }}</td>
                 </tr>
                 {% endfor %}

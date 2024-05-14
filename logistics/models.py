@@ -119,7 +119,6 @@ class Order(models.Model):
     shipper_phone = models.CharField(max_length=30, null=True, blank=True)
     consignee_name = models.CharField(max_length=500)
     consignee_acc_num = models.IntegerField()
-    consignee_address = models.TextField(max_length=255)
     shipping_agent = models.CharField(max_length=50)
     shipping_agent_acc_num = models.IntegerField()
     order_date = models.DateTimeField()
